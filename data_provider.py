@@ -5,8 +5,6 @@ from logger_setup import logger
 # --- 配置 ---
 COINGECKO_API_URL = "https://api.coingecko.com/api/v3"
 FEAR_GREED_API_URL = "https://api.alternative.me/fng/?limit=1"
-# 使用币安官方API
-BINANCE_KLINE_API_URL = "https://api.binance.com/api/v3/klines"
 MAX_RETRIES = 3
 RETRY_DELAY_SECONDS = 5
 
@@ -68,22 +66,54 @@ def get_fear_and_greed_index():
     return None
 
 
-def get_binance_klines(symbol="BTCUSDT", interval="1d", limit=100):
+def get_klines(symbol="BTCUSDT", interval="1d", limit=100):
     """
-    从币安获取 K 线数据
-    :param symbol: 交易对, e.g., 'BTCUSDT'
-    :param interval: K线间隔, e.g., '1h', '4h', '1d'
-    :param limit: 数据点数量
-    :return: K线数据列表
+    从 CoinGecko 获取 K 线数据 (OHLC)
+    :param symbol: 交易对, e.g., 'BTCUSDT' (当前仅支持BTC)
+    :param interval: K线间隔 (CoinGecko API 以天为单位，此参数当前被忽略)
+    :param limit: 数据点数量 (天数)
+    :return: 模拟币安格式的K线数据列表
     """
-    logger.info(f"正在从币安获取 {symbol} 的 {interval} K线数据 (最近 {limit} 条)...")
-    params = {"symbol": symbol, "interval": interval, "limit": limit}
-    data = _make_request(BINANCE_KLINE_API_URL, params)
+    logger.info(f"正在从 CoinGecko 获取 BTC 的 OHLC K线数据 (最近 {limit} 天)...")
+
+    # 参数映射：将函数参数转换为 CoinGecko API 参数
+    # 注意：CoinGecko 的免费 OHLC API 是按天计的，interval 参数在这里不起作用
+    params = {"vs_currency": "usd", "days": limit}
+    # 写死 id 为 bitcoin，因为当前只处理 BTC
+    coin_id = "bitcoin"
+    url = f"{COINGECKO_API_URL}/coins/{coin_id}/ohlc"
+
+    data = _make_request(url, params)
 
     if data:
-        logger.info(f"成功获取 {len(data)} 条K线数据。")
-        return data
-    logger.error(f"无法从币安获取 {symbol} 的K线数据。")
+        # 数据转换：将 CoinGecko 的 OHLC 格式转换为币安的 K-line 格式
+        # CoinGecko: [timestamp, open, high, low, close]
+        # Binance:   [timestamp, open, high, low, close, volume, close_time, ...] (12个字段)
+        # 我们需要模拟币安的格式，因为 strategy.py 依赖于此
+        klines = []
+        for row in data:
+            # 补齐币安格式所需的其余字段，用0或空值填充
+            # 最重要的是 volume (第5个索引) 必须存在
+            kline_row = [
+                row[0],  # timestamp
+                str(row[1]),  # open
+                str(row[2]),  # high
+                str(row[3]),  # low
+                str(row[4]),  # close
+                "0",  # volume (关键！用0填充)
+                row[0] + 86400000 - 1,  # close_time (估算一个日线的关闭时间)
+                "0",
+                "0",
+                "0",
+                "0",
+                "0",  # 其他字段
+            ]
+            klines.append(kline_row)
+
+        logger.info(f"成功获取并转换 {len(klines)} 条K线数据。")
+        return klines
+
+    logger.error(f"无法从 CoinGecko 获取 {symbol} 的K线数据。")
     return None
 
 
@@ -100,8 +130,8 @@ if __name__ == "__main__":
     if fng_data:
         print(f"恐惧贪婪指数: {fng_data['value']} ({fng_data['classification']})")
 
-    print("\n--- 测试 Binance K-lines API ---")
-    klines = get_binance_klines(limit=5)
+    print("\n--- 测试 K-lines API (现在使用 CoinGecko) ---")
+    klines = get_klines(limit=5)
     if klines:
         print(f"获取到 {len(klines)} 条最新的K线数据:")
         # 每条K线数据是 [开盘时间, 开盘价, 最高价, 最低价, 收盘价, ...]

@@ -219,3 +219,123 @@
 2025-07-11 22:50:48 - BtcBroadcast - INFO - 最终决策: 少量卖出
 2025-07-11 22:50:48 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
 
+2025-07-11 23:08:57 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-11 23:08:57 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-11 23:08:58 - BtcBroadcast - INFO - 获取成功: 价格=$117838, 24h变化=5.96%
+2025-07-11 23:08:58 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-11 23:09:00 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=71 (Greed)
+2025-07-11 23:09:00 - BtcBroadcast - CRITICAL - 程序遇到未处理的严重错误: 'kline'
+Traceback (most recent call last):
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 62, in <module>
+    run_once()
+    ~~~~~~~~^^
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 24, in run_once
+    symbol=config["kline"]["symbol"],
+           ~~~~~~^^^^^^^^^
+KeyError: 'kline'
+2025-07-11 23:09:21 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-11 23:09:21 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-11 23:09:22 - BtcBroadcast - INFO - 获取成功: 价格=$117838, 24h变化=5.96%
+2025-07-11 23:09:22 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-11 23:09:23 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=71 (Greed)
+2025-07-11 23:09:23 - BtcBroadcast - CRITICAL - 程序遇到未处理的严重错误: 'kline'
+Traceback (most recent call last):
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 62, in <module>
+    run_once()
+    ~~~~~~~~^^
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 24, in run_once
+    symbol=config["kline"]["symbol"],
+           ~~~~~~^^^^^^^^^
+KeyError: 'kline'
+2025-07-11 23:10:12 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-11 23:10:12 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-11 23:10:12 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/simple/price' 失败 (尝试 1/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)')))
+2025-07-11 23:10:18 - BtcBroadcast - INFO - 获取成功: 价格=$117842, 24h变化=5.96%
+2025-07-11 23:10:18 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-11 23:10:19 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=71 (Greed)
+2025-07-11 23:10:19 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 的 OHLC K线数据 (最近 100 天)...
+2025-07-11 23:10:20 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/coins/bitcoin/ohlc' 失败 (尝试 1/3): 400 Client Error: Bad Request for url: https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=100
+2025-07-11 23:10:27 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/coins/bitcoin/ohlc' 失败 (尝试 2/3): 400 Client Error: Bad Request for url: https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=100
+2025-07-11 23:10:33 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/coins/bitcoin/ohlc' 失败 (尝试 3/3): 400 Client Error: Bad Request for url: https://api.coingecko.com/api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=100
+2025-07-11 23:10:33 - BtcBroadcast - ERROR - 请求 'https://api.coingecko.com/api/v3/coins/bitcoin/ohlc' 在 3 次尝试后最终失败。
+2025-07-11 23:10:33 - BtcBroadcast - ERROR - 无法从 CoinGecko 获取 BTCUSDT 的K线数据。
+2025-07-11 23:10:33 - BtcBroadcast - ERROR - 由于部分数据源获取失败，本轮播报中止。
+2025-07-11 23:10:33 - BtcBroadcast - ERROR - 数据不完整，无法格式化飞书消息。
+2025-07-11 23:10:33 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-11 23:10:33 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-11 23:10:33 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-11 23:13:31 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-11 23:13:31 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-11 23:13:32 - BtcBroadcast - INFO - 获取成功: 价格=$117824, 24h变化=5.94%
+2025-07-11 23:13:32 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-11 23:13:32 - BtcBroadcast - WARNING - 请求 'https://api.alternative.me/fng/?limit=1' 失败 (尝试 1/3): HTTPSConnectionPool(host='api.alternative.me', port=443): Max retries exceeded with url: /fng/?limit=1 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)')))
+2025-07-11 23:13:38 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=71 (Greed)
+2025-07-11 23:13:38 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 的 OHLC K线数据 (最近 90 天)...
+2025-07-11 23:13:39 - BtcBroadcast - INFO - 成功获取并转换 23 条K线数据。
+2025-07-11 23:13:39 - BtcBroadcast - WARNING - K线数据不足，无法计算技术指标。
+2025-07-11 23:13:39 - BtcBroadcast - ERROR - 由于技术指标计算失败，本轮播报中止。
+2025-07-11 23:13:39 - BtcBroadcast - ERROR - 数据不完整，无法格式化飞书消息。
+2025-07-11 23:13:39 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-11 23:13:39 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-11 23:13:39 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-11 23:15:42 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-11 23:15:42 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-11 23:15:42 - BtcBroadcast - INFO - 获取成功: 价格=$117766, 24h变化=5.97%
+2025-07-11 23:15:42 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-11 23:15:44 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=71 (Greed)
+2025-07-11 23:15:44 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 的 OHLC K线数据 (最近 90 天)...
+2025-07-11 23:15:44 - BtcBroadcast - INFO - 成功获取并转换 23 条K线数据。
+2025-07-11 23:15:44 - BtcBroadcast - INFO - 技术指标计算完成: SMA_20=104511.75, RSI_14=81.01
+2025-07-11 23:15:44 - BtcBroadcast - INFO - 开始决策...
+2025-07-11 23:15:44 - BtcBroadcast - INFO - 当前价格: 117766, SMA_30: 104511.75, RSI_14: 81.01, F&G指数: 71
+2025-07-11 23:15:44 - BtcBroadcast - INFO - 决策：大量卖出 (原因: RSI >= 75)
+2025-07-11 23:15:44 - BtcBroadcast - INFO - 最终决策: 大量卖出
+2025-07-11 23:15:44 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-11 23:16:23 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-11 23:16:23 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-11 23:16:24 - BtcBroadcast - INFO - 获取成功: 价格=$117766, 24h变化=5.97%
+2025-07-11 23:16:24 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-11 23:16:26 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=71 (Greed)
+2025-07-11 23:16:26 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 的 OHLC K线数据 (最近 90 天)...
+2025-07-11 23:16:26 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/coins/bitcoin/ohlc' 失败 (尝试 1/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/coins/bitcoin/ohlc?vs_currency=usd&days=90 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)')))
+2025-07-11 23:16:31 - BtcBroadcast - INFO - 成功获取并转换 23 条K线数据。
+2025-07-11 23:16:31 - BtcBroadcast - INFO - 技术指标计算完成: SMA_20=104511.75, RSI_14=81.01
+2025-07-11 23:16:31 - BtcBroadcast - INFO - 开始决策...
+2025-07-11 23:16:31 - BtcBroadcast - INFO - 当前价格: 117766, SMA_30: 104511.75, RSI_14: 81.01, F&G指数: 71
+2025-07-11 23:16:31 - BtcBroadcast - INFO - 决策：大量卖出 (原因: RSI >= 75)
+2025-07-11 23:16:31 - BtcBroadcast - INFO - 最终决策: 大量卖出
+2025-07-11 23:16:31 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-11 23:16:48 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-11 23:16:48 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-11 23:16:49 - BtcBroadcast - INFO - 获取成功: 价格=$117747, 24h变化=5.88%
+2025-07-11 23:16:49 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-11 23:16:50 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=71 (Greed)
+2025-07-11 23:16:50 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 的 OHLC K线数据 (最近 90 天)...
+2025-07-11 23:16:50 - BtcBroadcast - INFO - 成功获取并转换 23 条K线数据。
+2025-07-11 23:16:50 - BtcBroadcast - INFO - 技术指标计算完成: SMA_20=104511.75, RSI_14=81.01
+2025-07-11 23:16:50 - BtcBroadcast - INFO - 开始决策...
+2025-07-11 23:16:50 - BtcBroadcast - INFO - 当前价格: 117747, SMA_30: 104511.75, RSI_14: 81.01, F&G指数: 71
+2025-07-11 23:16:50 - BtcBroadcast - INFO - 决策：大量卖出 (原因: RSI >= 75)
+2025-07-11 23:16:50 - BtcBroadcast - INFO - 最终决策: 大量卖出
+2025-07-11 23:16:50 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-11 23:17:34 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-11 23:17:34 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-11 23:17:34 - BtcBroadcast - INFO - 获取成功: 价格=$117747, 24h变化=5.88%
+2025-07-11 23:17:34 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-11 23:17:37 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=71 (Greed)
+2025-07-11 23:17:37 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 的 OHLC K线数据 (最近 90 天)...
+2025-07-11 23:17:38 - BtcBroadcast - INFO - 成功获取并转换 23 条K线数据。
+2025-07-11 23:17:38 - BtcBroadcast - INFO - 技术指标计算完成: SMA_20=104511.75, RSI_14=81.01
+2025-07-11 23:17:38 - BtcBroadcast - INFO - 开始决策...
+2025-07-11 23:17:38 - BtcBroadcast - INFO - 当前价格: 117747, SMA_30: 104511.75, RSI_14: 81.01, F&G指数: 71
+2025-07-11 23:17:38 - BtcBroadcast - INFO - 决策：大量卖出 (原因: RSI >= 75)
+2025-07-11 23:17:38 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-11 23:17:38 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-11 23:17:38 - BtcBroadcast - INFO - 最终决策: 大量卖出
+2025-07-11 23:17:38 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+

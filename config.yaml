@@ -1,6 +1,12 @@
 # 运行参数
 fetch_interval_minutes: 15
 
+# K线数据源配置
+kline:
+  symbol: "BTCUSDT"
+  interval: "1d"      # CoinGecko API 当前会忽略此参数，但保留以备将来使用
+  limit: 90           # 获取过去90天的数据 (CoinGecko API 上限)
+
 # 指标阈值
 thresholds:
   sma30_multiplier:

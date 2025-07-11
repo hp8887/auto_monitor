@@ -10,8 +10,12 @@ def calculate_indicators(klines):
     :param klines: 从 get_binance_klines 获取的K线列表
     :return: 包含最新指标的字典，例如 {'sma_30': 12345.6, 'rsi_14': 45.6}
     """
-    if not klines or len(klines) < 30:  # 确保有足够数据计算30日均线
-        logger.warning("K线数据不足，无法计算技术指标。")
+    # 由于API返回数据点可能不足, 将指标计算所需天数降低
+    sma_period = 20
+    if not klines or len(klines) < sma_period:  # 确保有足够数据计算
+        logger.warning(
+            f"K线数据不足 (需要{sma_period}条, 实际{len(klines)}条)，无法计算技术指标。"
+        )
         return None
 
     # 将 K 线数据转换为 pandas DataFrame
@@ -39,19 +43,20 @@ def calculate_indicators(klines):
 
     # --- 计算指标 ---
     # 使用 pandas_ta 库可以非常方便地计算
-    # 计算 30 日简单移动平均线 (SMA)
-    df.ta.sma(length=30, append=True)
+    # 计算 20 日简单移动平均线 (SMA)
+    df.ta.sma(length=sma_period, append=True)
     # 计算 14 日相对强弱指数 (RSI)
     df.ta.rsi(length=14, append=True)
 
     # 获取最新的指标值
+    # 注意：为了避免修改其他文件，这里仍使用 'sma_30' 作为键名
     latest_indicators = {
-        "sma_30": df["SMA_30"].iloc[-1],
+        "sma_30": df[f"SMA_{sma_period}"].iloc[-1],
         "rsi_14": df["RSI_14"].iloc[-1],
     }
 
     logger.info(
-        f"技术指标计算完成: SMA_30={latest_indicators['sma_30']:.2f}, RSI_14={latest_indicators['rsi_14']:.2f}"
+        f"技术指标计算完成: SMA_{sma_period}={latest_indicators['sma_30']:.2f}, RSI_14={latest_indicators['rsi_14']:.2f}"
     )
     return latest_indicators
 
@@ -127,14 +132,14 @@ def make_decision(price_data, indicators, fear_greed_index):
 if __name__ == "__main__":
     # --- 测试 ---
     from data_provider import (
-        get_binance_klines,
+        get_klines,
         get_btc_price_and_change,
         get_fear_and_greed_index,
     )
 
     print("\n--- 测试指标计算 ---")
     # 1. 获取K线数据
-    test_klines = get_binance_klines(limit=50)  # 获取50条数据以确保能计算
+    test_klines = get_klines(limit=50)  # 获取50条数据以确保能计算
     if test_klines:
         # 2. 计算指标
         test_indicators = calculate_indicators(test_klines)

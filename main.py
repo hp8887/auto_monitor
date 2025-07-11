@@ -4,10 +4,10 @@ from config_loader import config
 from data_provider import (
     get_btc_price_and_change,
     get_fear_and_greed_index,
-    get_binance_klines,
+    get_klines,
 )
 from strategy import calculate_indicators, make_decision
-from notifier import format_feishu_message, send_to_feishu
+from notifier import send_to_feishu, format_feishu_message
 
 
 def run_once():
@@ -20,7 +20,11 @@ def run_once():
     price_data = get_btc_price_and_change()
     fear_greed_index = get_fear_and_greed_index()
     # 获取最近100天的日K线数据来计算指标
-    klines = get_binance_klines(interval="1d", limit=100)
+    klines = get_klines(
+        symbol=config["kline"]["symbol"],
+        interval=config["kline"]["interval"],
+        limit=config["kline"]["limit"],
+    )
 
     # 检查数据完整性
     if not all([price_data, fear_greed_index, klines]):
@@ -38,7 +42,7 @@ def run_once():
         error_msg = format_feishu_message(
             price_data, None, fear_greed_index, "指标计算失败"
         )
-        send_to_feishu(error_msg)
+        send_to_feishu(error_msg)  # 调试期间暂时禁用
         logger.info("=" * 20 + " 本轮播报执行结束 " + "=" * 20 + "\n")
         return
 
@@ -47,7 +51,7 @@ def run_once():
 
     # 4. 格式化并发送消息
     message = format_feishu_message(price_data, indicators, fear_greed_index, decision)
-    send_to_feishu(message)
+    send_to_feishu(message)  # 调试期间暂时禁用
 
     logger.info(f"最终决策: {decision}")
     logger.info("=" * 20 + " 本轮播报执行结束 " + "=" * 20 + "\n")
