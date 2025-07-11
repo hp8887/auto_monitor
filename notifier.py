@@ -82,7 +82,7 @@ def format_feishu_message(price_data, indicators, fear_greed_index, decision):
                         {
                             "is_short": True,
                             "text": {
-                                "content": f"**SMA (30D)**\n${indicators['sma_30']:,.2f}",
+                                "content": f"**SMA (20D)**\n${indicators['sma_30']:,.2f}",
                                 "tag": "lark_md",
                             },
                         }
@@ -137,7 +137,7 @@ if __name__ == "__main__":
     # --- 测试 ---
     # 1. 准备模拟数据
     mock_price = {"price": 65000.88, "change_24h": -2.55}
-    mock_indicators = {"sma_30": 66000.50, "rsi_14": 38.5}
+    mock_indicators = {"sma_30": 66000.50, "rsi_14": 38.5}  # key 仍为 sma_30
     mock_fng = {"value": 28, "classification": "Fear"}
     mock_decision = "少量买入"
 
