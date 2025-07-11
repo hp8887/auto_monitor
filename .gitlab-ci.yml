@@ -13,6 +13,8 @@ test_and_coverage:
     - echo "Installing dependencies..."
     - pip install -r requirements.txt
     - echo "Running tests and calculating coverage..."
+    # Debug: List all files to check if tests/ directory exists
+    - ls -R
     # 明确指定测试目录和要覆盖的代码目录
     - pytest tests/ --cov=.
   # 从作业日志中提取代码覆盖率
