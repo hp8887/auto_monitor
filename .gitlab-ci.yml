@@ -1,16 +1,27 @@
 # 使用官方的 Python 3.11 slim 镜像作为基础环境
 image: python:3.11-slim
 
-# 定义 CI/CD 的各个阶段
+# 定义 CI/CD 的各个阶段, 它们会按顺序执行
 stages:
+  - test
   - run
+
+# 定义测试作业
+test_and_coverage:
+  stage: test
+  script:
+    - echo "Installing dependencies..."
+    - pip install -r requirements.txt
+    - echo "Running tests and calculating coverage..."
+    - pytest --cov
+  # 从作业日志中提取代码覆盖率
+  coverage: '/TOTAL.*\s+(\d+\%)/'
 
 # 定义一个具体的作业（Job）
 run_broadcast_job:
   stage: run
   script:
-    - echo "Installing dependencies..."
-    - pip install -r requirements.txt
+    - echo "Dependencies already installed in test stage."
     - echo "Running broadcast script..."
     - python main.py
   

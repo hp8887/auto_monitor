@@ -4,4 +4,6 @@ PyYAML
 pandas
 pandas-ta
 python-dotenv
-numpy<2.0 
+numpy<2.0
+pytest
+pytest-cov 

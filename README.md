@@ -1,6 +1,6 @@
 # auto_monitor
 
-[![pipeline status](https://gitlab.com/hp88871/auto_monitor/badges/main/pipeline.svg)](https://gitlab.com/hp88871/auto_monitor/-/commits/main)
+[![pipeline status](https://gitlab.com/hp88871/auto_monitor/badges/main/pipeline.svg)](https://gitlab.com/hp88871/auto_monitor/-/commits/main) [![coverage report](https://gitlab.com/hp88871/auto_monitor/badges/main/coverage.svg)](https://gitlab.com/hp88871/auto_monitor/-/commits/main)
 
 这是一个用于加密货币（特别是比特币）市场监控和自动播报的机器人项目。
 
