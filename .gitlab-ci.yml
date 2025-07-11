@@ -8,20 +8,13 @@ stages:
 # 定义一个具体的作业（Job）
 run_broadcast_job:
   stage: run
-  
-  # 在执行主脚本前需要运行的命令
-  before_script:
+  script:
     - echo "Installing dependencies..."
     - pip install -r requirements.txt
-  
-  # 作业要执行的核心命令
-  script:
     - echo "Running broadcast script..."
     - python main.py
   
   # 定义此作业何时运行
   rules:
-    # 允许通过 GitLab UI 手动触发 ("Run pipeline")
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-    # 允许通过计划任务触发 ("CI/CD Schedules")
-    - if: '$CI_PIPELINE_SOURCE == "schedule"' 
+    # 允许通过 GitLab UI 手动触发 ("Run pipeline") 或通过计划任务触发 ("CI/CD Schedules")
+    - if: '$CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "schedule"' 
