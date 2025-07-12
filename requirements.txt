@@ -1,4 +1,5 @@
 pandas
 requests
 numpy
-pytz 
+pytz
+PyYAML 
