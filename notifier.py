@@ -2,6 +2,7 @@ import requests
 import json
 import time
 from datetime import datetime
+import pytz
 from config_loader import config
 from logger_setup import logger
 
@@ -36,8 +37,9 @@ def format_feishu_message(
     score_breakdown = decision_data["breakdown"]
     color = get_decision_color(decision)
 
-    # 获取当前时间
-    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # 获取东八区当前时间
+    tz = pytz.timezone("Asia/Shanghai")
+    current_time = datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")
 
     # 获取各时间周期的RSI和SMA值
     rsi_15m = indicators.get("rsi_15m", 0)
@@ -135,6 +137,16 @@ def format_feishu_message(
 
     # 将归因信息合并为单行逗号分隔的文本
     attribution_text = ", ".join(attribution_items)
+
+    # 生成决策解释或主要信号来源
+    explanation_text = ""
+    if "观望" in decision:
+        explanation_text = "👉 **决策解释**: 多数指标方向不一致，或无强烈信号。"
+    elif score_breakdown:
+        # score_breakdown 已按分数绝对值排好序
+        top_signals = [item["name"] for item in score_breakdown[:2]]
+        if top_signals:
+            explanation_text = f"👉 **主要信号来源**: {', '.join(top_signals)}"
 
     # 格式化价差和买卖比的显示
     spread_display = (
@@ -287,6 +299,11 @@ def format_feishu_message(
                         "content": f"**综合决策: {decision}**",
                         "tag": "lark_md",
                     },
+                },
+                # 决策解释
+                {
+                    "tag": "div",
+                    "text": {"content": explanation_text, "tag": "lark_md"},
                 },
                 # 决策归因
                 {

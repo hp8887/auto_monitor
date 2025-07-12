@@ -60,9 +60,8 @@ def run_once():
         return
 
     # 3. 做出决策
-    decision_data = make_decision(
-        price_data, all_indicators, fear_greed_index, order_book_data
-    )
+    if price_data and fear_greed_index:
+        decision_data = make_decision(all_indicators, fear_greed_index, order_book_data)
 
     # 4. 格式化并发送消息
     # 直接传递所有时间周期的指标

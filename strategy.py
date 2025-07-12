@@ -143,304 +143,143 @@ def calculate_multi_timeframe_indicators(multi_timeframe_klines):
     return all_indicators
 
 
-def make_decision(price_data, indicators, fear_greed_index, order_book_data=None):
+def make_decision(indicators, fear_greed_index, order_book_data):
     """
-    根据所有输入数据和配置的阈值，通过评分系统做出最终决策。
-    :param price_data: 价格数据
-    :param indicators: 技术指标数据
-    :param fear_greed_index: 恐惧贪婪指数
-    :param order_book_data: 订单薄数据
-    :return: 包含决策、总分和归因明细的字典.
+    根据所有输入数据做出最终决策
     """
-    if not all([price_data, indicators, fear_greed_index]):
-        logger.error("数据不完整，无法做出决策。")
-        return {"decision": "数据不足", "score": 0, "breakdown": []}
+    total_score = 0
+    breakdown = []
 
-    thresholds = config["thresholds"]
-    current_price = price_data["price"]
-    score = 0
-    score_breakdown = []  # 决策归因明细
+    # 定义周期权重，使决策更偏向长期趋势
+    cycle_weights = {"1d": 2.0, "4h": 1.5, "15m": 1.0}
 
-    logger.info("开始基于多时间周期评分系统进行决策...")
-    logger.info(f"当前价格: {current_price:.2f}, F&G指数: {fear_greed_index['value']}")
+    # 1. 恐惧贪婪指数 (仅影响日线权重)
+    # F&G 指数是日线级别情绪，其分数应被日线权重放大
+    fng_score = 0
+    if fear_greed_index and fear_greed_index["value"] is not None:
+        fng_value = fear_greed_index["value"]
+        classification = fear_greed_index["classification"]
+        if fng_value < 25:
+            fng_score = 2  # 基础分2
+        elif fng_value < 40:
+            fng_score = 1  # 基础分1
+        elif fng_value > 75:
+            fng_score = -2  # 基础分-2
+        elif fng_value > 60:
+            fng_score = -1  # 基础分-1
 
-    # 检查是否有所有需要的时间周期数据
-    required_indicators = [
-        "price_1d",
-        "sma_1d",
-        "rsi_1d",
-        "price_4h",
-        "sma_4h",
-        "rsi_4h",
-        "price_15m",
-        "sma_15m",
-        "rsi_15m",
-    ]
-
-    missing_indicators = [ind for ind in required_indicators if ind not in indicators]
-    if missing_indicators:
-        logger.warning(
-            f"缺少以下指标: {missing_indicators}. 将使用可用的指标进行决策。"
-        )
-
-    # --- 评分逻辑 (多时间周期) ---
-
-    # 1. 恐惧贪婪指数评分
-    fng_value = fear_greed_index["value"]
-    if fng_value <= thresholds["fear_index"]["buy_large"]:
-        score += 4  # 极度恐惧，强烈买入信号
-        reason = f"F&G指数 ({fng_value}) <= {thresholds['fear_index']['buy_large']}"
-        score_breakdown.append({"name": f"F&G指数({fng_value})", "score": 4})
-        logger.info(f"[得分] {reason}，分数 +4")
-    elif fng_value >= thresholds["greed_index"]["sell_large"]:
-        score -= 4  # 极度贪婪，强烈卖出信号
-        reason = f"F&G 指数 ({fng_value}) >= {thresholds['greed_index']['sell_large']}"
-        score_breakdown.append({"name": f"F&G指数({fng_value})", "score": -4})
-        logger.info(f"[得分] {reason}，分数 -4")
-
-    # 2. 15分钟周期评分
-    if (
-        "rsi_15m" in indicators
-        and "price_15m" in indicators
-        and "sma_15m" in indicators
-    ):
-        rsi_15m = indicators["rsi_15m"]
-        price_15m = indicators["price_15m"]
-        sma_15m = indicators["sma_15m"]
-
-        # RSI评分
-        if rsi_15m < 25:
-            score += 2
-            score_breakdown.append({"name": f"15分钟RSI({rsi_15m:.2f})", "score": 2})
-            logger.info(f"[得分] 15分钟 RSI ({rsi_15m:.2f}) < 25，分数 +2")
-        elif rsi_15m > 75:
-            score -= 2
-            score_breakdown.append({"name": f"15分钟RSI({rsi_15m:.2f})", "score": -2})
-            logger.info(f"[得分] 15分钟 RSI ({rsi_15m:.2f}) > 75，分数 -2")
-
-        # 价格与SMA关系
-        price_to_sma_ratio = price_15m / sma_15m
-        if price_to_sma_ratio < 0.98:
-            score += 1
-            score_breakdown.append(
-                {"name": f"15分钟价格/SMA比率({price_to_sma_ratio:.2f})", "score": 1}
-            )
-            logger.info(
-                f"[得分] 15分钟价格/SMA比率 ({price_to_sma_ratio:.2f}) < 0.98，分数 +1"
-            )
-        elif price_to_sma_ratio > 1.02:
-            score -= 1
-            score_breakdown.append(
-                {"name": f"15分钟价格/SMA比率({price_to_sma_ratio:.2f})", "score": -1}
-            )
-            logger.info(
-                f"[得分] 15分钟价格/SMA比率 ({price_to_sma_ratio:.2f}) > 1.02，分数 -1"
+        if fng_score != 0:
+            total_score += fng_score * cycle_weights["1d"]
+            breakdown.append(
+                {
+                    "name": f"F&G指数({fng_value}-{classification})",
+                    "score": fng_score * cycle_weights["1d"],
+                }
             )
 
-        # 15分钟EMA交叉评分
-        if indicators.get("golden_cross_15m", False):
-            score += 1
-            score_breakdown.append({"name": "15分钟EMA金叉", "score": 1})
-            logger.info(f"[得分] 15分钟 EMA12/26 金叉，分数 +1")
-        elif indicators.get("death_cross_15m", False):
-            score -= 1
-            score_breakdown.append({"name": "15分钟EMA死叉", "score": -1})
-            logger.info(f"[得分] 15分钟 EMA12/26 死叉，分数 -1")
-        else:
-            score_breakdown.append({"name": "15分钟EMA交叉", "score": 0})
-
-        # 15分钟KDJ交叉评分
-        if indicators.get("kdj_golden_cross_15m", False):
-            score += 1
-            score_breakdown.append({"name": "15分钟KDJ金叉", "score": 1})
-            logger.info(f"[得分] 15分钟 KDJ 金叉，分数 +1")
-        elif indicators.get("kdj_death_cross_15m", False):
-            score -= 1
-            score_breakdown.append({"name": "15分钟KDJ死叉", "score": -1})
-            logger.info(f"[得分] 15分钟 KDJ 死叉，分数 -1")
-        else:
-            score_breakdown.append({"name": "15分钟KDJ交叉", "score": 0})
-
-    # 3. 4小时周期评分
-    if "rsi_4h" in indicators and "price_4h" in indicators and "sma_4h" in indicators:
-        rsi_4h = indicators["rsi_4h"]
-        price_4h = indicators["price_4h"]
-        sma_4h = indicators["sma_4h"]
-
-        # RSI评分
-        if rsi_4h < 30:
-            score += 3
-            score_breakdown.append({"name": f"4小时RSI({rsi_4h:.2f})", "score": 3})
-            logger.info(f"[得分] 4小时 RSI ({rsi_4h:.2f}) < 30，分数 +3")
-        elif rsi_4h > 70:
-            score -= 3
-            score_breakdown.append({"name": f"4小时RSI({rsi_4h:.2f})", "score": -3})
-            logger.info(f"[得分] 4小时 RSI ({rsi_4h:.2f}) > 70，分数 -3")
-
-        # 价格与SMA关系
-        price_to_sma_ratio = price_4h / sma_4h
-        if price_to_sma_ratio < 0.95:
-            score += 2
-            score_breakdown.append(
-                {"name": f"4小时价格/SMA比率({price_to_sma_ratio:.2f})", "score": 2}
-            )
-            logger.info(
-                f"[得分] 4小时价格/SMA比率 ({price_to_sma_ratio:.2f}) < 0.95，分数 +2"
-            )
-        elif price_to_sma_ratio > 1.05:
-            score -= 2
-            score_breakdown.append(
-                {"name": f"4小时价格/SMA比率({price_to_sma_ratio:.2f})", "score": -2}
-            )
-            logger.info(
-                f"[得分] 4小时价格/SMA比率 ({price_to_sma_ratio:.2f}) > 1.05，分数 -2"
-            )
-
-        # 4小时EMA交叉评分
-        if indicators.get("golden_cross_4h", False):
-            score += 2
-            score_breakdown.append({"name": "4小时EMA金叉", "score": 2})
-            logger.info(f"[得分] 4小时 EMA12/26 金叉，分数 +2")
-        elif indicators.get("death_cross_4h", False):
-            score -= 2
-            score_breakdown.append({"name": "4小时EMA死叉", "score": -2})
-            logger.info(f"[得分] 4小时 EMA12/26 死叉，分数 -2")
-        else:
-            score_breakdown.append({"name": "4小时EMA交叉", "score": 0})
-
-        # 4小时KDJ交叉评分
-        if indicators.get("kdj_golden_cross_4h", False):
-            score += 2
-            score_breakdown.append({"name": "4小时KDJ金叉", "score": 2})
-            logger.info(f"[得分] 4小时 KDJ 金叉，分数 +2")
-        elif indicators.get("kdj_death_cross_4h", False):
-            score -= 2
-            score_breakdown.append({"name": "4小时KDJ死叉", "score": -2})
-            logger.info(f"[得分] 4小时 KDJ 死叉，分数 -2")
-        else:
-            score_breakdown.append({"name": "4小时KDJ交叉", "score": 0})
-
-    # 4. 日线周期评分
-    if "rsi_1d" in indicators and "price_1d" in indicators and "sma_1d" in indicators:
-        rsi_1d = indicators["rsi_1d"]
-        price_1d = indicators["price_1d"]
-        sma_1d = indicators["sma_1d"]
-
-        # RSI评分
-        if rsi_1d < 30:
-            score += 3
-            score_breakdown.append({"name": f"日线RSI({rsi_1d:.2f})", "score": 3})
-            logger.info(f"[得分] 日线 RSI ({rsi_1d:.2f}) < 30，分数 +3")
-        elif rsi_1d >= 75:
-            score -= 4
-            score_breakdown.append({"name": f"日线RSI({rsi_1d:.2f})", "score": -4})
-            logger.info(f"[得分] 日线 RSI ({rsi_1d:.2f}) >= 75，分数 -4")
-        elif rsi_1d > 70:
-            score -= 3
-            score_breakdown.append({"name": f"日线RSI({rsi_1d:.2f})", "score": -3})
-            logger.info(f"[得分] 日线 RSI ({rsi_1d:.2f}) > 70，分数 -3")
-
-        # 价格与SMA关系
-        price_to_sma_ratio = price_1d / sma_1d
-        if price_to_sma_ratio < 0.9:
-            score += 3
-            score_breakdown.append(
-                {"name": f"日线价格/SMA比率({price_to_sma_ratio:.2f})", "score": 3}
-            )
-            logger.info(
-                f"[得分] 日线价格/SMA比率 ({price_to_sma_ratio:.2f}) < 0.9，分数 +3"
-            )
-        elif price_to_sma_ratio > 1.1:
-            score -= 3
-            score_breakdown.append(
-                {"name": f"日线价格/SMA比率({price_to_sma_ratio:.2f})", "score": -3}
-            )
-            logger.info(
-                f"[得分] 日线价格/SMA比率 ({price_to_sma_ratio:.2f}) > 1.1，分数 -3"
-            )
-
-        # 5. 均线排列和交叉（日线）
-        if all(key in indicators for key in ["ema12_1d", "ema26_1d"]):
-            ema12 = indicators["ema12_1d"]
-            ema26 = indicators["ema26_1d"]
-
-            # 均线多头排列
-            if ema12 > ema26:
-                score += 2
-                score_breakdown.append({"name": "日线EMA多头排列", "score": 2})
-                logger.info(f"[得分] 均线多头排列 (EMA12 > EMA26)，分数 +2")
-            # 均线空头排列
-            elif ema12 < ema26:
-                score -= 2
-                score_breakdown.append({"name": "日线EMA空头排列", "score": -2})
-                logger.info(f"[得分] 均线空头排列 (EMA12 < EMA26)，分数 -2")
-
-            # 金叉/死叉
-            if indicators.get("golden_cross_1d", False):
-                score += 3
-                score_breakdown.append({"name": "日线EMA金叉", "score": 3})
-                logger.info(f"[得分] EMA12/26 金叉，分数 +3")
-            elif indicators.get("death_cross_1d", False):
-                score -= 3
-                score_breakdown.append({"name": "日线EMA死叉", "score": -3})
-                logger.info(f"[得分] EMA12/26 死叉，分数 -3")
-            else:
-                score_breakdown.append({"name": "日线EMA交叉", "score": 0})
-
-        # 日线KDJ交叉评分
-        if indicators.get("kdj_golden_cross_1d", False):
-            score += 3
-            score_breakdown.append({"name": "日线KDJ金叉", "score": 3})
-            logger.info(f"[得分] 日线 KDJ 金叉，分数 +3")
-        elif indicators.get("kdj_death_cross_1d", False):
-            score -= 3
-            score_breakdown.append({"name": "日线KDJ死叉", "score": -3})
-            logger.info(f"[得分] 日线 KDJ 死叉，分数 -3")
-        else:
-            score_breakdown.append({"name": "日线KDJ交叉", "score": 0})
-
-    # 6. 订单薄数据评分
+    # 2. 订单薄数据
+    # 作为一个独立的实时补充信号，不乘以周期权重，但提高触发阈值
     if order_book_data and order_book_data.get("data_available", False):
-        # 买卖比例评分
-        bid_ask_ratio = order_book_data.get("bid_ask_ratio", 1.0)
-        if bid_ask_ratio > 1.5:  # 买单明显多于卖单
-            score += 2
-            score_breakdown.append({"name": f"买卖比({bid_ask_ratio:.2f})", "score": 2})
-            logger.info(f"[得分] 订单薄买卖比 ({bid_ask_ratio:.2f}) > 1.5，分数 +2")
-        elif bid_ask_ratio < 0.7:  # 卖单明显多于买单
-            score -= 2
-            score_breakdown.append(
-                {"name": f"买卖比({bid_ask_ratio:.2f})", "score": -2}
+        ratio = order_book_data.get("bid_ask_ratio", 1.0)
+        order_book_score = 0
+        if ratio > 2.0:  # 提高买卖比阈值，捕捉更强的信号
+            order_book_score = 2
+        elif ratio < 0.5:
+            order_book_score = -2
+
+        if order_book_score != 0:
+            total_score += order_book_score
+            breakdown.append(
+                {"name": f"订单薄买卖比({ratio:.2f})", "score": order_book_score}
             )
-            logger.info(f"[得分] 订单薄买卖比 ({bid_ask_ratio:.2f}) < 0.7，分数 -2")
 
-        # 价差评分
-        spread = order_book_data.get("spread", 0.1)
-        if spread > 0.2:  # 价差较大，市场流动性不足
-            score -= 1
-            score_breakdown.append({"name": f"价差({spread:.2f}%)", "score": -1})
-            logger.info(f"[得分] 订单薄价差 ({spread:.2f}%) > 0.2%，分数 -1")
+    # 3. 多周期指标分析 (RSI, EMA, KDJ)
+    for cycle in ["15m", "4h", "1d"]:
+        rsi = indicators.get(f"rsi_{cycle}")
+        golden_cross = indicators.get(f"golden_cross_{cycle}")
+        death_cross = indicators.get(f"death_cross_{cycle}")
+        kdj_golden_cross = indicators.get(f"kdj_golden_cross_{cycle}")
+        kdj_death_cross = indicators.get(f"kdj_death_cross_{cycle}")
+        close_price = indicators.get(f"close_{cycle}")
+        ema12 = indicators.get(f"ema12_{cycle}")
+        ema26 = indicators.get(f"ema26_{cycle}")
 
-    # --- 根据总分转换最终决策 ---
-    logger.info(f"最终总分: {score}")
+        # RSI 评分 (基础分 ±2)
+        rsi_score = 0
+        if rsi is not None:
+            if rsi > 75:
+                rsi_score = -2
+            elif rsi < 25:
+                rsi_score = 2
+            if rsi_score != 0:
+                total_score += rsi_score * cycle_weights[cycle]
+                breakdown.append(
+                    {
+                        "name": f"{cycle} RSI({rsi:.2f})",
+                        "score": rsi_score * cycle_weights[cycle],
+                    }
+                )
 
-    if score >= 8:
-        decision = "🚀 超级买入"
-    elif score >= 4:
-        decision = "🟢 大量买入"
-    elif score > 0:
-        decision = "🟩 少量买入"
-    elif score == 0:
-        decision = "⏸️ 观望"
-    elif score > -4:
-        decision = "🟥 少量卖出"
-    elif score > -8:
-        decision = "🔴 大量卖出"
-    else:  # score <= -8
+        # EMA 交叉评分 (基础分 ±3，趋势信号权重更高)
+        ema_cross_score = 0
+        if golden_cross:
+            ema_cross_score = 3
+        elif death_cross:
+            ema_cross_score = -3
+        if ema_cross_score != 0:
+            total_score += ema_cross_score * cycle_weights[cycle]
+            breakdown.append(
+                {
+                    "name": f"{cycle} EMA交叉",
+                    "score": ema_cross_score * cycle_weights[cycle],
+                }
+            )
+
+        # KDJ 交叉评分 (基础分 ±1)
+        kdj_cross_score = 0
+        if kdj_golden_cross:
+            kdj_cross_score = 1
+        elif kdj_death_cross:
+            kdj_cross_score = -1
+        if kdj_cross_score != 0:
+            total_score += kdj_cross_score * cycle_weights[cycle]
+            breakdown.append(
+                {
+                    "name": f"{cycle} KDJ交叉",
+                    "score": kdj_cross_score * cycle_weights[cycle],
+                }
+            )
+
+        # EMA 排列 (仅日线和4h)
+        if cycle in ["1d", "4h"]:
+            ema_trend_score = 0
+            if close_price and ema12 and ema26:
+                if close_price > ema12 > ema26:
+                    ema_trend_score = 1  # 基础分1
+                elif close_price < ema12 < ema26:
+                    ema_trend_score = -1  # 基础分-1
+
+            if ema_trend_score != 0:
+                total_score += ema_trend_score * cycle_weights[cycle]
+                breakdown.append(
+                    {
+                        "name": f"{cycle} EMA排列",
+                        "score": ema_trend_score * cycle_weights[cycle],
+                    }
+                )
+
+    # 最终决策
+    decision = "🟡 观望"
+    if total_score >= 10:
+        decision = "🟢 超级买入"
+    elif total_score >= 5:
+        decision = "🟢 买入"
+    elif total_score <= -10:
         decision = "💣 超级卖出"
+    elif total_score <= -5:
+        decision = "🔴 卖出"
 
-    logger.info(f"最终决策: {decision}")
-    return {"decision": decision, "score": score, "breakdown": score_breakdown}
+    return {"decision": decision, "score": total_score, "breakdown": breakdown}
 
 
 if __name__ == "__main__":
@@ -472,9 +311,7 @@ if __name__ == "__main__":
 
             # 4. 模拟数据进行决策
             if price_data and fng_data:
-                decision_data = make_decision(
-                    price_data, all_indicators, fng_data, order_book_data
-                )
+                decision_data = make_decision(all_indicators, fng_data, order_book_data)
                 print(f"\n最终决策: {decision_data['decision']}")
                 print(f"总分: {decision_data['score']}")
                 print(f"归因: {decision_data['breakdown']}")
