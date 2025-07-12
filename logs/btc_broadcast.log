@@ -339,3 +339,1334 @@ KeyError: 'kline'
 2025-07-11 23:17:38 - BtcBroadcast - INFO - 最终决策: 大量卖出
 2025-07-11 23:17:38 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
 
+2025-07-12 10:05:05 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:05:05 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:05:06 - BtcBroadcast - INFO - 获取成功: 价格=$117702, 24h变化=1.54%
+2025-07-12 10:05:06 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:05:07 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:05:07 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 的 OHLC K线数据 (最近 90 天)...
+2025-07-12 10:05:08 - BtcBroadcast - INFO - 成功获取并转换 23 条K线数据。
+2025-07-12 10:05:08 - BtcBroadcast - INFO - 技术指标计算完成: SMA_20=104511.75, RSI_14=81.01
+2025-07-12 10:05:08 - BtcBroadcast - INFO - 开始基于评分系统进行决策...
+2025-07-12 10:05:08 - BtcBroadcast - INFO - 当前价格: 117702.00, SMA_20: 104511.75, RSI_14: 81.01, F&G指数: 79
+2025-07-12 10:05:08 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 10:05:08 - BtcBroadcast - INFO - [得分] RSI (81.01) >= 75，分数 -3
+2025-07-12 10:05:08 - BtcBroadcast - INFO - [得分] 价格/SMA比率 (1.13) >= 1.1，分数 -3
+2025-07-12 10:05:08 - BtcBroadcast - INFO - 最终总分: -10
+2025-07-12 10:05:08 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:05:08 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 10:05:09 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 10:05:09 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:05:09 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 10:16:41 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:16:41 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:16:42 - BtcBroadcast - INFO - 获取成功: 价格=$117691, 24h变化=1.38%
+2025-07-12 10:16:42 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:16:43 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:16:43 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:16:45 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:16:45 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:16:46 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:16:46 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:16:48 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:16:48 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117544.90, RSI_14=53.05
+2025-07-12 10:16:48 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113182.15, RSI_14=75.83
+2025-07-12 10:16:48 - BtcBroadcast - CRITICAL - 程序遇到未处理的严重错误: 'EMA_50'
+Traceback (most recent call last):
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'EMA_50'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 71, in <module>
+    run_once()
+    ~~~~~~~~^^
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 40, in run_once
+    all_indicators = calculate_multi_timeframe_indicators(mtf_data)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 127, in calculate_multi_timeframe_indicators
+    indicators = calculate_indicators(klines, timeframe)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 80, in calculate_indicators
+    "ema50": df["EMA_50"].iloc[-1],
+             ~~^^^^^^^^^^
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/frame.py", line 4107, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'EMA_50'
+2025-07-12 10:18:19 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:18:19 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:18:20 - BtcBroadcast - INFO - 获取成功: 价格=$117696, 24h变化=1.39%
+2025-07-12 10:18:20 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:18:21 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:18:21 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:18:23 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:18:23 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:18:26 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:18:26 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:18:28 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:18:28 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117545.91, RSI_14=53.67
+2025-07-12 10:18:28 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113183.54, RSI_14=75.90
+2025-07-12 10:18:28 - BtcBroadcast - CRITICAL - 程序遇到未处理的严重错误: 'EMA_50'
+Traceback (most recent call last):
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'EMA_50'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 71, in <module>
+    run_once()
+    ~~~~~~~~^^
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 40, in run_once
+    all_indicators = calculate_multi_timeframe_indicators(mtf_data)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 126, in calculate_multi_timeframe_indicators
+    indicators = calculate_indicators(klines, timeframe)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 79, in calculate_indicators
+    "ema50": df["EMA_50"].iloc[-1],
+             ~~^^^^^^^^^^
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/frame.py", line 4107, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'EMA_50'
+2025-07-12 10:20:04 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:20:04 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:20:05 - BtcBroadcast - INFO - 获取成功: 价格=$117701, 24h变化=1.39%
+2025-07-12 10:20:05 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:20:06 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:20:06 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:20:07 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:20:07 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:20:09 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:20:09 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:20:10 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:20:10 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117547.05, RSI_14=54.35
+2025-07-12 10:20:10 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113184.39, RSI_14=75.95
+2025-07-12 10:20:10 - BtcBroadcast - CRITICAL - 程序遇到未处理的严重错误: 'EMA_50'
+Traceback (most recent call last):
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'EMA_50'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 71, in <module>
+    run_once()
+    ~~~~~~~~^^
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 40, in run_once
+    all_indicators = calculate_multi_timeframe_indicators(mtf_data)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 127, in calculate_multi_timeframe_indicators
+    indicators = calculate_indicators(klines, timeframe)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 80, in calculate_indicators
+    "ema50": df["EMA_50"].iloc[-1],
+             ~~^^^^^^^^^^
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/frame.py", line 4107, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'EMA_50'
+2025-07-12 10:24:46 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:24:46 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:24:47 - BtcBroadcast - INFO - 获取成功: 价格=$117757, 24h变化=1.37%
+2025-07-12 10:24:47 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:24:48 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:24:48 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:24:50 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:24:50 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:24:51 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:24:51 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:24:53 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:24:53 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117547.91, RSI_14=54.84
+2025-07-12 10:24:53 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113185.26, RSI_14=75.99
+2025-07-12 10:24:53 - BtcBroadcast - CRITICAL - 程序遇到未处理的严重错误: 'EMA_50'
+Traceback (most recent call last):
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'EMA_50'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 71, in <module>
+    run_once()
+    ~~~~~~~~^^
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 40, in run_once
+    all_indicators = calculate_multi_timeframe_indicators(mtf_data)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 127, in calculate_multi_timeframe_indicators
+    indicators = calculate_indicators(klines, timeframe)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 80, in calculate_indicators
+    "ema50": df["EMA_50"].iloc[-1],
+             ~~^^^^^^^^^^
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/frame.py", line 4107, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'EMA_50'
+2025-07-12 10:26:02 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:26:02 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:26:03 - BtcBroadcast - INFO - 获取成功: 价格=$117754, 24h变化=1.37%
+2025-07-12 10:26:03 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:26:04 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:26:04 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:26:06 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:26:06 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:26:08 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:26:08 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:26:10 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:26:10 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117548.15, RSI_14=54.98
+2025-07-12 10:26:10 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113185.96, RSI_14=76.03
+2025-07-12 10:26:10 - BtcBroadcast - CRITICAL - 程序遇到未处理的严重错误: 'EMA_50'
+Traceback (most recent call last):
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'EMA_50'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 71, in <module>
+    run_once()
+    ~~~~~~~~^^
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 40, in run_once
+    all_indicators = calculate_multi_timeframe_indicators(mtf_data)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 128, in calculate_multi_timeframe_indicators
+    indicators = calculate_indicators(klines, timeframe)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 81, in calculate_indicators
+    "ema50": df["EMA_50"].iloc[-1],
+             ~~^^^^^^^^^^
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/frame.py", line 4107, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'EMA_50'
+2025-07-12 10:29:40 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:29:40 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:29:41 - BtcBroadcast - INFO - 获取成功: 价格=$117783, 24h变化=1.33%
+2025-07-12 10:29:41 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:29:42 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:29:42 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:29:43 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:29:43 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:29:45 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:29:45 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:29:47 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:29:47 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117547.78, RSI_14=54.77
+2025-07-12 10:29:47 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113185.12, RSI_14=75.99
+2025-07-12 10:29:47 - BtcBroadcast - CRITICAL - 程序遇到未处理的严重错误: 'EMA_50'
+Traceback (most recent call last):
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'EMA_50'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 71, in <module>
+    run_once()
+    ~~~~~~~~^^
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 40, in run_once
+    all_indicators = calculate_multi_timeframe_indicators(mtf_data)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 123, in calculate_multi_timeframe_indicators
+    indicators = calculate_indicators(klines, timeframe)
+  File "/Users/lihaopeng/develope/auto_monitor/strategy.py", line 78, in calculate_indicators
+    latest_indicators["ema50"] = df["EMA_50"].iloc[-1]
+                                 ~~^^^^^^^^^^
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/frame.py", line 4107, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/lihaopeng/.pyenv/versions/3.7.13_v/lib/python3.13/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'EMA_50'
+2025-07-12 10:30:52 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:30:52 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:30:53 - BtcBroadcast - INFO - 获取成功: 价格=$117779, 24h变化=1.33%
+2025-07-12 10:30:53 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:30:54 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:30:54 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:30:56 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:30:56 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:30:57 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:30:57 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:30:59 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:30:59 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117559.88, RSI_14=54.24
+2025-07-12 10:30:59 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113184.45, RSI_14=75.95
+2025-07-12 10:30:59 - BtcBroadcast - INFO - DataFrame列名: ['timestamp', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'quote_asset_volume', 'number_of_trades', 'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore', 'SMA_20', 'RSI_14', 'EMA_12', 'EMA_26']
+2025-07-12 10:30:59 - BtcBroadcast - ERROR - 找不到EMA列: 'EMA_50'
+2025-07-12 10:30:59 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109238.01, RSI_14=76.48
+2025-07-12 10:30:59 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 10:30:59 - BtcBroadcast - INFO - 当前价格: 117779.00, F&G指数: 79
+2025-07-12 10:30:59 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 10:30:59 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.95) > 70，分数 -3
+2025-07-12 10:30:59 - BtcBroadcast - INFO - [得分] 日线 RSI (76.48) >= 75，分数 -4
+2025-07-12 10:30:59 - BtcBroadcast - INFO - 最终总分: -11
+2025-07-12 10:30:59 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:30:59 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:30:59 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 10:31:52 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:31:52 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:31:52 - BtcBroadcast - INFO - 获取成功: 价格=$117779, 24h变化=1.33%
+2025-07-12 10:31:52 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:31:53 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:31:53 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:31:55 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:31:55 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:31:56 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:31:56 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:32:01 - BtcBroadcast - WARNING - 请求 'https://min-api.cryptocompare.com/data/v2/histoday' 失败 (尝试 1/3): HTTPSConnectionPool(host='min-api.cryptocompare.com', port=443): Max retries exceeded with url: /data/v2/histoday?fsym=BTC&tsym=USDT&limit=30 (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 503 Service Unavailable')))
+2025-07-12 10:32:08 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:32:08 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117560.98, RSI_14=55.01
+2025-07-12 10:32:08 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113185.51, RSI_14=76.00
+2025-07-12 10:32:08 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109239.07, RSI_14=76.51
+2025-07-12 10:32:08 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 10:32:08 - BtcBroadcast - INFO - 当前价格: 117779.00, F&G指数: 79
+2025-07-12 10:32:08 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 10:32:08 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.00) > 70，分数 -3
+2025-07-12 10:32:08 - BtcBroadcast - INFO - [得分] 日线 RSI (76.51) >= 75，分数 -4
+2025-07-12 10:32:08 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 10:32:08 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 10:32:08 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:32:08 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:32:08 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 10:32:41 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:32:41 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:32:41 - BtcBroadcast - INFO - 获取成功: 价格=$117776, 24h变化=1.29%
+2025-07-12 10:32:41 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:32:42 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:32:42 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:32:44 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:32:44 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:32:45 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:32:45 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:32:47 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:32:47 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117561.44, RSI_14=55.29
+2025-07-12 10:32:47 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113185.93, RSI_14=76.03
+2025-07-12 10:32:47 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109239.49, RSI_14=76.52
+2025-07-12 10:32:47 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 10:32:47 - BtcBroadcast - INFO - 当前价格: 117776.00, F&G指数: 79
+2025-07-12 10:32:47 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 10:32:47 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.03) > 70，分数 -3
+2025-07-12 10:32:47 - BtcBroadcast - INFO - [得分] 日线 RSI (76.52) >= 75，分数 -4
+2025-07-12 10:32:47 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 10:32:47 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 10:32:47 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:32:47 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:32:47 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 10:34:31 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:34:31 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:34:32 - BtcBroadcast - INFO - 获取成功: 价格=$117790, 24h变化=1.30%
+2025-07-12 10:34:32 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:34:33 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:34:33 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:34:35 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:34:35 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:34:36 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:34:36 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:34:38 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:34:38 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117560.51, RSI_14=54.71
+2025-07-12 10:34:38 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113185.09, RSI_14=75.98
+2025-07-12 10:34:38 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109238.60, RSI_14=76.50
+2025-07-12 10:34:38 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 10:34:38 - BtcBroadcast - INFO - 当前价格: 117790.00, F&G指数: 79
+2025-07-12 10:34:38 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 10:34:38 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.98) > 70，分数 -3
+2025-07-12 10:34:38 - BtcBroadcast - INFO - [得分] 日线 RSI (76.50) >= 75，分数 -4
+2025-07-12 10:34:38 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 10:34:38 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 10:34:38 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:34:38 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 10:34:38 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 10:34:38 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:34:38 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 10:39:41 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:39:41 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:39:41 - BtcBroadcast - INFO - 获取成功: 价格=$117788, 24h变化=1.21%
+2025-07-12 10:39:41 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:39:42 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:39:42 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:39:44 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:39:44 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:39:45 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:39:45 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:39:47 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:39:47 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117558.72, RSI_14=53.40
+2025-07-12 10:39:47 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113183.25, RSI_14=75.89
+2025-07-12 10:39:47 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109236.81, RSI_14=76.45
+2025-07-12 10:39:47 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 10:39:47 - BtcBroadcast - INFO - 当前价格: 117788.00, F&G指数: 79
+2025-07-12 10:39:47 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 10:39:47 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.89) > 70，分数 -3
+2025-07-12 10:39:47 - BtcBroadcast - INFO - [得分] 日线 RSI (76.45) >= 75，分数 -4
+2025-07-12 10:39:47 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 10:39:47 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 10:39:47 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:39:47 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 10:39:47 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 10:39:47 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:39:47 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 10:44:54 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:44:54 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:44:59 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/simple/price' 失败 (尝试 1/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 503 Service Unavailable')))
+2025-07-12 10:45:05 - BtcBroadcast - INFO - 获取成功: 价格=$117760, 24h变化=1.14%
+2025-07-12 10:45:05 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:45:06 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:45:06 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:45:08 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:45:08 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:45:09 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:45:09 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:45:11 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:45:11 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117560.78, RSI_14=52.62
+2025-07-12 10:45:11 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113182.16, RSI_14=75.83
+2025-07-12 10:45:11 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109235.71, RSI_14=76.42
+2025-07-12 10:45:11 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 10:45:11 - BtcBroadcast - INFO - 当前价格: 117760.00, F&G指数: 79
+2025-07-12 10:45:11 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 10:45:11 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.83) > 70，分数 -3
+2025-07-12 10:45:11 - BtcBroadcast - INFO - [得分] 日线 RSI (76.42) >= 75，分数 -4
+2025-07-12 10:45:11 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 10:45:11 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 10:45:11 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:45:11 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 10:45:11 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 10:45:11 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:45:11 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 10:46:26 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:46:26 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:46:28 - BtcBroadcast - INFO - 获取成功: 价格=$117749, 24h变化=1.09%
+2025-07-12 10:46:28 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:46:28 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:46:28 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:46:30 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:46:30 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:46:32 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:46:32 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:46:33 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:46:33 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117560.81, RSI_14=52.64
+2025-07-12 10:46:33 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113182.18, RSI_14=75.83
+2025-07-12 10:46:33 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109235.74, RSI_14=76.42
+2025-07-12 10:46:33 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 10:46:33 - BtcBroadcast - INFO - 当前价格: 117749.00, F&G指数: 79
+2025-07-12 10:46:33 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 10:46:33 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.83) > 70，分数 -3
+2025-07-12 10:46:33 - BtcBroadcast - INFO - [得分] 日线 RSI (76.42) >= 75，分数 -4
+2025-07-12 10:46:33 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 10:46:33 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 10:46:33 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:46:33 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 10:46:34 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 10:46:34 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:46:34 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 10:49:06 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:49:06 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:49:07 - BtcBroadcast - INFO - 获取成功: 价格=$117741, 24h变化=1.08%
+2025-07-12 10:49:07 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:49:08 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:49:08 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:49:10 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:49:10 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:49:11 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:49:11 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:49:13 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:49:13 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117559.86, RSI_14=51.94
+2025-07-12 10:49:13 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113181.23, RSI_14=75.79
+2025-07-12 10:49:13 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109234.79, RSI_14=76.40
+2025-07-12 10:49:13 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 10:49:13 - BtcBroadcast - INFO - 当前价格: 117741.00, F&G指数: 79
+2025-07-12 10:49:13 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 10:49:13 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.79) > 70，分数 -3
+2025-07-12 10:49:13 - BtcBroadcast - INFO - [得分] 日线 RSI (76.40) >= 75，分数 -4
+2025-07-12 10:49:13 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 10:49:13 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 10:49:13 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:49:13 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 10:49:13 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 10:49:13 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:49:13 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 10:53:11 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:53:11 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:53:12 - BtcBroadcast - INFO - 获取成功: 价格=$117732, 24h变化=0.91%
+2025-07-12 10:53:12 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:53:13 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:53:13 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:53:14 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:53:14 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:53:16 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:53:16 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:53:17 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:53:17 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117557.83, RSI_14=50.51
+2025-07-12 10:53:17 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113179.21, RSI_14=75.68
+2025-07-12 10:53:17 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109232.76, RSI_14=76.34
+2025-07-12 10:53:17 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 10:53:17 - BtcBroadcast - INFO - 当前价格: 117732.00, F&G指数: 79
+2025-07-12 10:53:17 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 10:53:17 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.68) > 70，分数 -3
+2025-07-12 10:53:17 - BtcBroadcast - INFO - [得分] 日线 RSI (76.34) >= 75，分数 -4
+2025-07-12 10:53:17 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 10:53:17 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 10:53:17 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:53:17 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 10:53:18 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 10:53:18 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:53:18 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 10:56:47 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 10:56:47 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 10:56:49 - BtcBroadcast - INFO - 获取成功: 价格=$117653, 24h变化=0.85%
+2025-07-12 10:56:49 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 10:56:50 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 10:56:50 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 10:56:51 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 10:56:51 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 10:56:53 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 10:56:53 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 10:56:54 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 10:56:54 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117556.53, RSI_14=49.64
+2025-07-12 10:56:54 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113177.91, RSI_14=75.61
+2025-07-12 10:56:54 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109231.47, RSI_14=76.30
+2025-07-12 10:56:54 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 10:56:54 - BtcBroadcast - INFO - 当前价格: 117653.00, F&G指数: 79
+2025-07-12 10:56:54 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 10:56:54 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.61) > 70，分数 -3
+2025-07-12 10:56:54 - BtcBroadcast - INFO - [得分] 日线 RSI (76.30) >= 75，分数 -4
+2025-07-12 10:56:54 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 10:56:54 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 10:56:54 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:56:54 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 10:56:54 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 10:56:54 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 10:56:54 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 11:05:41 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 11:05:41 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 11:05:42 - BtcBroadcast - INFO - 获取成功: 价格=$117650, 24h变化=0.87%
+2025-07-12 11:05:42 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 11:05:43 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 11:05:43 - BtcBroadcast - INFO - 正在获取 BTCUSDT 的订单薄数据...
+2025-07-12 11:05:45 - BtcBroadcast - INFO - 成功获取订单薄数据，买卖比: 0.00, 价差: 0.00%
+2025-07-12 11:05:45 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 11:05:46 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 11:05:46 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 11:05:48 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 11:05:48 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 11:05:50 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 11:05:50 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117565.18, RSI_14=52.23
+2025-07-12 11:05:50 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113181.66, RSI_14=75.81
+2025-07-12 11:05:50 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109235.22, RSI_14=76.41
+2025-07-12 11:05:50 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 11:05:50 - BtcBroadcast - INFO - 当前价格: 117650.00, F&G指数: 79
+2025-07-12 11:05:50 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 11:05:50 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.81) > 70，分数 -3
+2025-07-12 11:05:50 - BtcBroadcast - INFO - [得分] 日线 RSI (76.41) >= 75，分数 -4
+2025-07-12 11:05:50 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 11:05:50 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.00) < 0.7，分数 -2
+2025-07-12 11:05:50 - BtcBroadcast - INFO - 最终总分: -11
+2025-07-12 11:05:50 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:05:50 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 11:05:50 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 11:05:50 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:05:50 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 11:24:52 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 11:24:52 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 11:24:53 - BtcBroadcast - INFO - 获取成功: 价格=$117859, 24h变化=1.13%
+2025-07-12 11:24:53 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 11:24:54 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 11:24:54 - BtcBroadcast - INFO - 正在获取 BTCUSDT 的订单薄数据...
+2025-07-12 11:24:56 - BtcBroadcast - INFO - 成功获取订单薄数据，买卖比: 0.00, 价差: 0.00%
+2025-07-12 11:24:56 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 11:24:58 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 11:24:58 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 11:24:59 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 11:24:59 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 11:25:01 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 11:25:01 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117598.45, RSI_14=56.69
+2025-07-12 11:25:01 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113189.05, RSI_14=76.18
+2025-07-12 11:25:01 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109242.60, RSI_14=76.61
+2025-07-12 11:25:01 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 11:25:01 - BtcBroadcast - INFO - 当前价格: 117859.00, F&G指数: 79
+2025-07-12 11:25:01 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 11:25:01 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.18) > 70，分数 -3
+2025-07-12 11:25:01 - BtcBroadcast - INFO - [得分] 日线 RSI (76.61) >= 75，分数 -4
+2025-07-12 11:25:01 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 11:25:01 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.00) < 0.7，分数 -2
+2025-07-12 11:25:01 - BtcBroadcast - INFO - 最终总分: -11
+2025-07-12 11:25:01 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:25:01 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 11:25:01 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 11:25:01 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:25:01 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 11:28:46 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 11:28:46 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 11:28:47 - BtcBroadcast - INFO - 获取成功: 价格=$117847, 24h变化=1.13%
+2025-07-12 11:28:47 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 11:28:48 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 11:28:48 - BtcBroadcast - INFO - 正在获取 BTCUSDT 的订单薄数据...
+2025-07-12 11:28:49 - BtcBroadcast - INFO - 成功获取订单薄数据，买卖比: 0.00, 价差: 0.00%
+2025-07-12 11:28:49 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 11:28:51 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 11:28:51 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 11:28:52 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 11:28:52 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 11:28:54 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 11:28:54 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117597.52, RSI_14=56.15
+2025-07-12 11:28:54 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113188.12, RSI_14=76.14
+2025-07-12 11:28:54 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109241.67, RSI_14=76.58
+2025-07-12 11:28:54 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 11:28:54 - BtcBroadcast - INFO - 当前价格: 117847.00, F&G指数: 79
+2025-07-12 11:28:54 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 11:28:54 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.14) > 70，分数 -3
+2025-07-12 11:28:54 - BtcBroadcast - INFO - [得分] 日线 RSI (76.58) >= 75，分数 -4
+2025-07-12 11:28:54 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 11:28:54 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.00) < 0.7，分数 -2
+2025-07-12 11:28:54 - BtcBroadcast - INFO - 最终总分: -11
+2025-07-12 11:28:54 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:28:54 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 11:28:54 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 11:28:54 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:28:54 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 11:31:58 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 11:31:58 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 11:31:59 - BtcBroadcast - INFO - 获取成功: 价格=$117850, 24h变化=1.14%
+2025-07-12 11:31:59 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 11:32:00 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 11:32:00 - BtcBroadcast - INFO - 正在获取 BTCUSDT 的订单薄数据...
+2025-07-12 11:32:02 - BtcBroadcast - INFO - 成功获取订单薄数据，买卖比: 0.00, 价差: 0.00%
+2025-07-12 11:32:02 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 11:32:03 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 11:32:03 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 11:32:05 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 11:32:05 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 11:32:06 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 11:32:06 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117620.58, RSI_14=57.43
+2025-07-12 11:32:06 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113188.99, RSI_14=76.18
+2025-07-12 11:32:06 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109243.22, RSI_14=76.63
+2025-07-12 11:32:06 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 11:32:06 - BtcBroadcast - INFO - 当前价格: 117850.00, F&G指数: 79
+2025-07-12 11:32:06 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 11:32:06 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.18) > 70，分数 -3
+2025-07-12 11:32:06 - BtcBroadcast - INFO - [得分] 日线 RSI (76.63) >= 75，分数 -4
+2025-07-12 11:32:06 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 11:32:06 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.00) < 0.7，分数 -2
+2025-07-12 11:32:06 - BtcBroadcast - INFO - 最终总分: -11
+2025-07-12 11:32:06 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:32:06 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 11:32:06 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 11:32:06 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:32:06 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 11:35:46 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 11:35:46 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 11:35:47 - BtcBroadcast - INFO - 获取成功: 价格=$117840, 24h变化=1.12%
+2025-07-12 11:35:47 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 11:35:48 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 11:35:48 - BtcBroadcast - INFO - 正在获取 BTCUSDT 的订单薄数据...
+2025-07-12 11:35:49 - BtcBroadcast - WARNING - 订单薄数据中没有有效的买单或卖单
+2025-07-12 11:35:49 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 11:35:51 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 11:35:51 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 11:35:53 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 11:35:53 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 11:35:55 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 11:35:55 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117618.00, RSI_14=55.51
+2025-07-12 11:35:55 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113187.69, RSI_14=76.12
+2025-07-12 11:35:55 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109241.24, RSI_14=76.57
+2025-07-12 11:35:55 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 11:35:55 - BtcBroadcast - INFO - 当前价格: 117840.00, F&G指数: 79
+2025-07-12 11:35:55 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 11:35:55 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.12) > 70，分数 -3
+2025-07-12 11:35:55 - BtcBroadcast - INFO - [得分] 日线 RSI (76.57) >= 75，分数 -4
+2025-07-12 11:35:55 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 11:35:55 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 11:35:55 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:35:55 - BtcBroadcast - CRITICAL - 程序遇到未处理的严重错误: Invalid format specifier '.2f or '--'' for object of type 'bool'
+Traceback (most recent call last):
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 70, in <module>
+    run_once()
+    ~~~~~~~~^^
+  File "/Users/lihaopeng/develope/auto_monitor/main.py", line 59, in run_once
+    message = format_feishu_message(
+        price_data, all_indicators, fear_greed_index, order_book_data, decision
+    )
+  File "/Users/lihaopeng/develope/auto_monitor/notifier.py", line 287, in format_feishu_message
+    "content": f"**15分钟EMA**\n交叉: {golden_cross_15m and '🔼金叉' or (death_cross_15m and '🔽死叉' or '无')}\n排列: {ema12_15m > ema26_15m and '多头排列' or '空头排列'}\n价差: {data_available and spread:.2f or '--'}%",
+                                                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Invalid format specifier '.2f or '--'' for object of type 'bool'
+2025-07-12 11:44:32 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 11:44:32 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 11:44:33 - BtcBroadcast - INFO - 获取成功: 价格=$117804, 24h变化=1.09%
+2025-07-12 11:44:33 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 11:44:34 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 11:44:34 - BtcBroadcast - INFO - 正在获取 BTCUSDT 的订单薄数据...
+2025-07-12 11:44:35 - BtcBroadcast - WARNING - 订单薄数据中没有有效的买单或卖单
+2025-07-12 11:44:35 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 11:44:37 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 11:44:37 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 11:44:39 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 11:44:39 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 11:44:40 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 11:44:40 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117614.13, RSI_14=52.66
+2025-07-12 11:44:40 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113183.83, RSI_14=75.92
+2025-07-12 11:44:40 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109237.38, RSI_14=76.47
+2025-07-12 11:44:40 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 11:44:40 - BtcBroadcast - INFO - 当前价格: 117804.00, F&G指数: 79
+2025-07-12 11:44:40 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 11:44:40 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.92) > 70，分数 -3
+2025-07-12 11:44:40 - BtcBroadcast - INFO - [得分] 日线 RSI (76.47) >= 75，分数 -4
+2025-07-12 11:44:40 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 11:44:40 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 11:44:40 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:44:40 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 11:44:41 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 11:44:41 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:44:41 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 11:48:58 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 11:48:58 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 11:49:00 - BtcBroadcast - INFO - 获取成功: 价格=$117793, 24h变化=0.95%
+2025-07-12 11:49:00 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 11:49:01 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 11:49:01 - BtcBroadcast - INFO - 正在获取 BTCUSDT 的订单薄数据...
+2025-07-12 11:49:02 - BtcBroadcast - WARNING - 订单薄数据中没有有效的买单或卖单
+2025-07-12 11:49:02 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 11:49:04 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 11:49:04 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 11:49:05 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 11:49:05 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 11:49:07 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 11:49:07 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117617.24, RSI_14=51.31
+2025-07-12 11:49:07 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113182.00, RSI_14=75.83
+2025-07-12 11:49:07 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109235.56, RSI_14=76.42
+2025-07-12 11:49:07 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 11:49:07 - BtcBroadcast - INFO - 当前价格: 117793.00, F&G指数: 79
+2025-07-12 11:49:07 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 11:49:07 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.83) > 70，分数 -3
+2025-07-12 11:49:07 - BtcBroadcast - INFO - [得分] 日线 RSI (76.42) >= 75，分数 -4
+2025-07-12 11:49:07 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 11:49:07 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 11:49:07 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:49:07 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 11:49:07 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 11:49:07 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:49:07 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 11:52:20 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 11:52:20 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 11:52:21 - BtcBroadcast - INFO - 获取成功: 价格=$117739, 24h变化=0.87%
+2025-07-12 11:52:21 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 11:52:22 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 11:52:22 - BtcBroadcast - INFO - 正在获取 BTCUSDT 的订单薄数据...
+2025-07-12 11:52:23 - BtcBroadcast - WARNING - 订单薄数据中没有有效的买单或卖单，使用模拟数据代替
+2025-07-12 11:52:23 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 11:52:24 - BtcBroadcast - INFO - 获取成功: 价格=$117739, 24h变化=0.87%
+2025-07-12 11:52:24 - BtcBroadcast - INFO - 生成模拟订单薄数据，买卖比: 0.68, 价差: 0.20%
+2025-07-12 11:52:24 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 11:52:25 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 11:52:25 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 11:52:26 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 11:52:26 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 11:52:28 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 11:52:28 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117617.10, RSI_14=51.20
+2025-07-12 11:52:28 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113181.85, RSI_14=75.82
+2025-07-12 11:52:28 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109235.41, RSI_14=76.41
+2025-07-12 11:52:28 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 11:52:28 - BtcBroadcast - INFO - 当前价格: 117739.00, F&G指数: 79
+2025-07-12 11:52:28 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 11:52:28 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.82) > 70，分数 -3
+2025-07-12 11:52:28 - BtcBroadcast - INFO - [得分] 日线 RSI (76.41) >= 75，分数 -4
+2025-07-12 11:52:28 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 11:52:28 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.68) < 0.7，分数 -2
+2025-07-12 11:52:28 - BtcBroadcast - INFO - 最终总分: -11
+2025-07-12 11:52:28 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:52:28 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 11:52:29 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 11:52:29 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 11:52:29 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:08:06 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:08:06 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:08:07 - BtcBroadcast - INFO - 获取成功: 价格=$117819, 24h变化=0.97%
+2025-07-12 12:08:07 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:08:08 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 12:08:08 - BtcBroadcast - INFO - 正在从 Coinbase 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:08:09 - BtcBroadcast - WARNING - 请求 'https://api.pro.coinbase.com/products/BTC-USDT/book' 失败 (尝试 1/3): 503 Server Error: Service Unavailable for url: https://api.pro.coinbase.com/products/BTC-USDT/book?level=2
+2025-07-12 12:08:14 - BtcBroadcast - WARNING - 请求 'https://api.pro.coinbase.com/products/BTC-USDT/book' 失败 (尝试 2/3): 503 Server Error: Service Unavailable for url: https://api.pro.coinbase.com/products/BTC-USDT/book?level=2
+2025-07-12 12:08:20 - BtcBroadcast - WARNING - 请求 'https://api.pro.coinbase.com/products/BTC-USDT/book' 失败 (尝试 3/3): 503 Server Error: Service Unavailable for url: https://api.pro.coinbase.com/products/BTC-USDT/book?level=2
+2025-07-12 12:08:20 - BtcBroadcast - ERROR - 请求 'https://api.pro.coinbase.com/products/BTC-USDT/book' 在 3 次尝试后最终失败。
+2025-07-12 12:08:20 - BtcBroadcast - ERROR - 从 Coinbase 获取 BTC-USDT 的订单薄数据失败或返回数据为空。
+2025-07-12 12:08:20 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:08:22 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:08:22 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:08:23 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:08:23 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:08:24 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:08:24 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117627.62, RSI_14=54.83
+2025-07-12 12:08:25 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113628.12, RSI_14=75.87
+2025-07-12 12:08:25 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109239.33, RSI_14=76.52
+2025-07-12 12:08:25 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:08:25 - BtcBroadcast - INFO - 当前价格: 117819.00, F&G指数: 79
+2025-07-12 12:08:25 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:08:25 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.87) > 70，分数 -3
+2025-07-12 12:08:25 - BtcBroadcast - INFO - [得分] 日线 RSI (76.52) >= 75，分数 -4
+2025-07-12 12:08:25 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:08:25 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 12:08:25 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:08:25 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:08:25 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:08:25 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:08:25 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:10:11 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:10:11 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:10:12 - BtcBroadcast - INFO - 获取成功: 价格=$117804, 24h变化=0.96%
+2025-07-12 12:10:12 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:10:13 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (Extreme Greed)
+2025-07-12 12:10:13 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:10:14 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.91, 价差: 0.00%
+2025-07-12 12:10:14 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:10:15 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:10:15 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:10:17 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:10:17 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:10:19 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:10:19 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117628.15, RSI_14=55.18
+2025-07-12 12:10:19 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113630.03, RSI_14=76.09
+2025-07-12 12:10:19 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109241.24, RSI_14=76.57
+2025-07-12 12:10:19 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:10:19 - BtcBroadcast - INFO - 当前价格: 117804.00, F&G指数: 79
+2025-07-12 12:10:19 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:10:19 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.09) > 70，分数 -3
+2025-07-12 12:10:19 - BtcBroadcast - INFO - [得分] 日线 RSI (76.57) >= 75，分数 -4
+2025-07-12 12:10:19 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:10:19 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 12:10:19 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:10:19 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:10:19 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:10:19 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:10:19 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:13:00 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:13:00 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:13:01 - BtcBroadcast - INFO - 获取成功: 价格=$117801, 24h变化=0.98%
+2025-07-12 12:13:01 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:13:02 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:13:02 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:13:03 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 1.56, 价差: 0.00%
+2025-07-12 12:13:03 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:13:04 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:13:04 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:13:06 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:13:06 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:13:08 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:13:08 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117627.98, RSI_14=55.07
+2025-07-12 12:13:08 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113629.87, RSI_14=76.08
+2025-07-12 12:13:08 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109241.08, RSI_14=76.57
+2025-07-12 12:13:08 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:13:08 - BtcBroadcast - INFO - 当前价格: 117801.00, F&G指数: 79
+2025-07-12 12:13:08 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:13:08 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.08) > 70，分数 -3
+2025-07-12 12:13:08 - BtcBroadcast - INFO - [得分] 日线 RSI (76.57) >= 75，分数 -4
+2025-07-12 12:13:08 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:13:08 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (1.56) > 1.5，分数 +2
+2025-07-12 12:13:08 - BtcBroadcast - INFO - 最终总分: -7
+2025-07-12 12:13:08 - BtcBroadcast - INFO - 最终决策: 🔴 大量卖出
+2025-07-12 12:13:08 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:13:08 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:13:08 - BtcBroadcast - INFO - 最终决策: 🔴 大量卖出
+2025-07-12 12:13:08 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:16:39 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:16:39 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:16:39 - BtcBroadcast - INFO - 获取成功: 价格=$117821, 24h变化=1.02%
+2025-07-12 12:16:39 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:16:40 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:16:40 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:16:41 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.59, 价差: 0.00%
+2025-07-12 12:16:41 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:16:42 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:16:42 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:16:45 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:16:45 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:16:46 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:16:46 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117638.76, RSI_14=55.88
+2025-07-12 12:16:46 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113631.15, RSI_14=76.15
+2025-07-12 12:16:46 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109242.28, RSI_14=76.60
+2025-07-12 12:16:46 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:16:46 - BtcBroadcast - INFO - 当前价格: 117821.00, F&G指数: 79
+2025-07-12 12:16:46 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:16:46 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.15) > 70，分数 -3
+2025-07-12 12:16:46 - BtcBroadcast - INFO - [得分] 日线 RSI (76.60) >= 75，分数 -4
+2025-07-12 12:16:46 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:16:46 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.59) < 0.7，分数 -2
+2025-07-12 12:16:46 - BtcBroadcast - INFO - 最终总分: -11
+2025-07-12 12:16:46 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:16:46 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:16:47 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:16:47 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:16:47 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:20:11 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:20:11 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:20:12 - BtcBroadcast - INFO - 获取成功: 价格=$117840, 24h变化=1.04%
+2025-07-12 12:20:12 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:20:13 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:20:13 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:20:14 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 1.77, 价差: 0.00%
+2025-07-12 12:20:14 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:20:16 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:20:16 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:20:17 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:20:17 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:20:19 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:20:19 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117635.13, RSI_14=52.92
+2025-07-12 12:20:19 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113628.36, RSI_14=75.91
+2025-07-12 12:20:19 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109238.80, RSI_14=76.51
+2025-07-12 12:20:19 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:20:19 - BtcBroadcast - INFO - 当前价格: 117840.00, F&G指数: 79
+2025-07-12 12:20:19 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:20:19 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.91) > 70，分数 -3
+2025-07-12 12:20:19 - BtcBroadcast - INFO - [得分] 日线 RSI (76.51) >= 75，分数 -4
+2025-07-12 12:20:19 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:20:19 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (1.77) > 1.5，分数 +2
+2025-07-12 12:20:19 - BtcBroadcast - INFO - 最终总分: -7
+2025-07-12 12:20:19 - BtcBroadcast - INFO - 最终决策: 🔴 大量卖出
+2025-07-12 12:20:19 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:20:19 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:20:19 - BtcBroadcast - INFO - 最终决策: 🔴 大量卖出
+2025-07-12 12:20:19 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:21:53 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:21:53 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:21:54 - BtcBroadcast - INFO - 获取成功: 价格=$117824, 24h变化=1.02%
+2025-07-12 12:21:54 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:21:55 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:21:55 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:21:56 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.21, 价差: 0.00%
+2025-07-12 12:21:56 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:21:57 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:21:57 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:21:59 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:21:59 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:22:01 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:22:01 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117637.28, RSI_14=54.63
+2025-07-12 12:22:01 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113629.67, RSI_14=76.07
+2025-07-12 12:22:01 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109240.92, RSI_14=76.56
+2025-07-12 12:22:01 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:22:01 - BtcBroadcast - INFO - 当前价格: 117824.00, F&G指数: 79
+2025-07-12 12:22:01 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:22:01 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.07) > 70，分数 -3
+2025-07-12 12:22:01 - BtcBroadcast - INFO - [得分] 日线 RSI (76.56) >= 75，分数 -4
+2025-07-12 12:22:01 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:22:01 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.21) < 0.7，分数 -2
+2025-07-12 12:22:01 - BtcBroadcast - INFO - 最终总分: -11
+2025-07-12 12:22:01 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:22:01 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:22:02 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:22:02 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:22:02 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:26:36 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:26:36 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:26:37 - BtcBroadcast - INFO - 获取成功: 价格=$117829, 24h变化=1.06%
+2025-07-12 12:26:37 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:26:38 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:26:38 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:26:39 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 7.77, 价差: 0.00%
+2025-07-12 12:26:39 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:26:40 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:26:40 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:26:42 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:26:42 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:26:43 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:26:43 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117637.78, RSI_14=55.05
+2025-07-12 12:26:43 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113630.16, RSI_14=76.10
+2025-07-12 12:26:43 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109241.38, RSI_14=76.58
+2025-07-12 12:26:43 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:26:43 - BtcBroadcast - INFO - 当前价格: 117829.00, F&G指数: 79
+2025-07-12 12:26:43 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:26:43 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.10) > 70，分数 -3
+2025-07-12 12:26:43 - BtcBroadcast - INFO - [得分] 日线 RSI (76.58) >= 75，分数 -4
+2025-07-12 12:26:43 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:26:43 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (7.77) > 1.5，分数 +2
+2025-07-12 12:26:43 - BtcBroadcast - INFO - 最终总分: -7
+2025-07-12 12:26:43 - BtcBroadcast - INFO - 最终决策: 🔴 大量卖出
+2025-07-12 12:26:43 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:26:44 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:26:44 - BtcBroadcast - INFO - 最终决策: 🔴 大量卖出
+2025-07-12 12:26:44 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:29:32 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:29:32 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:29:34 - BtcBroadcast - INFO - 获取成功: 价格=$117842, 24h变化=1.07%
+2025-07-12 12:29:34 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:29:35 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:29:35 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:29:35 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 1.24, 价差: 0.00%
+2025-07-12 12:29:35 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:29:37 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:29:37 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:29:38 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:29:38 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:29:40 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:29:40 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117638.33, RSI_14=55.52
+2025-07-12 12:29:40 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113630.72, RSI_14=76.13
+2025-07-12 12:29:40 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109241.94, RSI_14=76.59
+2025-07-12 12:29:40 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:29:40 - BtcBroadcast - INFO - 当前价格: 117842.00, F&G指数: 79
+2025-07-12 12:29:40 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:29:40 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.13) > 70，分数 -3
+2025-07-12 12:29:40 - BtcBroadcast - INFO - [得分] 日线 RSI (76.59) >= 75，分数 -4
+2025-07-12 12:29:40 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:29:40 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 12:29:40 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:29:40 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:29:40 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:29:40 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:29:40 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:31:13 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:31:13 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:31:14 - BtcBroadcast - INFO - 获取成功: 价格=$117845, 24h变化=1.07%
+2025-07-12 12:31:14 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:31:15 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:31:15 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:31:16 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.74, 价差: 0.00%
+2025-07-12 12:31:16 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:31:18 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:31:18 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:31:19 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:31:19 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:31:21 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:31:21 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117652.57, RSI_14=55.71
+2025-07-12 12:31:21 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113631.41, RSI_14=76.16
+2025-07-12 12:31:21 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109242.62, RSI_14=76.61
+2025-07-12 12:31:21 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:31:21 - BtcBroadcast - INFO - 当前价格: 117845.00, F&G指数: 79
+2025-07-12 12:31:21 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:31:21 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.16) > 70，分数 -3
+2025-07-12 12:31:21 - BtcBroadcast - INFO - [得分] 日线 RSI (76.61) >= 75，分数 -4
+2025-07-12 12:31:21 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:31:21 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 12:31:21 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:31:21 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:31:21 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:31:21 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:31:21 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:33:40 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:33:40 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:33:41 - BtcBroadcast - INFO - 获取成功: 价格=$117857, 24h变化=1.11%
+2025-07-12 12:33:41 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:33:42 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:33:42 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:33:42 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.95, 价差: 0.00%
+2025-07-12 12:33:42 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:33:44 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:33:44 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:33:46 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:33:46 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:33:47 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:33:47 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117652.24, RSI_14=55.42
+2025-07-12 12:33:47 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113631.12, RSI_14=76.15
+2025-07-12 12:33:47 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109242.33, RSI_14=76.60
+2025-07-12 12:33:47 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:33:47 - BtcBroadcast - INFO - 当前价格: 117857.00, F&G指数: 79
+2025-07-12 12:33:47 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:33:47 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.15) > 70，分数 -3
+2025-07-12 12:33:47 - BtcBroadcast - INFO - [得分] 日线 RSI (76.60) >= 75，分数 -4
+2025-07-12 12:33:47 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:33:47 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 12:33:47 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:33:47 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:33:48 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:33:48 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:33:48 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:36:12 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:36:12 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:36:13 - BtcBroadcast - INFO - 获取成功: 价格=$117855, 24h变化=1.10%
+2025-07-12 12:36:13 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:36:14 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:36:14 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:36:15 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.38, 价差: 0.00%
+2025-07-12 12:36:15 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:36:17 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:36:17 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:36:18 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:36:18 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:36:20 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:36:20 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117651.28, RSI_14=54.61
+2025-07-12 12:36:20 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113630.17, RSI_14=76.10
+2025-07-12 12:36:20 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109241.39, RSI_14=76.58
+2025-07-12 12:36:20 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:36:20 - BtcBroadcast - INFO - 当前价格: 117855.00, F&G指数: 79
+2025-07-12 12:36:20 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:36:20 - BtcBroadcast - INFO - [得分] 15分钟 KDJ 死叉，分数 -1
+2025-07-12 12:36:20 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.10) > 70，分数 -3
+2025-07-12 12:36:20 - BtcBroadcast - INFO - [得分] 日线 RSI (76.58) >= 75，分数 -4
+2025-07-12 12:36:20 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:36:20 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.38) < 0.7，分数 -2
+2025-07-12 12:36:20 - BtcBroadcast - INFO - 最终总分: -12
+2025-07-12 12:36:20 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:36:20 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:36:20 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:36:20 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:36:20 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:36:51 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:36:51 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:36:51 - BtcBroadcast - INFO - 获取成功: 价格=$117855, 24h变化=1.10%
+2025-07-12 12:36:51 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:36:52 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:36:52 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:36:52 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.30, 价差: 0.00%
+2025-07-12 12:36:52 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:36:54 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:36:54 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:36:55 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:36:55 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:36:57 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:36:57 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117650.85, RSI_14=54.25
+2025-07-12 12:36:57 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113629.74, RSI_14=76.07
+2025-07-12 12:36:57 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109240.95, RSI_14=76.56
+2025-07-12 12:36:57 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:36:57 - BtcBroadcast - INFO - 当前价格: 117855.00, F&G指数: 79
+2025-07-12 12:36:57 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:36:57 - BtcBroadcast - INFO - [得分] 15分钟 KDJ 死叉，分数 -1
+2025-07-12 12:36:57 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.07) > 70，分数 -3
+2025-07-12 12:36:57 - BtcBroadcast - INFO - [得分] 日线 RSI (76.56) >= 75，分数 -4
+2025-07-12 12:36:57 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:36:57 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.30) < 0.7，分数 -2
+2025-07-12 12:36:57 - BtcBroadcast - INFO - 最终总分: -12
+2025-07-12 12:36:57 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:36:57 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:36:57 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:36:57 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:36:57 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:37:21 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:37:21 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:37:22 - BtcBroadcast - INFO - 获取成功: 价格=$117851, 24h变化=1.10%
+2025-07-12 12:37:22 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:37:23 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:37:23 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:37:24 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.54, 价差: 0.00%
+2025-07-12 12:37:24 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:37:25 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:37:25 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:37:27 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:37:27 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:37:28 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:37:28 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117650.85, RSI_14=54.25
+2025-07-12 12:37:28 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113629.72, RSI_14=76.07
+2025-07-12 12:37:28 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109240.93, RSI_14=76.56
+2025-07-12 12:37:28 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:37:28 - BtcBroadcast - INFO - 当前价格: 117851.00, F&G指数: 79
+2025-07-12 12:37:28 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:37:28 - BtcBroadcast - INFO - [得分] 15分钟 KDJ 死叉，分数 -1
+2025-07-12 12:37:28 - BtcBroadcast - INFO - [得分] 4小时 RSI (76.07) > 70，分数 -3
+2025-07-12 12:37:28 - BtcBroadcast - INFO - [得分] 日线 RSI (76.56) >= 75，分数 -4
+2025-07-12 12:37:28 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:37:28 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.54) < 0.7，分数 -2
+2025-07-12 12:37:28 - BtcBroadcast - INFO - 最终总分: -12
+2025-07-12 12:37:28 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:37:28 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:37:29 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:37:29 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:37:29 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:39:34 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:39:34 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:39:35 - BtcBroadcast - INFO - 获取成功: 价格=$117844, 24h变化=1.10%
+2025-07-12 12:39:35 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:39:36 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:39:36 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:39:36 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.69, 价差: 0.00%
+2025-07-12 12:39:36 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:39:37 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:39:37 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:39:39 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:39:39 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:39:42 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:39:42 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117649.53, RSI_14=53.17
+2025-07-12 12:39:42 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113628.42, RSI_14=75.92
+2025-07-12 12:39:42 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109239.63, RSI_14=76.53
+2025-07-12 12:39:42 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:39:42 - BtcBroadcast - INFO - 当前价格: 117844.00, F&G指数: 79
+2025-07-12 12:39:42 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:39:42 - BtcBroadcast - INFO - [得分] 15分钟 KDJ 死叉，分数 -1
+2025-07-12 12:39:42 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.92) > 70，分数 -3
+2025-07-12 12:39:42 - BtcBroadcast - INFO - [得分] 日线 RSI (76.53) >= 75，分数 -4
+2025-07-12 12:39:42 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:39:42 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.69) < 0.7，分数 -2
+2025-07-12 12:39:42 - BtcBroadcast - INFO - 最终总分: -12
+2025-07-12 12:39:42 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:39:42 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:39:42 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:39:42 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:39:42 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:40:16 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:40:16 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:40:17 - BtcBroadcast - INFO - 获取成功: 价格=$117844, 24h变化=1.10%
+2025-07-12 12:40:17 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:40:18 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:40:18 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:40:18 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.33, 价差: 0.00%
+2025-07-12 12:40:18 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:40:20 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:40:20 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:40:21 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:40:21 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:40:23 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:40:23 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117649.42, RSI_14=53.08
+2025-07-12 12:40:23 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113628.31, RSI_14=75.90
+2025-07-12 12:40:23 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109239.52, RSI_14=76.53
+2025-07-12 12:40:23 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:40:23 - BtcBroadcast - INFO - 当前价格: 117844.00, F&G指数: 79
+2025-07-12 12:40:23 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:40:23 - BtcBroadcast - INFO - [得分] 15分钟 KDJ 死叉，分数 -1
+2025-07-12 12:40:23 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.90) > 70，分数 -3
+2025-07-12 12:40:23 - BtcBroadcast - INFO - [得分] 日线 RSI (76.53) >= 75，分数 -4
+2025-07-12 12:40:23 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:40:23 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.33) < 0.7，分数 -2
+2025-07-12 12:40:23 - BtcBroadcast - INFO - 最终总分: -12
+2025-07-12 12:40:23 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:40:23 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:40:23 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:40:23 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:40:23 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:42:43 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:42:43 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:42:44 - BtcBroadcast - INFO - 获取成功: 价格=$117816, 24h变化=1.05%
+2025-07-12 12:42:44 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:42:45 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:42:45 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:42:46 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.63, 价差: 0.00%
+2025-07-12 12:42:46 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:42:48 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:42:48 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:42:50 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:42:50 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:42:51 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:42:51 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117648.05, RSI_14=52.00
+2025-07-12 12:42:51 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113626.93, RSI_14=75.66
+2025-07-12 12:42:51 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109238.14, RSI_14=76.49
+2025-07-12 12:42:51 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:42:51 - BtcBroadcast - INFO - 当前价格: 117816.00, F&G指数: 79
+2025-07-12 12:42:51 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:42:51 - BtcBroadcast - INFO - [得分] 15分钟 KDJ 死叉，分数 -1
+2025-07-12 12:42:51 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.66) > 70，分数 -3
+2025-07-12 12:42:51 - BtcBroadcast - INFO - [得分] 日线 RSI (76.49) >= 75，分数 -4
+2025-07-12 12:42:51 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:42:51 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (0.63) < 0.7，分数 -2
+2025-07-12 12:42:51 - BtcBroadcast - INFO - 最终总分: -12
+2025-07-12 12:42:51 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:42:51 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:42:52 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:42:52 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:42:52 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:45:05 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:45:05 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:45:06 - BtcBroadcast - INFO - 获取成功: 价格=$117780, 24h变化=1.02%
+2025-07-12 12:45:06 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:45:07 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:45:07 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:45:08 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.97, 价差: 0.00%
+2025-07-12 12:45:08 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:45:10 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:45:10 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:45:12 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:45:12 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:45:14 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:45:14 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117657.42, RSI_14=51.75
+2025-07-12 12:45:14 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113626.61, RSI_14=75.61
+2025-07-12 12:45:14 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109237.82, RSI_14=76.48
+2025-07-12 12:45:14 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:45:14 - BtcBroadcast - INFO - 当前价格: 117780.00, F&G指数: 79
+2025-07-12 12:45:14 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:45:14 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.61) > 70，分数 -3
+2025-07-12 12:45:14 - BtcBroadcast - INFO - [得分] 日线 RSI (76.48) >= 75，分数 -4
+2025-07-12 12:45:14 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:45:14 - BtcBroadcast - INFO - 最终总分: -9
+2025-07-12 12:45:14 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:45:14 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:45:15 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:45:15 - BtcBroadcast - INFO - 最终决策: 💣 超级卖出
+2025-07-12 12:45:15 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
+2025-07-12 12:48:52 - BtcBroadcast - INFO - ==================== 开始执行新一轮播报 ====================
+2025-07-12 12:48:52 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-12 12:48:53 - BtcBroadcast - INFO - 获取成功: 价格=$117758, 24h变化=0.87%
+2025-07-12 12:48:53 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-12 12:48:54 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=79 (极度贪婪)
+2025-07-12 12:48:54 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-12 12:48:55 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 5.88, 价差: 0.00%
+2025-07-12 12:48:55 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-12 12:48:56 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-12 12:48:56 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-12 12:48:58 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-12 12:48:58 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-12 12:48:59 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-12 12:49:00 - BtcBroadcast - INFO - 15m 周期技术指标计算完成: SMA_20=117655.89, RSI_14=50.53
+2025-07-12 12:49:00 - BtcBroadcast - INFO - 4h 周期技术指标计算完成: SMA_20=113625.10, RSI_14=75.35
+2025-07-12 12:49:00 - BtcBroadcast - INFO - 1d 周期技术指标计算完成: SMA_20=109236.35, RSI_14=76.44
+2025-07-12 12:49:00 - BtcBroadcast - INFO - 开始基于多时间周期评分系统进行决策...
+2025-07-12 12:49:00 - BtcBroadcast - INFO - 当前价格: 117758.00, F&G指数: 79
+2025-07-12 12:49:00 - BtcBroadcast - INFO - [得分] F&G 指数 (79) >= 75，分数 -4
+2025-07-12 12:49:00 - BtcBroadcast - INFO - [得分] 4小时 RSI (75.35) > 70，分数 -3
+2025-07-12 12:49:00 - BtcBroadcast - INFO - [得分] 日线 RSI (76.44) >= 75，分数 -4
+2025-07-12 12:49:00 - BtcBroadcast - INFO - [得分] 均线多头排列 (EMA12 > EMA26)，分数 +2
+2025-07-12 12:49:00 - BtcBroadcast - INFO - [得分] 订单薄买卖比 (5.88) > 1.5，分数 +2
+2025-07-12 12:49:00 - BtcBroadcast - INFO - 最终总分: -7
+2025-07-12 12:49:00 - BtcBroadcast - INFO - 最终决策: 🔴 大量卖出
+2025-07-12 12:49:00 - BtcBroadcast - INFO - 正在发送消息到飞书...
+2025-07-12 12:49:00 - BtcBroadcast - INFO - 消息成功发送到飞书。
+2025-07-12 12:49:00 - BtcBroadcast - INFO - 最终决策: 🔴 大量卖出
+2025-07-12 12:49:00 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
+
