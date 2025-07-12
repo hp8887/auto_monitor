@@ -85,6 +85,18 @@ def format_feishu_message(
     kdj_golden_cross_1d = indicators.get("kdj_golden_cross_1d", False)
     kdj_death_cross_1d = indicators.get("kdj_death_cross_1d", False)
 
+    # 为RSI指标增加状态判断
+    def get_rsi_status(rsi):
+        if rsi > 70:
+            return " (超买区)"
+        if rsi < 30:
+            return " (超卖区)"
+        return " (中性区)"
+
+    rsi_15m_status = get_rsi_status(rsi_15m)
+    rsi_4h_status = get_rsi_status(rsi_4h)
+    rsi_1d_status = get_rsi_status(rsi_1d)
+
     # 生成各时间周期的简单信号
     signal_15m = "观望"
     if rsi_15m < 30:
@@ -238,7 +250,7 @@ def format_feishu_message(
                         {
                             "is_short": True,
                             "text": {
-                                "content": f"**15分钟周期**\nRSI: {rsi_15m:.2f}\nSMA20: ${sma_15m:,.2f}\n信号: {signal_15m}",
+                                "content": f"**15分钟周期**\nRSI: {rsi_15m:.2f}{rsi_15m_status}\nSMA20: ${sma_15m:,.2f}\n信号: {signal_15m}",
                                 "tag": "lark_md",
                             },
                         },
@@ -258,7 +270,7 @@ def format_feishu_message(
                         {
                             "is_short": True,
                             "text": {
-                                "content": f"**4小时周期**\nRSI: {rsi_4h:.2f}\nSMA20: ${sma_4h:,.2f}\n信号: {signal_4h}",
+                                "content": f"**4小时周期**\nRSI: {rsi_4h:.2f}{rsi_4h_status}\nSMA20: ${sma_4h:,.2f}\n信号: {signal_4h}",
                                 "tag": "lark_md",
                             },
                         },
@@ -278,7 +290,7 @@ def format_feishu_message(
                         {
                             "is_short": True,
                             "text": {
-                                "content": f"**日线周期**\nRSI: {rsi_1d:.2f}\nSMA20: ${sma_1d:,.2f}\n信号: {signal_1d}",
+                                "content": f"**日线周期**\nRSI: {rsi_1d:.2f}{rsi_1d_status}\nSMA20: ${sma_1d:,.2f}\n信号: {signal_1d}",
                                 "tag": "lark_md",
                             },
                         },
@@ -397,22 +409,19 @@ if __name__ == "__main__":
         "asks": [{"price": 65100, "quantity": 1.8}, {"price": 65200, "quantity": 2.2}],
         "data_available": True,
     }
-    # 模拟决策数据
+    # 模拟决策数据 (符合最新的加权评分模型和5档决策)
     mock_decision_data = {
-        "decision": "💣 超级卖出",
-        "score": -11,
+        "decision": "🔴🔴 强烈卖出",
+        "score": -12.5,
         "breakdown": [
-            {"name": "F&G指数(79)", "score": -4},
-            {"name": "日线RSI(76.6)", "score": -4},
-            {"name": "4小时RSI(76.1)", "score": -3},
-            {"name": "日线EMA多头排列", "score": 2},
-            {"name": "买卖比(0.21)", "score": -2},
-            {"name": "15分钟KDJ死叉", "score": -1},
-            {"name": "15分钟EMA交叉", "score": 0},
-            {"name": "4小时EMA交叉", "score": 0},
-            {"name": "4小时KDJ金叉", "score": 2},
-            {"name": "日线EMA金叉", "score": 3},
-            {"name": "日线KDJ金叉", "score": 3},
+            {"name": "1d EMA交叉", "score": -6.0},
+            {"name": "F&G指数(82-极度贪婪)", "score": -4.0},
+            {"name": "4h RSI(78.2)", "score": -3.0},
+            {"name": "订单薄买卖比(0.45)", "score": -2.0},
+            {"name": "1d KDJ交叉", "score": -2.0},
+            {"name": "1d EMA排列", "score": 2.0},
+            {"name": "4h EMA交叉", "score": 4.5},
+            {"name": "15m KDJ交叉", "score": -1.0},
         ],
     }
 

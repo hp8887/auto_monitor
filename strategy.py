@@ -151,7 +151,7 @@ def make_decision(indicators, fear_greed_index, order_book_data):
     breakdown = []
 
     # 定义周期权重，使决策更偏向长期趋势
-    cycle_weights = {"1d": 2.0, "4h": 1.5, "15m": 1.0}
+    cycle_weights = {"1d": 2.0, "4h": 1.5, "15m": 0.5}
 
     # 1. 恐惧贪婪指数 (仅影响日线权重)
     # F&G 指数是日线级别情绪，其分数应被日线权重放大
@@ -204,13 +204,13 @@ def make_decision(indicators, fear_greed_index, order_book_data):
         ema12 = indicators.get(f"ema12_{cycle}")
         ema26 = indicators.get(f"ema26_{cycle}")
 
-        # RSI 评分 (基础分 ±2)
+        # RSI 评分 (基础分 ±4，捕捉反转信号)
         rsi_score = 0
         if rsi is not None:
             if rsi > 75:
-                rsi_score = -2
+                rsi_score = -4
             elif rsi < 25:
-                rsi_score = 2
+                rsi_score = 4
             if rsi_score != 0:
                 total_score += rsi_score * cycle_weights[cycle]
                 breakdown.append(
@@ -235,12 +235,12 @@ def make_decision(indicators, fear_greed_index, order_book_data):
                 }
             )
 
-        # KDJ 交叉评分 (基础分 ±1)
+        # KDJ 交叉评分 (基础分 ±2)
         kdj_cross_score = 0
         if kdj_golden_cross:
-            kdj_cross_score = 1
+            kdj_cross_score = 2
         elif kdj_death_cross:
-            kdj_cross_score = -1
+            kdj_cross_score = -2
         if kdj_cross_score != 0:
             total_score += kdj_cross_score * cycle_weights[cycle]
             breakdown.append(
@@ -271,11 +271,11 @@ def make_decision(indicators, fear_greed_index, order_book_data):
     # 最终决策
     decision = "🟡 观望"
     if total_score >= 10:
-        decision = "🟢 超级买入"
+        decision = "🟢🟢 强烈买入"
     elif total_score >= 5:
         decision = "🟢 买入"
     elif total_score <= -10:
-        decision = "💣 超级卖出"
+        decision = "🔴🔴 强烈卖出"
     elif total_score <= -5:
         decision = "🔴 卖出"
 
