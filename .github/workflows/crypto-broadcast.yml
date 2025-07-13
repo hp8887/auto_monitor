@@ -29,4 +29,4 @@ jobs:
           # 创建了名为 FEISHU_WEBHOOK_URL 和 GROQ_API_KEY 的 Repository secret
           FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-        run: python main.py 
+        run: python main.py

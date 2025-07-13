@@ -1,92 +1,70 @@
 from config_loader import config
 
 
-def build_llm_prompt_zh(price_data, fng_index, period_signals):
+def build_llm_prompt_text(price_data, fng_index, breakdown):
     """
-    构建用于调用中文LLM的Prompt (Groq Llama3 版本)。
+    构建最终版（V3）的、用于 curl 调用的纯文本 Prompt。
+    采纳用户提供的强引导、结构化专业 Prompt 设计。
     """
-    # 提取数据
+    # 1. 准备宏观数据
     price = price_data.get("price", 0)
     change24h = price_data.get("change_24h", 0.0)
-    fg_index = (
-        f"{fng_index.get('value', 'N/A')} ({fng_index.get('classification', 'N/A')})"
+    fg_value = fng_index.get("value", "N/A")
+    fg_class = fng_index.get("classification", "N/A")
+
+    macro_data_text = (
+        f"📊 【宏观市场数据】\n"
+        f"- 当前 BTC 价格：${price:,.2f}\n"
+        f"- 24h 涨跌幅：{change24h:+.2f}%\n"
+        f"- 市场情绪（F&G 指数）：{fg_value}（{fg_class}）"
     )
-    signals = {
-        "15m": period_signals.get("15m", "信号不足"),
-        "4h": period_signals.get("4h", "信号不足"),
-        "1d": period_signals.get("1d", "信号不足"),
-    }
 
-    # System Prompt
-    system_prompt = {
-        "role": "system",
-        "content": (
-            "你是一位专业的比特币市场策略分析师，精通技术指标分析和市场情绪评估。"
-            "请根据用户提供的价格、情绪指标和各时间周期技术信号，给出一个综合的操作建议（买入/卖出/观望）及简要理由。"
-        ),
-    }
+    # 2. 准备量化信号
+    bullish_signals = [
+        f"- {item['name']}：+{item['score']:.1f}"
+        for item in breakdown
+        if item["score"] > 0
+    ]
+    bearish_signals = [
+        f"- {item['name']}：{item['score']:.1f}"
+        for item in breakdown
+        if item["score"] < 0
+    ]
 
-    # User Prompt
-    user_prompt = {
-        "role": "user",
-        "content": (
-            f"当前 BTC 价格：${price:,.2f}，24小时涨跌：{change24h:+.2f}%\n"
-            f"今日 F&G 指数：{fg_index}\n"
-            "\n"
-            f"技术周期信号：\n"
-            f"- 15分钟：{signals['15m']}\n"
-            f"- 4小时：{signals['4h']}\n"
-            f"- 日线：{signals['1d']}\n"
-            "\n"
-            "请结合上述技术信号和价格信息，给出一个最终投资建议（买入/卖出/观望），并说明原因。\n"
-            "请严格按照以下格式回答：\n"
-            "决策：<买入/卖出/观望>\n"
-            "理由：<一句话理由>"
-        ),
-    }
+    quant_signals_text = "🧮 【量化规则模型初步评分】\n以下为基于多周期技术指标分析得到的信号评分结果，仅供你参考：\n"
+    if bullish_signals:
+        quant_signals_text += "\n✅ 看涨信号（Positive Signals）：\n" + "\n".join(
+            bullish_signals
+        )
+    if bearish_signals:
+        quant_signals_text += "\n❌ 看跌信号（Negative Signals）：\n" + "\n".join(
+            bearish_signals
+        )
+    if not bullish_signals and not bearish_signals:
+        quant_signals_text += "\n无明显的多空信号。"
 
-    return [system_prompt, user_prompt]
-
-
-if __name__ == "__main__":
-    # 示例用法
-    mock_price = {"price": 68500.5, "change_24h": 1.25}
-    mock_fng = {"value": 74, "classification": "Greed"}
-    mock_signals = {"15m": "观望", "4h": "卖出", "1d": "卖出"}
-
-    prompt = build_llm_prompt_zh(mock_price, mock_fng, mock_signals)
-
-    import json
-
-    print(json.dumps(prompt, indent=2, ensure_ascii=False))
-
-
-def build_llm_prompt_text(price_data, fng_index, period_signals):
-    """
-    构建用于 curl 调用的纯文本 Prompt。
-    """
-    price = price_data.get("price", 0)
-    change24h = price_data.get("change_24h", 0.0)
-    fg_index = (
-        f"{fng_index.get('value', 'N/A')} ({fng_index.get('classification', 'N/A')})"
-    )
-    signals = {
-        "15m": period_signals.get("15m", "信号不足"),
-        "4h": period_signals.get("4h", "信号不足"),
-        "1d": period_signals.get("1d", "信号不足"),
-    }
-
+    # 3. 组装最终 Prompt
     return (
-        f"当前 BTC 价格为 ${price:,.2f} 美元，24h 涨跌为 {change24h:+.2f}%。\n"
-        f"今日 F&G 指数为 {fg_index}。\n\n"
-        "技术指标如下：\n"
-        f"- 15分钟周期信号：{signals['15m']}\n"
-        f"- 4小时周期信号：{signals['4h']}\n"
-        f"- 日线周期信号：{signals['1d']}\n\n"
-        "请你结合最新比特币相关新闻，并分析这些技术指标，判断市场走势，并给出：\n"
-        "- 最终操作建议（买入/卖出/观望）\n"
-        "- 简洁的理由（结合技术 + 新闻）\n"
-        "请中文作答，格式如下：\n"
-        "决策：<买入/卖出/观望>\n"
-        "理由：<简洁说明>"
+        f"你是一位专业的比特币市场策略分析师，具备宏观经济、技术分析和新闻解读能力。现在请你综合分析以下市场数据、技术信号以及你可以访问的最新新闻资讯，给出当前BTC市场的操作建议。\n\n"
+        f"---\n\n"
+        f"{macro_data_text}\n\n"
+        f"{quant_signals_text}\n\n"
+        f"---\n\n"
+        f"🧠 请你执行以下任务（所有内容为强制要求）：\n\n"
+        f"🔎 请主动回顾你可以访问的最新加密新闻或宏观事件（如美联储政策、通胀数据、大额资金异动等），并明确指出是否对当前市场产生实质影响。\n\n"
+        f"📈 对比不同时间周期的技术信号（短期15m、中期4h、长期1d），分析它们是否一致，是否存在背离。\n\n"
+        f"🧠 综合：量化信号、市场情绪、新闻驱动，进行多维度交叉验证后给出你的判断。\n\n"
+        f"✳️ 请注意：你看到的是规则引擎的初步量化结果，你可以借助它，但请基于更高层次的理解做出独立判断。\n\n"
+        f"---\n\n"
+        f"📋 请严格按照以下格式输出你的分析结果：\n"
+        f"决策：<强烈买入 / 买入 / 观望 / 卖出 / 强烈卖出>\n\n"
+        f"理由：\n"
+        f"1. 技术分析：\n"
+        f"   - 简述三周期主要技术信号和背离情况。\n"
+        f"2. 市场情绪：\n"
+        f"   - F&G 情绪及其含义。\n"
+        f"3. 新闻事件影响：\n"
+        f"   - 明确提及1~2条你识别的重要新闻，并说明对BTC的潜在影响。\n"
+        f"4. 综合判断：\n"
+        f"   - 你的最终建议，并指出可能的风险点。"
     )

@@ -47,16 +47,21 @@ def main():
         logger.error("所有周期的指标均计算失败，流程中止。")
         return
 
-    # 3. 为每个周期生成初步信号 (给LLM用)
-    logger.info("--- 步骤 3: 生成分周期初步信号 ---")
-    period_signals = {}
-    for tf in ["15m", "4h", "1d"]:
-        period_signals[tf] = compute_signal_for_period(all_indicators, tf)
-        logger.info(f"周期 {tf} 初步信号: {period_signals[tf]}")
+    # 步骤 3: 计算规则系统决策和详细归因 (提前计算，为LLM提供素材)
+    logger.info("--- 步骤 3: 计算规则系统决策和详细归因 ---")
+    score, breakdown = make_weighted_score(all_indicators, fng_data, order_book_data)
+    rule_decision = interpret_score(score)
+    rule_decision_data = {
+        "decision": rule_decision,
+        "score": score,
+        "breakdown": breakdown,
+    }
+    logger.info(f"规则决策结果: {rule_decision} (得分: {score})")
 
-    # 4. 构建 Prompt 并调用 LLM (通过 curl)
-    logger.info("--- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---")
-    prompt_text = build_llm_prompt_text(price_data, fng_data, period_signals)
+    # 步骤 4: 构建 Prompt 并调用 LLM (现在使用详细归因作为输入)
+    logger.info("--- 步骤 4: 调用大语言模型进行决策 ---")
+    # 注意：现在传递的是 breakdown 列表
+    prompt_text = build_llm_prompt_text(price_data, fng_data, breakdown)
     llm_response = ask_llm_by_curl(prompt_text)
 
     # 初始化LLM决策的最终数据结构
@@ -105,22 +110,11 @@ def main():
         final_llm_decision_data["model_used"] = llm_response.get("model_used", "无")
         logger.error(f"LLM 调用失败，原因: {error_info}")
 
-    # 5. 计算规则系统决策（现在总是需要计算，为UI提供数据和LLM失败时兜底）
-    logger.info("--- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---")
-    score, breakdown = make_weighted_score(all_indicators, fng_data, order_book_data)
-    rule_decision = interpret_score(score)
-    rule_decision_data = {
-        "decision": rule_decision,
-        "score": score,
-        "breakdown": breakdown,
-    }
-    logger.info(f"规则决策结果: {rule_decision} (得分: {score})")
+    # 步骤 5: 此步骤已合并
+    logger.info("--- 步骤 5: 决策数据准备完毕 ---")
 
-    # 6. 准备发送数据 (此步骤合并到前面)
-    logger.info("--- 步骤 6: 决策数据准备完毕 ---")
-
-    # 7. 发送到飞书
-    logger.info("--- 步骤 7: 格式化并发送播报到飞书 ---")
+    # 步骤 6: 发送到飞书
+    logger.info("--- 步骤 6: 格式化并发送播报到飞书 ---")
     format_and_send_message(
         price_data=price_data,
         all_indicators=all_indicators,
