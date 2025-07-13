@@ -57,7 +57,23 @@ def main():
     # 4. 构建 Prompt 并调用 LLM (通过 curl)
     logger.info("--- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---")
     prompt_text = build_llm_prompt_text(price_data, fng_data, period_signals)
-    llm_response_text = ask_llm_by_curl(prompt_text)
+    llm_response = ask_llm_by_curl(prompt_text)
+
+    llm_decision_text = ""
+    llm_call_success = False
+
+    if llm_response.get("success"):
+        llm_decision_text = llm_response.get("decision", "决策辅助失败")
+        llm_call_success = True
+        logger.info(f"LLM 综合决策 (AI): {llm_decision_text}")
+    else:
+        # 如果调用失败，decision 字段会包含具体的错误信息
+        error_info = llm_response.get("decision", "决策辅助失败 (未知原因)")
+        llm_decision_text = (
+            f"决策辅助失败\nLLM调用异常 ({error_info})，下方为纯规则系统分析结果。"
+        )
+        llm_call_success = False
+        logger.error(f"LLM 调用失败，原因: {error_info}")
 
     # 5. 计算规则系统决策（现在总是需要计算，为UI提供数据和LLM失败时兜底）
     logger.info("--- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---")
@@ -70,27 +86,12 @@ def main():
     }
     logger.info(f"规则决策结果: {rule_decision} (得分: {score})")
 
-    # 6. 解析LLM响应，如果失败则使用规则决策
-    logger.info("--- 步骤 6: 解析LLM响应并准备最终决策 ---")
-
-    final_llm_decision = "决策辅助失败"
-    final_llm_reason = f"LLM调用异常 ({llm_response_text})，下方为纯规则系统分析结果。"
-
-    if "决策：" in llm_response_text and "理由：" in llm_response_text:
-        try:
-            parts = llm_response_text.split("\n")
-            decision_part = parts[0]
-            reason_part = parts[1]
-            final_llm_decision = decision_part.replace("决策：", "").strip()
-            final_llm_reason = reason_part.replace("理由：", "").strip()
-            logger.info(f"LLM决策解析成功: {final_llm_decision}")
-        except Exception as e:
-            logger.error(f"解析LLM响应时出错: {e}")
-            final_llm_reason = f"LLM响应格式不规范 ({llm_response_text})"
-
+    # 6. 准备最终决策数据
+    logger.info("--- 步骤 6: 准备最终决策数据 ---")
+    # LLM 的最终决策数据现在直接根据调用结果来定
     final_llm_decision_data = {
-        "decision": final_llm_decision,
-        "reason": final_llm_reason,
+        "decision": "本地大模型综合决策 (AI)",  # 这是一个固定的标题
+        "reason": llm_decision_text,  # 这里包含了成功的结果或失败的详细信息
     }
 
     # 7. 发送到飞书

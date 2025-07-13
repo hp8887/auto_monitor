@@ -249,11 +249,18 @@ def format_and_send_message(
             },
             {"tag": "div", "text": {"tag": "lark_md", "content": explanation_text}},
             {
+                "tag": "div",
+                "text": {
+                    "tag": "lark_md",
+                    "content": attribution_text,
+                },
+            },
+            {
                 "tag": "note",
                 "elements": [
                     {
-                        "tag": "lark_md",
-                        "content": f"📊 决策归因 (总分: {total_score:.2f}): {attribution_text}\n数据来源: CoinGecko, CryptoCompare, alternative.me. 仅供参考，非投资建议。",
+                        "tag": "plain_text",
+                        "content": "风险提示：本内容仅为AI生成的技术指标分析，不构成任何投资建议。",
                     }
                 ],
             },
@@ -261,41 +268,51 @@ def format_and_send_message(
     )
 
     card = {
-        "config": {"wide_screen_mode": True},
+        "config": {"wide_screen_mode": True, "enable_forward": True},
         "header": {
-            "template": card_color,
             "title": {
-                "content": f"BTC 市场观察 · {final_decision_source}: {final_decision_text}",
                 "tag": "plain_text",
+                "content": f"{get_decision_emoji(final_decision_text)} BtcBroadcast - {final_decision_source}",
             },
+            "template": card_color,
         },
         "elements": elements,
     }
 
     # --------------------------------------------------------------------------
-    # 3. 发送消息
+    # 3. 发送飞书消息
     # --------------------------------------------------------------------------
+    send_to_feishu(card)
+
+
+def send_to_feishu(card_data):
+    """
+    将构建好的飞书卡片数据发送到 webhook 地址。
+    """
     webhook_url = os.getenv("FEISHU_WEBHOOK_URL")
     if not webhook_url:
-        logger.warning(
-            "未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取..."
-        )
-        webhook_url = config.get("feishu", {}).get("webhook_url")
-
-    if not webhook_url or "YOUR_WEBHOOK_URL_HERE" in webhook_url:
         logger.error(
-            "飞书 Webhook URL 未配置。请设置 FEISHU_WEBHOOK_URL 环境变量或在 config.yaml 中配置。"
+            "未在环境变量中找到 FEISHU_WEBHOOK_URL。请设置该环境变量。消息发送失败。"
         )
         return
 
+    headers = {"Content-Type": "application/json"}
     try:
         response = requests.post(
-            webhook_url, json={"msg_type": "interactive", "card": card}
+            webhook_url, json={"msg_type": "interactive", "card": card_data}
         )
-        response.raise_for_status()
-        logger.info("成功发送格式化消息到飞书。")
-    except Exception as e:
-        logger.error(f"发送飞书消息失败: {e}")
+        response.raise_for_status()  # 如果请求失败 (非2xx响应), 则抛出异常
+
+        response_json = response.json()
+        if response_json.get("StatusCode") == 0 or response_json.get("code") == 0:
+            logger.info("成功发送格式化消息到飞书。")
+        else:
+            logger.error(f"发送飞书消息失败，响应: {response.text}")
+
+    except requests.exceptions.RequestException as e:
+        logger.error(f"请求飞书 API 时发生网络错误: {e}")
+    except json.JSONDecodeError:
+        logger.error(f"无法解析飞书 API 的响应: {response.text}")
 
 
 if __name__ == "__main__":
