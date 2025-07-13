@@ -2531,3 +2531,165 @@ KeyError: 'choices'
 2025-07-13 16:31:09 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
 2025-07-13 16:31:09 - BtcBroadcast - INFO - ================ 主流程结束 ================
 
+2025-07-13 17:14:23 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 17:14:23 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 17:14:23 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 17:14:25 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 17:14:25 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 17:14:28 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 17:14:28 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 17:14:30 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 17:14:30 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 17:14:32 - BtcBroadcast - INFO - 获取成功: 价格=$117914, 24h变化=-0.03%
+2025-07-13 17:14:32 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 17:14:34 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 17:14:34 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 17:14:35 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.67, 价差: 0.00%
+2025-07-13 17:14:35 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 17:14:35 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 17:14:35 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 17:14:35 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 17:14:35 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 17:14:35 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 17:14:35 - BtcBroadcast - INFO - 正在使用 API Key: gsk_p4G...6c90
+2025-07-13 17:14:35 - BtcBroadcast - INFO - 正在通过 curl 命令调用 Groq API...
+2025-07-13 17:14:36 - BtcBroadcast - INFO - 成功从 Groq (via curl) 获取到 LLM 响应。
+2025-07-13 17:14:36 - BtcBroadcast - INFO - LLM 决策解析成功: 观望
+2025-07-13 17:14:36 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 17:14:36 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -12.5)
+2025-07-13 17:14:36 - BtcBroadcast - INFO - --- 步骤 6: 决策数据准备完毕 ---
+2025-07-13 17:14:36 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 17:14:37 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 17:14:37 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 17:18:20 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 17:18:20 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 17:18:20 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 17:18:20 - BtcBroadcast - WARNING - 请求 'https://min-api.cryptocompare.com/data/v2/histominute' 失败 (尝试 1/3): HTTPSConnectionPool(host='min-api.cryptocompare.com', port=443): Max retries exceeded with url: /data/v2/histominute?fsym=BTC&tsym=USDT&limit=96&aggregate=15 (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)')))
+2025-07-13 17:18:27 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 17:18:27 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 17:18:27 - BtcBroadcast - WARNING - 请求 'https://min-api.cryptocompare.com/data/v2/histohour' 失败 (尝试 1/3): HTTPSConnectionPool(host='min-api.cryptocompare.com', port=443): Max retries exceeded with url: /data/v2/histohour?fsym=BTC&tsym=USDT&limit=60&aggregate=4 (Caused by ProxyError('Cannot connect to proxy.', ConnectionResetError(54, 'Connection reset by peer')))
+2025-07-13 17:18:35 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 17:18:35 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 17:18:37 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 17:18:37 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 17:18:38 - BtcBroadcast - INFO - 获取成功: 价格=$117904, 24h变化=-0.07%
+2025-07-13 17:18:38 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 17:18:39 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 17:18:39 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 17:18:41 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.24, 价差: 0.00%
+2025-07-13 17:18:41 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 17:18:41 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 17:18:41 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 17:18:41 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 17:18:41 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 17:18:41 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 17:18:41 - BtcBroadcast - INFO - 正在使用 API Key: gsk_p4G...6c90
+2025-07-13 17:18:41 - BtcBroadcast - INFO - 正在通过 curl 命令调用 Groq API...
+2025-07-13 17:18:42 - BtcBroadcast - INFO - 成功从 Groq (via curl) 获取到 LLM 响应。
+2025-07-13 17:18:42 - BtcBroadcast - INFO - LLM 决策解析成功: 观望
+2025-07-13 17:18:42 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 17:18:42 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -14.5)
+2025-07-13 17:18:42 - BtcBroadcast - INFO - --- 步骤 6: 决策数据准备完毕 ---
+2025-07-13 17:18:42 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 17:18:43 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 17:18:43 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 17:21:25 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 17:21:25 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 17:21:25 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 17:21:27 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 17:21:27 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 17:21:29 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 17:21:29 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 17:21:32 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 17:21:32 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 17:21:33 - BtcBroadcast - INFO - 获取成功: 价格=$117895, 24h变化=-0.12%
+2025-07-13 17:21:33 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 17:21:35 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 17:21:35 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 17:21:36 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.46, 价差: 0.00%
+2025-07-13 17:21:36 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 17:21:36 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 17:21:36 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 17:21:36 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 17:21:36 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 17:21:36 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 17:21:36 - BtcBroadcast - INFO - 正在使用 API Key: gsk_p4G...6c90
+2025-07-13 17:21:36 - BtcBroadcast - INFO - 正在通过 curl 命令调用 Groq API...
+2025-07-13 17:21:37 - BtcBroadcast - INFO - 成功从 Groq (via curl) 获取到 LLM 响应。
+2025-07-13 17:21:37 - BtcBroadcast - INFO - LLM 决策解析成功: 观望
+2025-07-13 17:21:37 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 17:21:37 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -14.5)
+2025-07-13 17:21:37 - BtcBroadcast - INFO - --- 步骤 6: 决策数据准备完毕 ---
+2025-07-13 17:21:37 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 17:21:37 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 17:21:37 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 17:25:58 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 17:25:58 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 17:25:58 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 17:26:00 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 17:26:00 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 17:26:05 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 17:26:05 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 17:26:07 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 17:26:07 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 17:26:08 - BtcBroadcast - INFO - 获取成功: 价格=$117887, 24h变化=-0.13%
+2025-07-13 17:26:08 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 17:26:09 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 17:26:09 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 17:26:10 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.89, 价差: 0.00%
+2025-07-13 17:26:10 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 17:26:10 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 17:26:10 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 17:26:10 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 17:26:10 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 17:26:10 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 17:26:10 - BtcBroadcast - INFO - --- 正在尝试模型: compound-beta ---
+2025-07-13 17:26:10 - BtcBroadcast - INFO - 准备使用模型 'compound-beta' 调用 API...
+2025-07-13 17:26:10 - BtcBroadcast - ERROR - curl 命令执行失败: 
+2025-07-13 17:26:10 - BtcBroadcast - ERROR - 模型 compound-beta 遭遇不可恢复的错误，终止尝试。错误: 命令执行错误: 
+2025-07-13 17:26:10 - BtcBroadcast - ERROR - LLM 调用失败，原因: 命令执行错误: 
+2025-07-13 17:26:10 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 17:26:10 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -12.5)
+2025-07-13 17:26:10 - BtcBroadcast - INFO - --- 步骤 6: 决策数据准备完毕 ---
+2025-07-13 17:26:10 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 17:26:11 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 17:26:11 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 17:28:09 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 17:28:09 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 17:28:09 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 17:28:11 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 17:28:11 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 17:28:12 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 17:28:12 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 17:28:14 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 17:28:14 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 17:28:15 - BtcBroadcast - INFO - 获取成功: 价格=$117885, 24h变化=-0.12%
+2025-07-13 17:28:15 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 17:28:17 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 17:28:17 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 17:28:17 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.38, 价差: 0.00%
+2025-07-13 17:28:17 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 17:28:18 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 17:28:18 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 17:28:18 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 17:28:18 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 17:28:18 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 17:28:18 - BtcBroadcast - INFO - --- 正在尝试模型: compound-beta ---
+2025-07-13 17:28:18 - BtcBroadcast - INFO - 准备使用模型 'compound-beta' 调用 API...
+2025-07-13 17:28:25 - BtcBroadcast - WARNING - API 返回错误 (模型: compound-beta): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01k015trphetcr8vvb36krfq7q` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 97404, Requested 10757. Please try again in 1h57m30.813s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing
+2025-07-13 17:28:25 - BtcBroadcast - WARNING - 模型 compound-beta 已达速率限制，将在下一个周期尝试更低优先级的模型。
+2025-07-13 17:28:25 - BtcBroadcast - INFO - --- 正在尝试模型: compound-beta-mini ---
+2025-07-13 17:28:25 - BtcBroadcast - INFO - 准备使用模型 'compound-beta-mini' 调用 API...
+2025-07-13 17:28:27 - BtcBroadcast - INFO - 模型 'compound-beta-mini' 调用成功。
+2025-07-13 17:28:27 - BtcBroadcast - INFO - LLM 决策解析成功: 观望
+2025-07-13 17:28:27 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 17:28:27 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -14.5)
+2025-07-13 17:28:27 - BtcBroadcast - INFO - --- 步骤 6: 决策数据准备完毕 ---
+2025-07-13 17:28:27 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 17:28:28 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 17:28:28 - BtcBroadcast - INFO - ================ 主流程结束 ================
+

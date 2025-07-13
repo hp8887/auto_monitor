@@ -59,20 +59,50 @@ def main():
     prompt_text = build_llm_prompt_text(price_data, fng_data, period_signals)
     llm_response = ask_llm_by_curl(prompt_text)
 
-    llm_decision_text = ""
-    llm_call_success = False
+    # 初始化LLM决策的最终数据结构
+    final_llm_decision_data = {
+        "decision": "决策辅助失败",  # 默认值
+        "reason": "",  # 默认值
+        "success": False,  # 标记是否成功获取并解析
+        "model_used": "无",  # 新增字段，记录使用的模型
+    }
 
     if llm_response.get("success"):
-        llm_decision_text = llm_response.get("decision", "决策辅助失败")
-        llm_call_success = True
-        logger.info(f"LLM 综合决策 (AI): {llm_decision_text}")
+        raw_text = llm_response.get("decision", "")
+        final_llm_decision_data["model_used"] = llm_response.get("model_used", "未知")
+        # 尝试解析 "决策："
+        if "决策：" in raw_text:
+            try:
+                # 简单分割，提取“决策：”后的部分，并去除前后空格
+                decision_part = raw_text.split("决策：")[1].split("\n")[0].strip()
+
+                # 提取理由部分
+                reason_part = raw_text
+                if "理由：" in raw_text:
+                    try:
+                        reason_part = raw_text.split("理由：", 1)[1].strip()
+                    except IndexError:
+                        reason_part = "无法提取理由详情。"
+
+                final_llm_decision_data["decision"] = decision_part
+                final_llm_decision_data["reason"] = reason_part  # 理由是解析后的
+                final_llm_decision_data["success"] = True
+                logger.info(f"LLM 决策解析成功: {decision_part}")
+            except IndexError:
+                logger.error(
+                    f"解析LLM响应格式时出错，虽然包含'决策：'但无法提取。响应: {raw_text}"
+                )
+                final_llm_decision_data["reason"] = f"LLM响应格式不规范 ({raw_text})"
+        else:
+            logger.warning(f"LLM响应中未找到'决策：'关键词。响应: {raw_text}")
+            final_llm_decision_data["reason"] = f"LLM响应格式不规范 ({raw_text})"
     else:
         # 如果调用失败，decision 字段会包含具体的错误信息
         error_info = llm_response.get("decision", "决策辅助失败 (未知原因)")
-        llm_decision_text = (
-            f"决策辅助失败\nLLM调用异常 ({error_info})，下方为纯规则系统分析结果。"
+        final_llm_decision_data["reason"] = (
+            f"LLM调用异常 ({error_info})，下方为纯规则系统分析结果。"
         )
-        llm_call_success = False
+        final_llm_decision_data["model_used"] = llm_response.get("model_used", "无")
         logger.error(f"LLM 调用失败，原因: {error_info}")
 
     # 5. 计算规则系统决策（现在总是需要计算，为UI提供数据和LLM失败时兜底）
@@ -86,13 +116,8 @@ def main():
     }
     logger.info(f"规则决策结果: {rule_decision} (得分: {score})")
 
-    # 6. 准备最终决策数据
-    logger.info("--- 步骤 6: 准备最终决策数据 ---")
-    # LLM 的最终决策数据现在直接根据调用结果来定
-    final_llm_decision_data = {
-        "decision": "本地大模型综合决策 (AI)",  # 这是一个固定的标题
-        "reason": llm_decision_text,  # 这里包含了成功的结果或失败的详细信息
-    }
+    # 6. 准备发送数据 (此步骤合并到前面)
+    logger.info("--- 步骤 6: 决策数据准备完毕 ---")
 
     # 7. 发送到飞书
     logger.info("--- 步骤 7: 格式化并发送播报到飞书 ---")

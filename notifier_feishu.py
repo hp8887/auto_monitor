@@ -117,12 +117,20 @@ def format_and_send_message(
     # 2. 构建飞书卡片
     # --------------------------------------------------------------------------
 
-    # 决定主标题和颜色
-    final_decision_source = "AI综合决策"
-    final_decision_text = llm_decision_data.get("decision", "决策失败")
-    if "失败" in final_decision_text or "错误" in final_decision_text:
+    # --- 决定主标题和最终决策 ---
+    # 优先使用 LLM 的决策，如果LLM调用失败，则使用规则系统的决策
+    if llm_decision_data and llm_decision_data.get("success"):
+        final_decision_source = "AI综合决策"
+        final_decision_text = llm_decision_data.get("decision", "决策失败")
+        # 从核心决策文本构建带表情符号的完整决策文本
+        verbose_decision_text = (
+            f"{get_decision_emoji(final_decision_text)} {final_decision_text}"
+        )
+    else:
         final_decision_source = "规则系统决策"
         final_decision_text = rule_decision
+        # 规则决策本身已包含表情符号
+        verbose_decision_text = final_decision_text
 
     card_color = get_decision_color(final_decision_text)
 
@@ -210,33 +218,40 @@ def format_and_send_message(
 
     elements.append({"tag": "hr"})
 
-    # !! 核心改动：在这里插入 LLM 的综合决策 !!
-    # 保持这个模块的标题为 “大模型综合决策”
-    llm_decision = llm_decision_data.get("decision", "决策失败")
-    llm_reason = llm_decision_data.get(
-        "reason", "未能从LLM获取有效决策，请参考下方规则归因。"
-    )
-
-    if llm_decision and llm_decision not in ["格式错误", "解析失败", "决策辅助失败"]:
+    # --- 构建 LLM 决策模块 ---
+    if llm_decision_data and llm_decision_data.get("success"):
+        llm_decision = llm_decision_data.get("decision", "解析错误")
+        llm_reason = llm_decision_data.get("reason", "无详细理由")
+        model_used = llm_decision_data.get("model_used", "未知模型")
         llm_decision_with_emoji = f"{get_decision_emoji(llm_decision)} {llm_decision}"
+
+        llm_section_content = (
+            f"**大模型综合决策 (AI-{model_used}): {llm_decision_with_emoji}**"
+        )
+
+        # 将解析后的理由作为正文内容添加
+        elements.append(
+            {"tag": "div", "text": {"tag": "lark_md", "content": llm_section_content}}
+        )
+        elements.append(
+            {
+                "tag": "div",
+                "text": {
+                    "tag": "lark_md",
+                    "content": llm_reason,  # 这里是解析后的理由
+                },
+            }
+        )
     else:
-        llm_decision_with_emoji = llm_decision  # 如果是失败信息，则不加emoji
+        # LLM 调用失败或解析失败
+        error_reason = llm_decision_data.get("reason", "未知错误")
+        model_used = llm_decision_data.get("model_used", "无")
+        llm_section_content = f"**大模型综合决策 (AI-{model_used}):** {get_decision_emoji('失败')} 决策辅助失败\n{error_reason}"
+        elements.append(
+            {"tag": "div", "text": {"tag": "lark_md", "content": llm_section_content}}
+        )
 
-    llm_decision_text_content = (
-        f"**大模型综合决策 (AI): {llm_decision_with_emoji}**\n{llm_reason}"
-    )
-
-    elements.append(
-        {
-            "tag": "div",
-            "text": {
-                "tag": "lark_md",
-                "content": llm_decision_text_content,
-            },
-        }
-    )
-
-    # 保留原有的规则决策和归因
+    # --- 构建规则系统决策模块 ---
     elements.extend(
         [
             {"tag": "hr"},
@@ -272,7 +287,7 @@ def format_and_send_message(
         "header": {
             "title": {
                 "tag": "plain_text",
-                "content": f"{get_decision_emoji(final_decision_text)} BtcBroadcast - {final_decision_source}",
+                "content": f"市场观察 · {final_decision_source}: {verbose_decision_text}",
             },
             "template": card_color,
         },
