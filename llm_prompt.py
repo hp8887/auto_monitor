@@ -30,6 +30,7 @@ def build_llm_prompt_text(price_data, fng_index, breakdown):
         for item in breakdown
         if item["score"] < 0
     ]
+    neutral_signals = [f"- {item['name']}" for item in breakdown if item["score"] == 0]
 
     quant_signals_text = "🧮 【量化规则模型初步评分】\n以下为基于多周期技术指标分析得到的信号评分结果，仅供你参考：\n"
     if bullish_signals:
@@ -40,7 +41,11 @@ def build_llm_prompt_text(price_data, fng_index, breakdown):
         quant_signals_text += "\n❌ 看跌信号（Negative Signals）：\n" + "\n".join(
             bearish_signals
         )
-    if not bullish_signals and not bearish_signals:
+    if neutral_signals:
+        quant_signals_text += "\n😐 中性信号（Neutral Signals）：\n" + "\n".join(
+            neutral_signals
+        )
+    if not bullish_signals and not bearish_signals and not neutral_signals:
         quant_signals_text += "\n无明显的多空信号。"
 
     # 3. 组装最终 Prompt
@@ -50,6 +55,7 @@ def build_llm_prompt_text(price_data, fng_index, breakdown):
         f"{macro_data_text}\n\n"
         f"{quant_signals_text}\n\n"
         f"---\n\n"
+        f"请将我们提供的“宏观市场数据”和“量化规则模型评分”作为你分析的核心基石。你的所有判断都必须优先基于这些内部数据，然后再结合你获取的外部新闻进行深化。\n\n"
         f"🧠 请你执行以下任务（所有内容为强制要求）：\n\n"
         f"🔎 请主动回顾你可以访问的最新加密新闻或宏观事件（如美联储政策、通胀数据、大额资金异动等），并明确指出是否对当前市场产生实质影响。\n\n"
         f"📈 对比不同时间周期的技术信号（短期15m、中期4h、长期1d），分析它们是否一致，是否存在背离。\n\n"
@@ -60,7 +66,7 @@ def build_llm_prompt_text(price_data, fng_index, breakdown):
         f"决策：<强烈买入 / 买入 / 观望 / 卖出 / 强烈卖出>\n\n"
         f"理由：\n"
         f"1. 技术分析：\n"
-        f"   - 简述三周期主要技术信号和背离情况。\n"
+        f"   - 必须严格依据我们提供的量化信号，对15m、4h、1d三个周期的信号进行解读，并说明它们之间是否存在冲突或一致性。\n"
         f"2. 市场情绪：\n"
         f"   - F&G 情绪及其含义。\n"
         f"3. 新闻事件影响：\n"

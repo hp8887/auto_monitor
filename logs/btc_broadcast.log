@@ -2984,3 +2984,35 @@ KeyError: 'choices'
 2025-07-13 22:10:02 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
 2025-07-13 22:10:02 - BtcBroadcast - INFO - ================ 主流程结束 ================
 
+2025-07-13 22:15:49 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 22:15:49 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 22:15:49 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 22:15:51 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 22:15:51 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 22:15:52 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 22:15:52 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 22:15:54 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 22:15:54 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 22:15:55 - BtcBroadcast - INFO - 获取成功: 价格=$118615, 24h变化=0.88%
+2025-07-13 22:15:55 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 22:15:56 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 22:15:56 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 22:15:56 - BtcBroadcast - WARNING - 请求 'https://api.kucoin.com/api/v1/market/orderbook/level2_20' 失败 (尝试 1/3): HTTPSConnectionPool(host='api.kucoin.com', port=443): Max retries exceeded with url: /api/v1/market/orderbook/level2_20?symbol=BTC-USDT (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)')))
+2025-07-13 22:16:01 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 1.36, 价差: 0.00%
+2025-07-13 22:16:01 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 22:16:01 - BtcBroadcast - INFO - --- 步骤 3: 计算规则系统决策和详细归因 ---
+2025-07-13 22:16:01 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -14.5)
+2025-07-13 22:16:01 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-13 22:16:01 - BtcBroadcast - INFO - --- 正在尝试模型: compound-beta ---
+2025-07-13 22:16:01 - BtcBroadcast - INFO - 准备使用模型 'compound-beta' 调用 API...
+2025-07-13 22:16:33 - BtcBroadcast - WARNING - API 返回错误 (模型: compound-beta): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01k015trphetcr8vvb36krfq7q` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 98626, Requested 7517. Please try again in 1h28m26.732s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing
+2025-07-13 22:16:33 - BtcBroadcast - WARNING - 模型 compound-beta 已达速率限制，将在下一个周期尝试更低优先级的模型。
+2025-07-13 22:16:33 - BtcBroadcast - INFO - --- 正在尝试模型: compound-beta-mini ---
+2025-07-13 22:16:33 - BtcBroadcast - INFO - 准备使用模型 'compound-beta-mini' 调用 API...
+2025-07-13 22:16:38 - BtcBroadcast - INFO - 模型 'compound-beta-mini' 调用成功。
+2025-07-13 22:16:38 - BtcBroadcast - INFO - LLM 决策解析成功: 观望
+2025-07-13 22:16:38 - BtcBroadcast - INFO - --- 步骤 5: 决策数据准备完毕 ---
+2025-07-13 22:16:38 - BtcBroadcast - INFO - --- 步骤 6: 格式化并发送播报到飞书 ---
+2025-07-13 22:16:38 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 22:16:38 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
