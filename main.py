@@ -2,82 +2,110 @@ import time
 from logger_setup import logger
 from config_loader import config
 from data_provider import (
+    get_multi_timeframe_data,
     get_btc_price_and_change,
     get_fear_and_greed_index,
-    get_multi_timeframe_data,
     get_order_book_data,
 )
-from strategy import calculate_multi_timeframe_indicators, make_decision
-from notifier import send_to_feishu, format_feishu_message
+from strategy import (
+    calculate_indicators,
+    compute_signal_for_period,
+    make_weighted_score,
+    interpret_score,
+)
+from llm_prompt import build_llm_prompt_text
+from llm_curl_compound_beta import ask_llm_by_curl
+from notifier_feishu import format_and_send_message
 
 
-def run_once():
+def main():
     """
-    执行一次完整的播报流程：获取数据 -> 计算指标 -> 做出决策 -> 发送通知
+    主函数，执行整个监控和播报流程
     """
-    logger.info("=" * 20 + " 开始执行新一轮播报 " + "=" * 20)
+    logger.info("================ 主流程开始 ================")
 
-    # 1. 获取所有原始数据
+    # 1. 获取所有需要的数据
+    logger.info("--- 步骤 1: 获取市场数据 ---")
+    multi_timeframe_klines = get_multi_timeframe_data(timeframes=["15m", "4h", "1d"])
     price_data = get_btc_price_and_change()
-    fear_greed_index = get_fear_and_greed_index()
-    order_book_data = get_order_book_data(symbol=config["kline"]["symbol"])
+    fng_data = get_fear_and_greed_index()
+    order_book_data = get_order_book_data()
 
-    # 获取多时间周期K线数据 (15分钟, 4小时, 1天)
-    mtf_data = get_multi_timeframe_data(
-        symbol=config["kline"]["symbol"],
-        timeframes=["15m", "4h", "1d"],
-        limits=[96, 60, 30],  # 15分钟取96条(24小时)，4小时取60条(10天)，日线取30条
-    )
-
-    # 检查数据完整性
-    if not all([price_data, fear_greed_index]) or not mtf_data:
-        logger.error("由于部分数据源获取失败，本轮播报中止。")
-        # （可选）发送一个失败通知
-        error_msg = format_feishu_message(
-            None,
-            None,
-            None,
-            None,
-            {"decision": "数据获取失败", "score": 0, "breakdown": []},
-        )
-        send_to_feishu(error_msg)  # 启用飞书通知
-        logger.info("=" * 20 + " 本轮播报执行结束 " + "=" * 20 + "\n")
+    if not all([multi_timeframe_klines, price_data, fng_data, order_book_data]):
+        logger.error("获取基础数据失败，无法继续执行。")
         return
 
-    # 2. 计算多时间周期技术指标
-    all_indicators = calculate_multi_timeframe_indicators(mtf_data)
+    # 2. 计算所有周期的技术指标
+    logger.info("--- 步骤 2: 计算技术指标 ---")
+    all_indicators = {}
+    for timeframe, klines in multi_timeframe_klines.items():
+        indicators = calculate_indicators(klines, timeframe)
+        if indicators:
+            all_indicators.update(indicators)
+
     if not all_indicators:
-        logger.error("由于技术指标计算失败，本轮播报中止。")
-        error_msg = format_feishu_message(
-            price_data,
-            None,
-            fear_greed_index,
-            order_book_data,
-            {"decision": "指标计算失败", "score": 0, "breakdown": []},
-        )
-        send_to_feishu(error_msg)  # 启用飞书通知
-        logger.info("=" * 20 + " 本轮播报执行结束 " + "=" * 20 + "\n")
+        logger.error("所有周期的指标均计算失败，流程中止。")
         return
 
-    # 3. 做出决策
-    if price_data and fear_greed_index:
-        decision_data = make_decision(all_indicators, fear_greed_index, order_book_data)
+    # 3. 为每个周期生成初步信号 (给LLM用)
+    logger.info("--- 步骤 3: 生成分周期初步信号 ---")
+    period_signals = {}
+    for tf in ["15m", "4h", "1d"]:
+        period_signals[tf] = compute_signal_for_period(all_indicators, tf)
+        logger.info(f"周期 {tf} 初步信号: {period_signals[tf]}")
 
-    # 4. 格式化并发送消息
-    # 直接传递所有时间周期的指标
-    message = format_feishu_message(
-        price_data, all_indicators, fear_greed_index, order_book_data, decision_data
+    # 4. 构建 Prompt 并调用 LLM (通过 curl)
+    logger.info("--- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---")
+    prompt_text = build_llm_prompt_text(price_data, fng_data, period_signals)
+    llm_response_text = ask_llm_by_curl(prompt_text)
+
+    # 5. 计算规则系统决策（现在总是需要计算，为UI提供数据和LLM失败时兜底）
+    logger.info("--- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---")
+    score, breakdown = make_weighted_score(all_indicators, fng_data, order_book_data)
+    rule_decision = interpret_score(score)
+    rule_decision_data = {
+        "decision": rule_decision,
+        "score": score,
+        "breakdown": breakdown,
+    }
+    logger.info(f"规则决策结果: {rule_decision} (得分: {score})")
+
+    # 6. 解析LLM响应，如果失败则使用规则决策
+    logger.info("--- 步骤 6: 解析LLM响应并准备最终决策 ---")
+
+    final_llm_decision = "决策辅助失败"
+    final_llm_reason = f"LLM调用异常 ({llm_response_text})，下方为纯规则系统分析结果。"
+
+    if "决策：" in llm_response_text and "理由：" in llm_response_text:
+        try:
+            parts = llm_response_text.split("\n")
+            decision_part = parts[0]
+            reason_part = parts[1]
+            final_llm_decision = decision_part.replace("决策：", "").strip()
+            final_llm_reason = reason_part.replace("理由：", "").strip()
+            logger.info(f"LLM决策解析成功: {final_llm_decision}")
+        except Exception as e:
+            logger.error(f"解析LLM响应时出错: {e}")
+            final_llm_reason = f"LLM响应格式不规范 ({llm_response_text})"
+
+    final_llm_decision_data = {
+        "decision": final_llm_decision,
+        "reason": final_llm_reason,
+    }
+
+    # 7. 发送到飞书
+    logger.info("--- 步骤 7: 格式化并发送播报到飞书 ---")
+    format_and_send_message(
+        price_data=price_data,
+        all_indicators=all_indicators,
+        fng_data=fng_data,
+        order_book_data=order_book_data,
+        rule_decision_data=rule_decision_data,
+        llm_decision_data=final_llm_decision_data,  # 将最终处理过的LLM结果传入
     )
-    send_to_feishu(message)  # 启用飞书通知
 
-    logger.info(f"最终决策: {decision_data['decision']}")
-    logger.info("=" * 20 + " 本轮播报执行结束 " + "=" * 20 + "\n")
+    logger.info("================ 主流程结束 ================\n")
 
 
 if __name__ == "__main__":
-    try:
-        run_once()
-    except KeyboardInterrupt:
-        logger.info("程序被手动中断。正在退出...")
-    except Exception as e:
-        logger.critical(f"程序遇到未处理的严重错误: {e}", exc_info=True)
+    main()

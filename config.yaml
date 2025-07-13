@@ -32,3 +32,53 @@ feishu:
 log:
   path: "./logs/btc_broadcast.log"
   level: "INFO"
+
+order_book_depth: 200
+
+# ===============================================
+# 新版: 混合 LLM 决策系统配置
+# ===============================================
+
+# 各周期指标阈值
+periods:
+  "15m": { rsi_period: 14, rsi_buy: 30, rsi_sell: 70, sma_period: 20, sma_buy_mult: 0.98, sma_sell_mult: 1.02 }
+  "4h":  { rsi_period: 14, rsi_buy: 35, rsi_sell: 65, sma_period: 20, sma_buy_mult: 0.95, sma_sell_mult: 1.05 }
+  "1d":  { rsi_period: 14, rsi_buy: 25, rsi_sell: 75, sma_period: 20, sma_buy_mult: 0.90, sma_sell_mult: 1.10 }
+
+# 规则打分权重 (用于兜底决策)
+weights:
+  ema_cross: 3
+  rsi_extreme: 4
+  kdj_cross: 2
+  ema_trend: 1
+  fng_extreme: 2
+  fng_normal: 1
+  order_book: 2
+
+# 周期权重 (用于兜底决策)
+timeframe_weights:
+  "1d": 2.0
+  "4h": 1.5
+  "15m": 0.5
+
+# 规则决策阈值 (用于兜底决策)
+thresholds:
+  strong: 10.0
+  normal: 5.0
+
+# LLM 相关配置
+llm:
+  # 使用 Groq 作为 LLM 服务提供商
+  # 参考文档: https://console.groq.com/docs/quickstart
+  api_base: "https://api.groq.com/openai/v1"
+  # 推荐模型: llama3-8b-8192 (最快), llama3-70b-8192 (能力更强)
+  model: "llama3-8b-8192"
+  temperature: 0.7
+  timeout: 15
+  # (可选) 如果不想设置环境变量，可直接在此处配置Key，作为备用方案
+  # 程序会优先使用环境变量中的 GROQ_API_KEY
+
+# API Keys - 集中管理所有密钥
+api_keys:
+  groq: "gsk_YOUR_GROQ_API_KEY_HERE" # 请将密钥配置在 GitHub Secrets 或本地环境变量中
+  openrouter: "sk-or-YOUR_OPENROUTER_API_KEY_HERE" # 备用

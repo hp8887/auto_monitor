@@ -26,6 +26,7 @@ jobs:
       - name: Run script
         env:
           # 此处引用了仓库的 Secrets，请确保在 GitHub -> Settings -> Secrets and variables -> Actions 中
-          # 创建了一个名为 FEISHU_WEBHOOK_URL 的 Repository secret
+          # 创建了名为 FEISHU_WEBHOOK_URL 和 GROQ_API_KEY 的 Repository secret
           FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python main.py 

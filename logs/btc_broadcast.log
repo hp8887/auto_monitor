@@ -1759,3 +1759,486 @@ TypeError: make_decision() takes 3 positional arguments but 4 were given
 2025-07-12 23:30:28 - BtcBroadcast - INFO - 最终决策: 🔴🔴 强烈卖出
 2025-07-12 23:30:28 - BtcBroadcast - INFO - ==================== 本轮播报执行结束 ====================
 
+2025-07-13 14:38:33 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 14:38:33 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 14:39:33 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 14:39:33 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 14:39:33 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 14:39:36 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 14:39:36 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 14:39:37 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 14:39:37 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 14:39:39 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 14:39:39 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 14:39:40 - BtcBroadcast - INFO - 获取成功: 价格=$117930, 24h变化=-0.03%
+2025-07-13 14:39:40 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 14:39:42 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 14:39:42 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 14:39:43 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 1.12, 价差: 0.00%
+2025-07-13 14:39:43 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 14:39:43 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 14:39:43 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 14:39:43 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 14:39:43 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 14:39:43 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-13 14:39:43 - BtcBroadcast - ERROR - 环境变量 GROQ_API_KEY 未设置。
+2025-07-13 14:39:43 - BtcBroadcast - WARNING - LLM 调用失败或返回格式错误，启动规则决策作为兜底。
+2025-07-13 14:39:43 - BtcBroadcast - INFO - 规则决策结果: 🔴 卖出 (得分: -8.5)
+2025-07-13 14:39:43 - BtcBroadcast - INFO - --- 步骤 5: 发送播报到飞书 ---
+2025-07-13 14:39:43 - BtcBroadcast - ERROR - 环境变量 FEISHU_WEBHOOK_URL 未设置。
+2025-07-13 14:39:43 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 14:43:39 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 14:43:39 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 14:43:39 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 14:43:42 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 14:43:42 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 14:43:44 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 14:43:44 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 14:43:47 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 14:43:47 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 14:43:49 - BtcBroadcast - INFO - 获取成功: 价格=$117958, 24h变化=-0.03%
+2025-07-13 14:43:49 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 14:43:51 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 14:43:51 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 14:43:54 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 3.89, 价差: 0.00%
+2025-07-13 14:43:54 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 14:43:54 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 14:43:54 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 14:43:54 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 14:43:54 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 14:43:54 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-13 14:43:54 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 14:43:54 - BtcBroadcast - INFO - 正在向 Groq 发送请求, 模型: llama3-8b-8192...
+2025-07-13 14:43:56 - BtcBroadcast - INFO - 成功收到 LLM 回复: 决策：观望
+理由：当前市场贪婪指数较高，且各周期信号均为观望，建议观望等待明确的技术指标信号或市场情绪变化。
+2025-07-13 14:43:56 - BtcBroadcast - INFO - LLM 调用成功，使用模型决策。
+2025-07-13 14:43:56 - BtcBroadcast - INFO - --- 步骤 5: 发送播报到飞书 ---
+2025-07-13 14:43:56 - BtcBroadcast - ERROR - 环境变量 FEISHU_WEBHOOK_URL 未设置。
+2025-07-13 14:43:56 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 14:46:08 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 14:46:08 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 14:46:08 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 14:46:10 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 14:46:10 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 14:46:15 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 14:46:15 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 14:46:17 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 14:46:17 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 14:46:18 - BtcBroadcast - INFO - 获取成功: 价格=$117970, 24h变化=-0.01%
+2025-07-13 14:46:18 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 14:46:19 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 14:46:19 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 14:46:20 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.43, 价差: 0.00%
+2025-07-13 14:46:20 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 14:46:20 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 14:46:20 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 14:46:20 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 14:46:20 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 14:46:20 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-13 14:46:20 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 14:46:20 - BtcBroadcast - INFO - 正在向 Groq 发送请求, 模型: llama3-8b-8192...
+2025-07-13 14:46:20 - BtcBroadcast - INFO - 成功收到 LLM 回复: 决策：观望
+理由：当前市场呈贪婪状态，多种时间周期的信号均为观望，建议观望不行动。
+2025-07-13 14:46:20 - BtcBroadcast - INFO - LLM 调用成功，使用模型决策。
+2025-07-13 14:46:20 - BtcBroadcast - INFO - --- 步骤 5: 发送播报到飞书 ---
+2025-07-13 14:46:20 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 14:46:21 - BtcBroadcast - INFO - 成功发送消息到飞书。
+2025-07-13 14:46:21 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 14:50:05 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 14:50:05 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 14:50:05 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 14:50:07 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 14:50:07 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 14:50:09 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 14:50:09 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 14:50:10 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 14:50:10 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 14:50:12 - BtcBroadcast - INFO - 获取成功: 价格=$117951, 24h变化=-0.01%
+2025-07-13 14:50:12 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 14:50:13 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 14:50:13 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 14:50:13 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.55, 价差: 0.00%
+2025-07-13 14:50:13 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 14:50:14 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 14:50:14 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 14:50:14 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 14:50:14 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 14:50:14 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-13 14:50:14 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 14:50:14 - BtcBroadcast - INFO - 正在向 Groq 发送请求, 模型: llama3-8b-8192...
+2025-07-13 14:50:14 - BtcBroadcast - INFO - 成功收到 LLM 回复: 决策：观望
+理由：当前市场处于贪婪状态，各周期信号未出现明确的买入或卖出信号。
+2025-07-13 14:50:14 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 ---
+2025-07-13 14:50:14 - BtcBroadcast - INFO - 规则决策结果: 🔴 卖出 (得分: -9.5)
+2025-07-13 14:50:14 - BtcBroadcast - INFO - --- 步骤 6: 格式化并发送播报到飞书 ---
+2025-07-13 14:50:14 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 14:50:15 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 14:50:15 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 15:11:41 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:11:41 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:11:41 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:11:43 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:11:43 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:11:45 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:11:45 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:11:48 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:11:48 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:11:50 - BtcBroadcast - INFO - 获取成功: 价格=$117915, 24h变化=-0.02%
+2025-07-13 15:11:50 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:11:51 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:11:51 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:11:52 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.22, 价差: 0.00%
+2025-07-13 15:11:52 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 15:11:52 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 15:11:52 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 15:11:52 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 15:11:52 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 15:11:52 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-13 15:11:52 - BtcBroadcast - WARNING - 未找到 OPENROUTER_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:11:52 - BtcBroadcast - ERROR - OpenRouter API Key 未配置。
+2025-07-13 15:11:52 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 15:11:52 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -11.5)
+2025-07-13 15:11:52 - BtcBroadcast - INFO - --- 步骤 6: 解析LLM响应并准备最终决策 ---
+2025-07-13 15:11:52 - BtcBroadcast - WARNING - LLM决策失败或格式错误，将使用规则系统决策。失败原因: 错误：API Key未配置
+2025-07-13 15:11:52 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 15:11:52 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:11:52 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 15:11:52 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 15:23:02 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:23:02 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:23:02 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:23:03 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:23:03 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:23:05 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:23:05 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:23:07 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:23:07 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:23:08 - BtcBroadcast - INFO - 获取成功: 价格=$117945, 24h变化=-0.06%
+2025-07-13 15:23:08 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:23:09 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:23:09 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:23:10 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.80, 价差: 0.00%
+2025-07-13 15:23:10 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 15:23:10 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 15:23:10 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 15:23:10 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 15:23:10 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 15:23:10 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 15:23:10 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:23:10 - BtcBroadcast - ERROR - Groq API Key 未配置或格式不正确。
+2025-07-13 15:23:10 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 15:23:10 - BtcBroadcast - INFO - 规则决策结果: 🔴 卖出 (得分: -9.5)
+2025-07-13 15:23:10 - BtcBroadcast - INFO - --- 步骤 6: 解析LLM响应并准备最终决策 ---
+2025-07-13 15:23:10 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 15:23:10 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:23:10 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 15:23:10 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 15:25:04 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:25:04 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:25:04 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:25:06 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:25:06 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:25:08 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:25:08 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:25:10 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:25:10 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:25:11 - BtcBroadcast - INFO - 获取成功: 价格=$117963, 24h变化=-0.03%
+2025-07-13 15:25:11 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:25:13 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:25:13 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:25:13 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.87, 价差: 0.00%
+2025-07-13 15:25:13 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 15:25:13 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 15:25:13 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 15:25:13 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 15:25:13 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 15:25:13 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 15:25:13 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:25:13 - BtcBroadcast - INFO - 正在通过 curl 命令调用 Groq API...
+2025-07-13 15:25:19 - BtcBroadcast - INFO - 成功从 Groq (via curl) 获取到 LLM 响应: 决策：观望
+理由：当前BTC价格为$117,963.00美元，24h涨跌为-0.03%，技术指标显示15分钟、4小时和日线周期信号均为观望，表明市场走势不明确。今日F&G指数为74（贪婪），表示市场情绪偏向乐观，但结合最新比特币相关新闻，市场存在不确定性因素，如中美贸易战、美联储利率等，因此建议观望。同时，考虑到比特币价格近期有所上涨，但也存在回调风险，故建议观望为宜。
+2025-07-13 15:25:19 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 15:25:19 - BtcBroadcast - INFO - 规则决策结果: 🔴 卖出 (得分: -9.5)
+2025-07-13 15:25:19 - BtcBroadcast - INFO - --- 步骤 6: 解析LLM响应并准备最终决策 ---
+2025-07-13 15:25:19 - BtcBroadcast - INFO - LLM决策解析成功: 观望
+2025-07-13 15:25:19 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 15:25:19 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:25:20 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 15:25:20 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 15:29:02 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:29:02 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:29:02 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:29:05 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:29:05 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:29:07 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:29:07 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:29:09 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:29:09 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:29:10 - BtcBroadcast - INFO - 获取成功: 价格=$117991, 24h变化=-0.00%
+2025-07-13 15:29:10 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:29:11 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:29:11 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:29:12 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.27, 价差: 0.00%
+2025-07-13 15:29:12 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 15:29:12 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 15:29:12 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 15:29:12 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 15:29:12 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 15:29:12 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 15:29:12 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:29:12 - BtcBroadcast - INFO - 正在通过 curl 命令调用 Groq API...
+2025-07-13 15:29:16 - BtcBroadcast - INFO - 成功从 Groq (via curl) 获取到 LLM 响应: 决策：观望
+理由：当前比特币价格为$117,991.00，24小时涨跌幅为-0.00%，F&G指数为74（贪婪），技术指标显示15分钟、4小时和日线周期信号均为观望。结合最新新闻，美国总统特朗普可能大幅降低对华关税，中美贸易战出现缓和迹象，美联储撤销2022年监管信函，松绑银行加密货币资产及美元代币业务的监管指引，这些消息可能对比特币价格产生正面影响。但考虑到技术指标仍然显示观望信号，且市场情绪处于贪婪状态，短期内可能会有波动，因此建议观望。
+2025-07-13 15:29:16 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 15:29:16 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -11.5)
+2025-07-13 15:29:16 - BtcBroadcast - INFO - --- 步骤 6: 解析LLM响应并准备最终决策 ---
+2025-07-13 15:29:16 - BtcBroadcast - INFO - LLM决策解析成功: 观望
+2025-07-13 15:29:16 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 15:29:16 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:29:17 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 15:29:17 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 15:34:00 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:34:00 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:34:00 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:34:02 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:34:02 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:34:04 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:34:04 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:34:07 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:34:07 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:34:08 - BtcBroadcast - INFO - 获取成功: 价格=$118002, 24h变化=0.04%
+2025-07-13 15:34:08 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:34:09 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:34:09 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:34:10 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.27, 价差: 0.00%
+2025-07-13 15:34:10 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 15:34:10 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 15:34:10 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 15:34:10 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 15:34:10 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 15:34:10 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 15:34:10 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:34:10 - BtcBroadcast - INFO - 正在通过 curl 命令调用 Groq API...
+2025-07-13 15:34:14 - BtcBroadcast - INFO - 成功从 Groq (via curl) 获取到 LLM 响应: 决策：观望
+理由：当前比特币价格为$118,002.00，24小时涨跌幅为+0.04%，F&G指数为74（贪婪），表明市场情绪较为乐观。但技术指标显示15分钟、4小时和日线周期信号均为观望，意味着市场短期内可能会出现波动。结合最新的比特币相关新闻，中美贸易战出现缓和迹象，美联储撤销2022年监管信函，松绑银行加密货币资产及美元代币业务的监管指引，对市场产生了积极影响。但考虑到技术指标仍然显示观望信号，建议暂时观望，等待进一步的市场信号和技术指标变化后再做出买入或卖出决定。
+2025-07-13 15:34:14 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 15:34:14 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -11.5)
+2025-07-13 15:34:14 - BtcBroadcast - INFO - --- 步骤 6: 解析LLM响应并准备最终决策 ---
+2025-07-13 15:34:14 - BtcBroadcast - INFO - LLM决策解析成功: 观望
+2025-07-13 15:34:14 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 15:34:14 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:34:15 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 15:34:15 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 15:35:04 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:35:04 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:35:04 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:35:06 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:35:06 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:35:07 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:35:07 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:35:09 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:35:09 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:35:14 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/simple/price' 失败 (尝试 1/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 503 Service Unavailable')))
+2025-07-13 15:35:24 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/simple/price' 失败 (尝试 2/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 503 Service Unavailable')))
+2025-07-13 15:35:35 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/simple/price' 失败 (尝试 3/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 503 Service Unavailable')))
+2025-07-13 15:35:35 - BtcBroadcast - ERROR - 请求 'https://api.coingecko.com/api/v3/simple/price' 在 3 次尝试后最终失败。
+2025-07-13 15:35:35 - BtcBroadcast - ERROR - 无法从 CoinGecko 获取 BTC 数据。
+2025-07-13 15:35:35 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:35:36 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:35:36 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:35:37 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 1.20, 价差: 0.00%
+2025-07-13 15:35:37 - BtcBroadcast - ERROR - 获取基础数据失败，无法继续执行。
+2025-07-13 15:35:50 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:35:50 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:35:50 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:35:52 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:35:52 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:35:54 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:35:54 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:35:55 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:35:55 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:36:00 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/simple/price' 失败 (尝试 1/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 503 Service Unavailable')))
+2025-07-13 15:36:11 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/simple/price' 失败 (尝试 2/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 503 Service Unavailable')))
+2025-07-13 15:36:21 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/simple/price' 失败 (尝试 3/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 503 Service Unavailable')))
+2025-07-13 15:36:21 - BtcBroadcast - ERROR - 请求 'https://api.coingecko.com/api/v3/simple/price' 在 3 次尝试后最终失败。
+2025-07-13 15:36:21 - BtcBroadcast - ERROR - 无法从 CoinGecko 获取 BTC 数据。
+2025-07-13 15:36:21 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:36:23 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:36:23 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:36:23 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 2.11, 价差: 0.00%
+2025-07-13 15:36:23 - BtcBroadcast - ERROR - 获取基础数据失败，无法继续执行。
+2025-07-13 15:38:37 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:38:37 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:38:37 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:38:41 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:38:41 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:38:43 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:38:43 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:38:45 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:38:45 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:38:50 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/simple/price' 失败 (尝试 1/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true (Caused by ProxyError('Cannot connect to proxy.', OSError('Tunnel connection failed: 503 Service Unavailable')))
+2025-07-13 15:38:56 - BtcBroadcast - INFO - 获取成功: 价格=$118021, 24h变化=0.11%
+2025-07-13 15:38:56 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:38:57 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:38:57 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:38:58 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.23, 价差: 0.00%
+2025-07-13 15:38:58 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 15:38:58 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 15:38:58 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 15:38:58 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 15:38:58 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 15:38:58 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 15:38:58 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:38:58 - BtcBroadcast - INFO - 正在通过 curl 命令调用 Groq API...
+2025-07-13 15:39:03 - BtcBroadcast - INFO - 成功从 Groq (via curl) 获取到 LLM 响应: 决策：<观望>
+理由：<当前BTC价格为$118,021.00，24h涨跌为+0.11%，F&G指数为74（贪婪），表明市场情绪较为乐观。但技术指标方面，15分钟周期信号、4小时周期信号和日线周期信号均为“观望”，这表明市场短期内可能会继续震荡整理。结合最新比特币相关新闻，美联储撤销2022年监管信函，松绑银行加密货币资产及美元代币业务的监管指引，对加密货币市场有利，但特朗普政府的贸易政策仍然存在不确定性。因此，短期内市场可能会继续保持震荡整理的态势，建议观望。>
+2025-07-13 15:39:03 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 15:39:03 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -11.5)
+2025-07-13 15:39:03 - BtcBroadcast - INFO - --- 步骤 6: 解析LLM响应并准备最终决策 ---
+2025-07-13 15:39:03 - BtcBroadcast - INFO - LLM决策解析成功: <观望>
+2025-07-13 15:39:03 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 15:39:03 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:39:03 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 15:39:03 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 15:41:29 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:41:29 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:41:29 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:41:31 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:41:31 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:41:32 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:41:32 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:41:35 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:41:35 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:41:37 - BtcBroadcast - INFO - 获取成功: 价格=$118014, 24h变化=0.11%
+2025-07-13 15:41:37 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:41:38 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:41:38 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:41:39 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.15, 价差: 0.00%
+2025-07-13 15:41:39 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 15:41:39 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 15:41:39 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 15:41:39 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 15:41:39 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 15:41:39 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 15:41:39 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:41:39 - BtcBroadcast - INFO - 正在通过 curl 命令调用 Groq API...
+2025-07-13 15:41:44 - BtcBroadcast - INFO - 成功从 Groq (via curl) 获取到 LLM 响应: 决策：观望
+理由：当前BTC价格为$118,014.00美元，24小时涨跌为+0.11%，F&G指数为74（贪婪），表明市场情绪较为乐观。但技术指标显示，15分钟、4小时和日线周期信号均为观望，意味着市场走势较为中性。结合最新比特币相关新闻，中美贸易战出现缓和迹象，美联储松绑银行加密货币资产监管等利好消息可能对比特币市场产生积极影响，但高贪婪指数也提示可能存在回调风险。因此，建议观望，等待市场进一步走势明朗后再做出决策。
+2025-07-13 15:41:44 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 15:41:44 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -11.5)
+2025-07-13 15:41:44 - BtcBroadcast - INFO - --- 步骤 6: 解析LLM响应并准备最终决策 ---
+2025-07-13 15:41:44 - BtcBroadcast - INFO - LLM决策解析成功: 观望
+2025-07-13 15:41:44 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 15:41:44 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:41:44 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 15:41:44 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 15:42:56 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:42:56 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:42:56 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:42:58 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:42:58 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:42:59 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:42:59 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:43:01 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:43:01 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:43:02 - BtcBroadcast - INFO - 获取成功: 价格=$118011, 24h变化=0.16%
+2025-07-13 15:43:02 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:43:04 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:43:04 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:43:05 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.27, 价差: 0.00%
+2025-07-13 15:43:05 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 15:43:05 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 15:43:05 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 15:43:05 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 15:43:05 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 15:43:05 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 15:43:05 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:43:05 - BtcBroadcast - INFO - 正在通过 curl 命令调用 Groq API...
+2025-07-13 15:43:10 - BtcBroadcast - INFO - 成功从 Groq (via curl) 获取到 LLM 响应: 决策：<观望>
+理由：<当前BTC价格为$118,011.00美元，24h涨跌为+0.16%，F&G指数为74（贪婪），表明市场情绪较为激动，但技术指标（15分钟、4小时和日线周期信号均为观望）提示市场可能处于震荡状态。结合最新比特币相关新闻，美联储撤销2022年监管信函，松绑银行加密货币资产及美元代币业务的监管指引，可能对市场产生积极影响，但特朗普政府的政策变化和全球经济形势仍存在不确定性。因此，建议观望，等待市场明确趋势后再做出买入或卖出决定。>
+2025-07-13 15:43:10 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 15:43:10 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -11.5)
+2025-07-13 15:43:10 - BtcBroadcast - INFO - --- 步骤 6: 解析LLM响应并准备最终决策 ---
+2025-07-13 15:43:10 - BtcBroadcast - INFO - LLM决策解析成功: <观望>
+2025-07-13 15:43:10 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 15:43:10 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:43:10 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 15:43:10 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 15:47:42 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:47:42 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:47:42 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:47:43 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:47:43 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:47:46 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:47:46 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:47:48 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:47:48 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:47:49 - BtcBroadcast - INFO - 获取成功: 价格=$118010, 24h变化=0.19%
+2025-07-13 15:47:49 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:47:50 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:47:50 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:47:52 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.53, 价差: 0.00%
+2025-07-13 15:47:52 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 15:47:52 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 15:47:52 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 15:47:52 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 15:47:52 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 15:47:52 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 15:47:52 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:47:52 - BtcBroadcast - INFO - 正在通过 curl 命令调用 Groq API...
+2025-07-13 15:47:57 - BtcBroadcast - INFO - 成功从 Groq (via curl) 获取到 LLM 响应: 决策：观望
+理由：当前BTC价格为$118,010.00，24小时涨跌为+0.19%，F&G指数为74（贪婪），技术指标显示15分钟、4小时和日线周期信号均为观望。虽然美国现货比特币ETF连续两日净流入突破10亿美元，总资产规模首次突破1400亿美元，且美国总统特朗普表示可能大幅降低对华关税，中美正就关税进行谈判，这些消息可能对比特币价格产生积极影响，但考虑到技术指标仍然显示观望信号，且市场贪婪指数较高，短期内以观望为主，密切关注市场变化和技术指标的转变较为合理。
+2025-07-13 15:47:57 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 15:47:57 - BtcBroadcast - INFO - 规则决策结果: 🔴 卖出 (得分: -9.5)
+2025-07-13 15:47:57 - BtcBroadcast - INFO - --- 步骤 6: 解析LLM响应并准备最终决策 ---
+2025-07-13 15:47:57 - BtcBroadcast - INFO - LLM决策解析成功: 观望
+2025-07-13 15:47:57 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 15:47:57 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:47:57 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 15:47:57 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-13 15:48:39 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-13 15:48:39 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-13 15:48:39 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-13 15:48:40 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-13 15:48:40 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-13 15:48:42 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-13 15:48:42 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-13 15:48:44 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-13 15:48:44 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-13 15:48:44 - BtcBroadcast - INFO - 获取成功: 价格=$118010, 24h变化=0.19%
+2025-07-13 15:48:44 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-13 15:48:45 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-13 15:48:45 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-13 15:48:46 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.34, 价差: 0.00%
+2025-07-13 15:48:46 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-13 15:48:46 - BtcBroadcast - INFO - --- 步骤 3: 生成分周期初步信号 ---
+2025-07-13 15:48:46 - BtcBroadcast - INFO - 周期 15m 初步信号: 观望
+2025-07-13 15:48:46 - BtcBroadcast - INFO - 周期 4h 初步信号: 观望
+2025-07-13 15:48:46 - BtcBroadcast - INFO - 周期 1d 初步信号: 观望
+2025-07-13 15:48:46 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 (curl 方式) ---
+2025-07-13 15:48:46 - BtcBroadcast - WARNING - 未找到 GROQ_API_KEY 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:48:46 - BtcBroadcast - INFO - 正在通过 curl 命令调用 Groq API...
+2025-07-13 15:48:50 - BtcBroadcast - INFO - 成功从 Groq (via curl) 获取到 LLM 响应: 决策：观望
+理由：当前BTC价格为$118,010.00，24小时涨跌幅为+0.19%，F&G指数为74（贪婪），技术指标显示15分钟、4小时和日线周期信号均为观望。结合最新比特币相关新闻，市场情绪较为乐观，但短期内可能面临一定的波动。因此，当前建议保持观望态度，等待市场进一步明确方向。
+2025-07-13 15:48:50 - BtcBroadcast - INFO - --- 步骤 5: 计算规则系统决策 (用于UI展示和失败兜底) ---
+2025-07-13 15:48:50 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -11.5)
+2025-07-13 15:48:50 - BtcBroadcast - INFO - --- 步骤 6: 解析LLM响应并准备最终决策 ---
+2025-07-13 15:48:50 - BtcBroadcast - INFO - LLM决策解析成功: 观望
+2025-07-13 15:48:50 - BtcBroadcast - INFO - --- 步骤 7: 格式化并发送播报到飞书 ---
+2025-07-13 15:48:50 - BtcBroadcast - WARNING - 未找到 FEISHU_WEBHOOK_URL 环境变量，尝试从 config.yaml 中获取...
+2025-07-13 15:48:50 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-13 15:48:50 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
