@@ -1,10 +1,11 @@
 from config_loader import config
+import datetime
 
 
 def build_llm_prompt_text(price_data, fng_index, breakdown, pivot_points_data):
     """
-    构建最终版（V4）的、用于 curl 调用的纯文本 Prompt。
-    整合了 Pivot Points 支撑/压力位，并强化了 AI 的主动性。
+    构建最终版（V5）的、用于 curl 调用的纯文本 Prompt。
+    V5版本对文本进行了精简，以避免超出模型的请求大小限制。
     """
     # 1. 准备宏观数据
     price = price_data.get("price", 0)
@@ -13,25 +14,27 @@ def build_llm_prompt_text(price_data, fng_index, breakdown, pivot_points_data):
     fg_class = fng_index.get("classification", "N/A")
 
     # 2. 准备量化信号
-    positive_signals = "\n".join(
-        [
-            f"  - {item['name']}：得分 +{item['score']:.1f}"
-            for item in breakdown
-            if item["score"] > 0
-        ]
+    positive_signals = (
+        "\n".join(
+            [
+                f"  - {item['name']}: +{item['score']:.1f}"
+                for item in breakdown
+                if item["score"] > 0
+            ]
+        )
+        or "  无明显看涨信号"
     )
-    if not positive_signals:
-        positive_signals = "  无明显看涨信号"
 
-    negative_signals = "\n".join(
-        [
-            f"  - {item['name']}：得分 {item['score']:.1f}"
-            for item in breakdown
-            if item["score"] < 0
-        ]
+    negative_signals = (
+        "\n".join(
+            [
+                f"  - {item['name']}: {item['score']:.1f}"
+                for item in breakdown
+                if item["score"] < 0
+            ]
+        )
+        or "  无明显看跌信号"
     )
-    if not negative_signals:
-        negative_signals = "  无明显看跌信号"
 
     # 3. 准备支撑与压力位数据
     def get_pivot_values(data, timeframe):
@@ -48,51 +51,56 @@ def build_llm_prompt_text(price_data, fng_index, breakdown, pivot_points_data):
     pivots_4h = get_pivot_values(pivot_points_data, "4h")
     pivots_1d = get_pivot_values(pivot_points_data, "1d")
 
-    # 4. 组装最终 Prompt (使用用户提供的最新模板)
-    prompt = f"""
-你是一位专业的比特币市场策略分析师，具备宏观经济、技术分析和新闻解读能力。请你结合以下市场数据、技术信号、支撑压力位和你可以访问的最新加密新闻，综合分析当前市场趋势，判断是否适合买入、卖出或观望。
+    # 4. 动态生成日期范围
+    today = datetime.date.today()
+    one_week_ago = today - datetime.timedelta(days=7)
+    date_range_str = (
+        f"{one_week_ago.strftime('%Y年%m月%d日')}至{today.strftime('%Y年%m月%d日')}"
+    )
+
+    # 5. 组装最终 Prompt (V6 增强版)
+    prompt = f"""作为专业的比特币市场策略分析师，请结合以下数据、信号、关键位及最新新闻，分析BTC市场趋势并给出操作建议（买入/卖出/观望）。
 
 ---
 
-📊 【宏观市场数据】
-- 当前 BTC 价格：${price:,.2f}
-- 24h 涨跌幅：{change24h_pct:+.2%}
-- 市场情绪（F&G 指数）：{fg_value} ({fg_class})
+📊 **宏观市场**
+- BTC 价格: ${price:,.2f}
+- 24h 涨跌: {change24h_pct:+.2%}
+- 恐慌贪婪指数: {fg_value} ({fg_class})
 
-🧮 【多周期量化信号评分】
-- ✅ 看涨信号：
+🧮 **量化信号评分**
+- 看涨信号:
 {positive_signals}
-- ❌ 看跌信号：
+- 看跌信号:
 {negative_signals}
 
-📐 【支撑与压力位】（由系统自动生成，仅供参考）
-请结合当前价格与以下关键点位的关系，自主分析市场动能。
-- 15m：S1={pivots_15m['s1']}, Pivot={pivots_15m['pivot']}, R1={pivots_15m['r1']}
-- 4h ：S1={pivots_4h['s1']},  Pivot={pivots_4h['pivot']},  R1={pivots_4h['r1']}
-- 1d ：S1={pivots_1d['s1']},  Pivot={pivots_1d['pivot']},  R1={pivots_1d['r1']}
+📐 **支撑与压力位**
+请结合当前价格与这些关键位，自主分析市场动能。
+- 15m: S1={pivots_15m['s1']}, P={pivots_15m['pivot']}, R1={pivots_15m['r1']}
+- 4h:  S1={pivots_4h['s1']},  P={pivots_4h['pivot']},  R1={pivots_4h['r1']}
+- 1d:  S1={pivots_1d['s1']},  P={pivots_1d['pivot']},  R1={pivots_1d['r1']}
 
 ---
 
-🧠 请你执行以下任务（请务必涵盖每一项）：
+🧠 **任务指令**
+1.  分析**{date_range_str}期间的关键加密新闻**，判断其利多或利空影响。
+2.  分析各周期信号是否一致或存在背离。
+3.  结合支撑/压力位，判断当前价格所处区间及潜在动能。
+4.  综合以上信息，给出明确操作建议并说明潜在风险。
 
-1. 主动回顾你可访问的**最新宏观或加密新闻**，判断是否对 BTC 价格构成利多或利空影响。
-2. 分析 15m / 4h / 1d 三个周期的量化信号是否一致，是否存在短中期背离。
-3. 结合支撑/压力位，判断当前价格是否面临关键阻力或存在支撑反弹机会。
-4. 综合上述三类信息，给出操作建议，并指出潜在风险。
-
-✳️ 注意：我们提供的信号与点位仅供参考，你必须发挥你的专业理解，独立做出判断。
+✳️ **注意**: 我们提供的信号和点位是参考，你必须独立判断。
 
 ---
 
-📋 请严格按照以下格式输出：
+📋 **请严格按此格式输出**
 
 决策：<强烈买入 / 买入 / 观望 / 卖出 / 强烈卖出>
 
 理由：
-1. 技术分析（基于各周期信号）
-2. 市场情绪（F&G 指数评估）
-3. 新闻驱动（提及1-2条关键事件并解释其影响）
-4. 支撑/压力位评估（是否接近、突破或失守）
-5. 综合判断与建议（明确风险点）
+1. 技术分析（解读周期信号）
+2. 市场情绪（F&G指数评估）
+3. 新闻驱动（提及关键事件及其影响）
+4. 支撑/压力位评估（对各周期，分析价格与R1/S1的关系，并给出突破或回落后的情景推演）
+5. 综合判断与建议（明确风险）
 """
     return prompt.strip()
