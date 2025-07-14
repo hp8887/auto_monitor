@@ -2,9 +2,9 @@ name: Crypto Price Broadcast
 
 on:
   workflow_dispatch: # 允许手动触发
-  schedule:
-    # UTC 时间，"*/15 * * * *" 表示每15分钟执行一次
-    - cron: "*/15 * * * *"
+  # schedule:
+  #   # UTC 时间，"*/15 * * * *" 表示每15分钟执行一次
+  #   - cron: "*/15 * * * *"
 
 jobs:
   run-crypto-broadcast:
