@@ -3016,3 +3016,49 @@ KeyError: 'choices'
 2025-07-13 22:16:38 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
 2025-07-13 22:16:38 - BtcBroadcast - INFO - ================ 主流程结束 ================
 
+2025-07-14 11:32:36 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-14 11:32:36 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-14 11:32:36 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-14 11:33:06 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-14 11:33:06 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-14 11:33:06 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-14 11:33:07 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-14 11:33:07 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-14 11:33:11 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-14 11:33:11 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-14 11:33:12 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-14 11:33:12 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-14 11:33:42 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/simple/price' 失败 (尝试 1/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x1576f5e80>, 'Connection to api.coingecko.com timed out. (connect timeout=15)'))
+2025-07-14 11:33:49 - BtcBroadcast - INFO - 获取成功: 价格=$119919, 24h变化=1.81%
+2025-07-14 11:33:49 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-14 11:33:51 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-14 11:33:51 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-14 11:33:52 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.44, 价差: 0.00%
+2025-07-14 11:33:52 - BtcBroadcast - INFO - 开始为周期 ['15m', '4h', '1d'] 计算 Pivot Points...
+2025-07-14 11:33:52 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 2 条)...
+2025-07-14 11:33:55 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 11:33:55 - BtcBroadcast - INFO - 周期 15m: 使用前一根K线数据 (High=119959.59, Low=119787.79, Close=119927.11)
+2025-07-14 11:33:55 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 2 条)...
+2025-07-14 11:33:58 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 11:33:58 - BtcBroadcast - INFO - 周期 4h: 使用前一根K线数据 (High=119371.06, Low=118262.91, Close=119079.77)
+2025-07-14 11:33:58 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 2 条)...
+2025-07-14 11:34:02 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 11:34:02 - BtcBroadcast - INFO - 周期 1d: 使用前一根K线数据 (High=119472.14, Low=117221.92, Close=119079.77)
+2025-07-14 11:34:02 - BtcBroadcast - INFO - 所有周期的 Pivot Points 计算完成。
+2025-07-14 11:34:02 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-14 11:34:02 - BtcBroadcast - INFO - --- 步骤 3: 计算规则系统决策和详细归因 ---
+2025-07-14 11:34:02 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -14.5)
+2025-07-14 11:34:02 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-14 11:34:02 - BtcBroadcast - INFO - --- 正在尝试模型: compound-beta ---
+2025-07-14 11:34:02 - BtcBroadcast - INFO - 准备使用模型 'compound-beta' 调用 API...
+2025-07-14 11:34:32 - BtcBroadcast - WARNING - API 返回错误 (模型: compound-beta): Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01k015trphetcr8vvb36krfq7q` service tier `on_demand` on tokens per day (TPD): Limit 100000, Used 91825, Requested 13195. Please try again in 1h12m16.634s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing
+2025-07-14 11:34:32 - BtcBroadcast - WARNING - 模型 compound-beta 已达速率限制，将在下一个周期尝试更低优先级的模型。
+2025-07-14 11:34:32 - BtcBroadcast - INFO - --- 正在尝试模型: compound-beta-mini ---
+2025-07-14 11:34:32 - BtcBroadcast - INFO - 准备使用模型 'compound-beta-mini' 调用 API...
+2025-07-14 11:34:39 - BtcBroadcast - INFO - 模型 'compound-beta-mini' 调用成功。
+2025-07-14 11:34:39 - BtcBroadcast - INFO - LLM 决策解析成功: 观望
+2025-07-14 11:34:39 - BtcBroadcast - INFO - --- 步骤 5: 决策数据准备完毕 ---
+2025-07-14 11:34:39 - BtcBroadcast - INFO - --- 步骤 6: 格式化并发送播报到飞书 ---
+2025-07-14 11:34:41 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-14 11:34:41 - BtcBroadcast - INFO - ================ 主流程结束 ================
+

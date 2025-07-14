@@ -6,6 +6,7 @@ from data_provider import (
     get_btc_price_and_change,
     get_fear_and_greed_index,
     get_order_book_data,
+    get_pivot_points_for_all_timeframes,  # 导入新函数
 )
 from strategy import (
     calculate_indicators,
@@ -30,8 +31,17 @@ def main():
     price_data = get_btc_price_and_change()
     fng_data = get_fear_and_greed_index()
     order_book_data = get_order_book_data()
+    pivot_points_data = get_pivot_points_for_all_timeframes()  # 获取 Pivot Points
 
-    if not all([multi_timeframe_klines, price_data, fng_data, order_book_data]):
+    if not all(
+        [
+            multi_timeframe_klines,
+            price_data,
+            fng_data,
+            order_book_data,
+            pivot_points_data,
+        ]
+    ):
         logger.error("获取基础数据失败，无法继续执行。")
         return
 
@@ -60,8 +70,10 @@ def main():
 
     # 步骤 4: 构建 Prompt 并调用 LLM (现在使用详细归因作为输入)
     logger.info("--- 步骤 4: 调用大语言模型进行决策 ---")
-    # 注意：现在传递的是 breakdown 列表
-    prompt_text = build_llm_prompt_text(price_data, fng_data, breakdown)
+    # 注意：现在传递的是 breakdown 列表 和 pivot_points_data
+    prompt_text = build_llm_prompt_text(
+        price_data, fng_data, breakdown, pivot_points_data
+    )
     llm_response = ask_llm_by_curl(prompt_text)
 
     # 初始化LLM决策的最终数据结构
@@ -122,6 +134,7 @@ def main():
         order_book_data=order_book_data,
         rule_decision_data=rule_decision_data,
         llm_decision_data=final_llm_decision_data,  # 将最终处理过的LLM结果传入
+        pivot_points_data=pivot_points_data,  # 将 pivot 数据传入飞书通知
     )
 
     logger.info("================ 主流程结束 ================\n")

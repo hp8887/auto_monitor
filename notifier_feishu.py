@@ -36,6 +36,7 @@ def format_and_send_message(
     order_book_data,
     rule_decision_data,
     llm_decision_data=None,
+    pivot_points_data=None,  # 添加新参数
 ):
     """
     格式化所有数据为飞书卡片，并直接发送。
@@ -217,6 +218,30 @@ def format_and_send_message(
         )
 
     elements.append({"tag": "hr"})
+
+    # --- 新增：构建支撑与压力位模块 ---
+    if pivot_points_data:
+        pivot_texts = []
+        for tf in ["15m", "4h", "1d"]:
+            data = pivot_points_data.get(tf)
+            if data and isinstance(data, dict):
+                s1 = data.get("support", {}).get("S1", "N/A")
+                pivot = data.get("pivot", "N/A")
+                r1 = data.get("resistance", {}).get("R1", "N/A")
+                pivot_texts.append(f"**{tf}**: S1 ${s1} | P ${pivot} | R1 ${r1}")
+
+        if pivot_texts:
+            elements.append(
+                {
+                    "tag": "div",
+                    "text": {
+                        "tag": "lark_md",
+                        "content": "📐 **关键支撑/压力位 (S1/Pivot/R1)**\n"
+                        + "\n".join(pivot_texts),
+                    },
+                }
+            )
+            elements.append({"tag": "hr"})
 
     # --- 构建 LLM 决策模块 ---
     if llm_decision_data and llm_decision_data.get("success"):
