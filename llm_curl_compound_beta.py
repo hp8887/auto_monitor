@@ -3,9 +3,28 @@ import json
 import os
 import requests
 from logger_setup import logger
+import random
 
 # --- 配置 ---
 MODEL_PRIORITY_LIST = ["compound-beta", "compound-beta-mini", "llama-3.1-8b-instant"]
+
+# --- User-Agent 池 ---
+USER_AGENT_POOL = [
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+]
+
+# --- 模拟人类开场白 ---
+HUMAN_INTRO_POOL = [
+    "Hi, can you help me with a quick Bitcoin outlook?",
+    "What's your take on the current BTC market situation?",
+    "Please provide a professional analysis of the Bitcoin market.",
+    "Could you give me a summary of the current Bitcoin trend?",
+]
+
 
 # --- API Key 列表 ---
 # 定义所有可用的API Key对应的环境变量名称
@@ -18,19 +37,24 @@ KEY_ENV_VAR_LIST = [
 
 
 def _call_groq_api(
-    prompt: str, model_name: str, api_key: str, key_env_var: str
+    prompt: str, model_name: str, api_key: str, key_env_var: str, user_agent: str
 ) -> dict:
     """
     内部函数，负责调用一次 Groq API。
-    使用传入的 API Key。
+    使用传入的 API Key 和 User-Agent。
     返回一个包含成功状态和结果/错误信息的字典。
     """
     logger.info(f"准备使用模型 '{model_name}' (通过 {key_env_var}) 调用 API...")
+
+    # 随机化参数
+    temperature = 0.6 + random.random() * 0.3  # 0.6 to 0.9
+    max_tokens = 280 + random.randint(0, 50)  # 280 to 330
+
     payload = {
         "model": model_name,
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.7,
-        "max_tokens": 300,
+        "temperature": round(temperature, 2),
+        "max_tokens": max_tokens,
     }
 
     curl_command = [
@@ -42,6 +66,8 @@ def _call_groq_api(
         f"Authorization: Bearer {api_key}",
         "--header",
         "Content-Type: application/json",
+        "--header",
+        f"User-Agent: {user_agent}",
         "--data",
         json.dumps(payload),
     ]
@@ -54,7 +80,7 @@ def _call_groq_api(
         if result.returncode != 0:
             error_output = result.stderr or result.stdout
             logger.error(
-                f"curl 命令执行失败 (模型: {model_name}, Key: {key_env_var})，返回码: {result.returncode}, 错误输出: {error_output}"
+                f"curl 命令执行失败 (模型: {model_name}, Key: {key_env_var}, UA: {user_agent})，返回码: {result.returncode}, 错误输出: {error_output}"
             )
             return {
                 "success": False,
@@ -70,7 +96,7 @@ def _call_groq_api(
             error_message = error_details.get("message", "未知错误")
             error_code = error_details.get("code", "")
             logger.warning(
-                f"API 返回错误 (模型: {model_name}, Key: {key_env_var}): {error_message}"
+                f"API 返回错误 (模型: {model_name}, Key: {key_env_var}, UA: {user_agent}): {error_message}"
             )
 
             is_skippable = (
@@ -92,7 +118,7 @@ def _call_groq_api(
         )
         if not content:
             logger.error(
-                f"无法从API响应中提取到 'content' (模型: {model_name}, Key: {key_env_var})。响应: {response_json}"
+                f"无法从API响应中提取到 'content' (模型: {model_name}, Key: {key_env_var}, UA: {user_agent})。响应: {response_json}"
             )
             return {
                 "success": False,
@@ -139,6 +165,13 @@ def ask_llm_by_curl(prompt: str) -> dict:
     """
     last_error = "没有可用的模型或API Key。"
 
+    # 以 25% 的概率添加人性化开场白
+    final_prompt = prompt
+    if random.random() < 0.25:
+        intro = random.choice(HUMAN_INTRO_POOL)
+        final_prompt = f"{intro}\n\nHere is the data for my main request:\n\n{prompt}"
+        logger.info(f"添加人性化开场白: '{intro}'")
+
     # 外层循环：按优先级遍历模型
     for model in MODEL_PRIORITY_LIST:
         logger.info(f"--- 正在锁定模型: {model} ---")
@@ -152,10 +185,16 @@ def ask_llm_by_curl(prompt: str) -> dict:
                 logger.debug(f"环境变量 '{key_env_var}' 未设置或无效，跳过此Key。")
                 continue
 
-            logger.info(f"使用 Key (来自 {key_env_var}) 尝试模型 {model}...")
+            # 随机选择一个 User-Agent
+            user_agent = random.choice(USER_AGENT_POOL)
+            logger.info(
+                f"使用 Key (来自 {key_env_var}) 和 UA '{user_agent}' 尝试模型 {model}..."
+            )
 
             # 调用API，传入模型、prompt和本次循环的Key
-            result = _call_groq_api(prompt, model, api_key, key_env_var)
+            result = _call_groq_api(
+                final_prompt, model, api_key, key_env_var, user_agent
+            )
 
             if result.get("success"):
                 # 只要成功一次，就立即返回最终结果
