@@ -5,6 +5,7 @@ import pytz
 from config_loader import config
 from logger_setup import logger
 import os
+import re  # 导入 re 模块
 
 
 def get_decision_color(decision):
@@ -250,20 +251,27 @@ def format_and_send_message(
         model_used = llm_decision_data.get("model_used", "未知模型")
         llm_decision_with_emoji = f"{get_decision_emoji(llm_decision)} {llm_decision}"
 
-        llm_section_content = (
+        # 将标题的主要部分加粗 -> 整行加粗
+        llm_section_title = (
             f"**大模型综合决策 (AI-{model_used}): {llm_decision_with_emoji}**"
+        )
+
+        # 使用正则表达式，只在主要标题前增加换行，以实现段落分隔
+        # 这会匹配一个换行符，该换行符后面紧跟着 "**"、一个数字(2-5)或"潜在风险"
+        llm_reason_formatted = re.sub(
+            r"\n(?=\*\*(?:[2-5]\.|潜在风险))", "\n\n", llm_reason
         )
 
         # 将解析后的理由作为正文内容添加
         elements.append(
-            {"tag": "div", "text": {"tag": "lark_md", "content": llm_section_content}}
+            {"tag": "div", "text": {"tag": "lark_md", "content": llm_section_title}}
         )
         elements.append(
             {
                 "tag": "div",
                 "text": {
                     "tag": "lark_md",
-                    "content": llm_reason,  # 这里是解析后的理由
+                    "content": llm_reason_formatted,  # 使用格式化后的理由
                 },
             }
         )

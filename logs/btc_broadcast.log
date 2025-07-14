@@ -3262,3 +3262,160 @@ KeyError: 'choices'
 2025-07-14 14:59:22 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
 2025-07-14 14:59:22 - BtcBroadcast - INFO - ================ 主流程结束 ================
 
+2025-07-14 15:12:52 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-14 15:12:52 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-14 15:12:52 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-14 15:12:53 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-14 15:12:53 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-14 15:12:54 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-14 15:12:54 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-14 15:12:56 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-14 15:12:56 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-14 15:13:11 - BtcBroadcast - WARNING - 请求 'https://api.coingecko.com/api/v3/simple/price' 失败 (尝试 1/3): HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x137b1ed30>: Failed to establish a new connection: [Errno 65] No route to host'))
+2025-07-14 15:13:16 - BtcBroadcast - INFO - 获取成功: 价格=$122274, 24h变化=3.69%
+2025-07-14 15:13:16 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-14 15:13:17 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-14 15:13:17 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-14 15:13:18 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.31, 价差: 0.00%
+2025-07-14 15:13:18 - BtcBroadcast - INFO - 开始为周期 ['15m', '4h', '1d'] 计算 Pivot Points...
+2025-07-14 15:13:18 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 2 条)...
+2025-07-14 15:13:19 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:13:19 - BtcBroadcast - INFO - 周期 15m: 使用前一根K线数据 (High=122171.74, Low=122062.52, Close=122126.72)
+2025-07-14 15:13:19 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 2 条)...
+2025-07-14 15:13:21 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:13:21 - BtcBroadcast - INFO - 周期 4h: 使用前一根K线数据 (High=121411.82, Low=118906.56, Close=120753.22)
+2025-07-14 15:13:21 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 2 条)...
+2025-07-14 15:13:22 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:13:22 - BtcBroadcast - INFO - 周期 1d: 使用前一根K线数据 (High=119472.14, Low=117221.92, Close=119079.77)
+2025-07-14 15:13:22 - BtcBroadcast - INFO - 所有周期的 Pivot Points 计算完成。
+2025-07-14 15:13:22 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-14 15:13:22 - BtcBroadcast - INFO - --- 步骤 3: 计算规则系统决策和详细归因 ---
+2025-07-14 15:13:22 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -16.5)
+2025-07-14 15:13:22 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-14 15:13:22 - BtcBroadcast - INFO - --- 正在锁定模型: compound-beta ---
+2025-07-14 15:13:22 - BtcBroadcast - INFO - 使用 Key (来自 GROQ_API_KEY_1) 尝试模型 compound-beta...
+2025-07-14 15:13:22 - BtcBroadcast - INFO - 准备使用模型 'compound-beta' (通过 GROQ_API_KEY_1) 调用 API...
+2025-07-14 15:13:33 - BtcBroadcast - INFO - 模型 'compound-beta' 使用 Key 'GROQ_API_KEY_1' 调用成功。
+2025-07-14 15:13:33 - BtcBroadcast - INFO - LLM 决策解析成功: **观望**
+2025-07-14 15:13:33 - BtcBroadcast - INFO - --- 步骤 5: 决策数据准备完毕 ---
+2025-07-14 15:13:33 - BtcBroadcast - INFO - --- 步骤 6: 格式化并发送播报到飞书 ---
+2025-07-14 15:13:36 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-14 15:13:36 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-14 15:21:41 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-14 15:21:41 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-14 15:21:41 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-14 15:21:43 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-14 15:21:43 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-14 15:21:44 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-14 15:21:44 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-14 15:21:46 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-14 15:21:46 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-14 15:21:46 - BtcBroadcast - INFO - 获取成功: 价格=$122304, 24h变化=3.70%
+2025-07-14 15:21:46 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-14 15:21:48 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-14 15:21:48 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-14 15:21:48 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.98, 价差: 0.00%
+2025-07-14 15:21:48 - BtcBroadcast - INFO - 开始为周期 ['15m', '4h', '1d'] 计算 Pivot Points...
+2025-07-14 15:21:48 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 2 条)...
+2025-07-14 15:21:50 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:21:50 - BtcBroadcast - INFO - 周期 15m: 使用前一根K线数据 (High=122423.41, Low=122098.74, Close=122225.92)
+2025-07-14 15:21:50 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 2 条)...
+2025-07-14 15:21:51 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:21:51 - BtcBroadcast - INFO - 周期 4h: 使用前一根K线数据 (High=121411.82, Low=118906.56, Close=120753.22)
+2025-07-14 15:21:51 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 2 条)...
+2025-07-14 15:21:53 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:21:53 - BtcBroadcast - INFO - 周期 1d: 使用前一根K线数据 (High=119472.14, Low=117221.92, Close=119079.77)
+2025-07-14 15:21:53 - BtcBroadcast - INFO - 所有周期的 Pivot Points 计算完成。
+2025-07-14 15:21:53 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-14 15:21:53 - BtcBroadcast - INFO - --- 步骤 3: 计算规则系统决策和详细归因 ---
+2025-07-14 15:21:53 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -14.5)
+2025-07-14 15:21:53 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-14 15:21:53 - BtcBroadcast - INFO - --- 正在锁定模型: compound-beta ---
+2025-07-14 15:21:53 - BtcBroadcast - INFO - 使用 Key (来自 GROQ_API_KEY_1) 尝试模型 compound-beta...
+2025-07-14 15:21:53 - BtcBroadcast - INFO - 准备使用模型 'compound-beta' (通过 GROQ_API_KEY_1) 调用 API...
+2025-07-14 15:22:04 - BtcBroadcast - INFO - 模型 'compound-beta' 使用 Key 'GROQ_API_KEY_1' 调用成功。
+2025-07-14 15:22:04 - BtcBroadcast - INFO - LLM 决策解析成功: 观望
+2025-07-14 15:22:04 - BtcBroadcast - INFO - --- 步骤 5: 决策数据准备完毕 ---
+2025-07-14 15:22:04 - BtcBroadcast - INFO - --- 步骤 6: 格式化并发送播报到飞书 ---
+2025-07-14 15:22:06 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-14 15:22:06 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-14 15:25:17 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-14 15:25:17 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-14 15:25:17 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-14 15:25:19 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-14 15:25:19 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-14 15:25:20 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-14 15:25:20 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-14 15:25:24 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-14 15:25:24 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-14 15:25:25 - BtcBroadcast - INFO - 获取成功: 价格=$122382, 24h变化=3.73%
+2025-07-14 15:25:25 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-14 15:25:26 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-14 15:25:26 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-14 15:25:27 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.66, 价差: 0.00%
+2025-07-14 15:25:27 - BtcBroadcast - INFO - 开始为周期 ['15m', '4h', '1d'] 计算 Pivot Points...
+2025-07-14 15:25:27 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 2 条)...
+2025-07-14 15:25:28 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:25:28 - BtcBroadcast - INFO - 周期 15m: 使用前一根K线数据 (High=122423.41, Low=122098.74, Close=122225.92)
+2025-07-14 15:25:28 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 2 条)...
+2025-07-14 15:25:30 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:25:30 - BtcBroadcast - INFO - 周期 4h: 使用前一根K线数据 (High=121411.82, Low=118906.56, Close=120753.22)
+2025-07-14 15:25:30 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 2 条)...
+2025-07-14 15:25:31 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:25:31 - BtcBroadcast - INFO - 周期 1d: 使用前一根K线数据 (High=119472.14, Low=117221.92, Close=119079.77)
+2025-07-14 15:25:31 - BtcBroadcast - INFO - 所有周期的 Pivot Points 计算完成。
+2025-07-14 15:25:31 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-14 15:25:31 - BtcBroadcast - INFO - --- 步骤 3: 计算规则系统决策和详细归因 ---
+2025-07-14 15:25:31 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -14.5)
+2025-07-14 15:25:31 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-14 15:25:31 - BtcBroadcast - INFO - --- 正在锁定模型: compound-beta ---
+2025-07-14 15:25:31 - BtcBroadcast - INFO - 使用 Key (来自 GROQ_API_KEY_1) 尝试模型 compound-beta...
+2025-07-14 15:25:31 - BtcBroadcast - INFO - 准备使用模型 'compound-beta' (通过 GROQ_API_KEY_1) 调用 API...
+2025-07-14 15:25:41 - BtcBroadcast - INFO - 模型 'compound-beta' 使用 Key 'GROQ_API_KEY_1' 调用成功。
+2025-07-14 15:25:41 - BtcBroadcast - INFO - LLM 决策解析成功: 观望
+2025-07-14 15:25:41 - BtcBroadcast - INFO - --- 步骤 5: 决策数据准备完毕 ---
+2025-07-14 15:25:41 - BtcBroadcast - INFO - --- 步骤 6: 格式化并发送播报到飞书 ---
+2025-07-14 15:25:42 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-14 15:25:42 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
+2025-07-14 15:28:34 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-14 15:28:34 - BtcBroadcast - INFO - --- 步骤 1: 获取市场数据 ---
+2025-07-14 15:28:34 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 96 条)...
+2025-07-14 15:28:36 - BtcBroadcast - INFO - 成功获取 97 条K线数据。
+2025-07-14 15:28:36 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 60 条)...
+2025-07-14 15:28:38 - BtcBroadcast - INFO - 成功获取 61 条K线数据。
+2025-07-14 15:28:38 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 30 条)...
+2025-07-14 15:28:40 - BtcBroadcast - INFO - 成功获取 31 条K线数据。
+2025-07-14 15:28:40 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-14 15:28:41 - BtcBroadcast - INFO - 获取成功: 价格=$122358, 24h变化=3.69%
+2025-07-14 15:28:41 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-14 15:28:42 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=74 (贪婪)
+2025-07-14 15:28:42 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-14 15:28:43 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 0.33, 价差: 0.00%
+2025-07-14 15:28:43 - BtcBroadcast - INFO - 开始为周期 ['15m', '4h', '1d'] 计算 Pivot Points...
+2025-07-14 15:28:43 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 2 条)...
+2025-07-14 15:28:45 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:28:45 - BtcBroadcast - INFO - 周期 15m: 使用前一根K线数据 (High=122423.41, Low=122098.74, Close=122225.92)
+2025-07-14 15:28:45 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 2 条)...
+2025-07-14 15:28:47 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:28:47 - BtcBroadcast - INFO - 周期 4h: 使用前一根K线数据 (High=121411.82, Low=118906.56, Close=120753.22)
+2025-07-14 15:28:47 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 2 条)...
+2025-07-14 15:28:50 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-14 15:28:50 - BtcBroadcast - INFO - 周期 1d: 使用前一根K线数据 (High=119472.14, Low=117221.92, Close=119079.77)
+2025-07-14 15:28:50 - BtcBroadcast - INFO - 所有周期的 Pivot Points 计算完成。
+2025-07-14 15:28:50 - BtcBroadcast - INFO - --- 步骤 2: 计算技术指标 ---
+2025-07-14 15:28:50 - BtcBroadcast - INFO - --- 步骤 3: 计算规则系统决策和详细归因 ---
+2025-07-14 15:28:50 - BtcBroadcast - INFO - 规则决策结果: 🔴🔴 强烈卖出 (得分: -16.5)
+2025-07-14 15:28:50 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-14 15:28:50 - BtcBroadcast - INFO - --- 正在锁定模型: compound-beta ---
+2025-07-14 15:28:50 - BtcBroadcast - INFO - 使用 Key (来自 GROQ_API_KEY_1) 尝试模型 compound-beta...
+2025-07-14 15:28:50 - BtcBroadcast - INFO - 准备使用模型 'compound-beta' (通过 GROQ_API_KEY_1) 调用 API...
+2025-07-14 15:29:06 - BtcBroadcast - INFO - 模型 'compound-beta' 使用 Key 'GROQ_API_KEY_1' 调用成功。
+2025-07-14 15:29:06 - BtcBroadcast - INFO - LLM 决策解析成功: **观望**
+2025-07-14 15:29:06 - BtcBroadcast - INFO - --- 步骤 5: 决策数据准备完毕 ---
+2025-07-14 15:29:06 - BtcBroadcast - INFO - --- 步骤 6: 格式化并发送播报到飞书 ---
+2025-07-14 15:29:08 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-14 15:29:08 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
