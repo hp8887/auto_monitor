@@ -69,11 +69,18 @@ def format_and_send_message(
             return "🔴 卖出"
         return "观望"
 
-    def get_cross_status(golden, death):
-        if golden:
-            return "🔼金叉"
-        if death:
-            return "🔽死叉"
+    def get_cross_status(
+        is_instant_golden, is_instant_death, is_state_golden, is_state_death
+    ):
+        """根据交叉瞬间和持续状态，返回最终的交叉信号文本"""
+        if is_instant_golden:
+            return "🔼发生金叉"
+        if is_instant_death:
+            return "🔽发生死叉"
+        if is_state_golden:
+            return "📈持续金叉"
+        if is_state_death:
+            return "📉持续死叉"
         return "无"
 
     # 准备各周期详细数据
@@ -87,10 +94,14 @@ def format_and_send_message(
             "ema_cross": get_cross_status(
                 all_indicators.get(f"golden_cross_{tf}"),
                 all_indicators.get(f"death_cross_{tf}"),
+                all_indicators.get(f"ema_golden_state_{tf}"),
+                all_indicators.get(f"ema_death_state_{tf}"),
             ),
             "kdj_cross": get_cross_status(
                 all_indicators.get(f"kdj_golden_cross_{tf}"),
                 all_indicators.get(f"kdj_death_cross_{tf}"),
+                all_indicators.get(f"kdj_golden_state_{tf}"),
+                all_indicators.get(f"kdj_death_state_{tf}"),
             ),
         }
 

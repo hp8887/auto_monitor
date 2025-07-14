@@ -2,10 +2,12 @@ from config_loader import config
 import datetime
 
 
-def build_llm_prompt_text(price_data, fng_index, breakdown, pivot_points_data):
+def build_llm_prompt_text(
+    price_data, fng_index, breakdown, pivot_points_data, all_indicators
+):
     """
-    构建最终版（V5）的、用于 curl 调用的纯文本 Prompt。
-    V5版本对文本进行了精简，以避免超出模型的请求大小限制。
+    构建最终版（V6）的、用于 curl 调用的纯文本 Prompt。
+    V6 版本新增了交叉信号，为 LLM 提供更丰富的技术指标。
     """
     # 1. 准备宏观数据
     price = price_data.get("price", 0)
@@ -36,7 +38,30 @@ def build_llm_prompt_text(price_data, fng_index, breakdown, pivot_points_data):
         or "  无明显看跌信号"
     )
 
-    # 3. 准备支撑与压力位数据
+    # 3. 新增：准备交叉信号数据
+    def get_cross_status_for_prompt(tf, indicator_type):
+        is_instant_golden = all_indicators.get(f"{indicator_type}_golden_cross_{tf}")
+        is_instant_death = all_indicators.get(f"{indicator_type}_death_cross_{tf}")
+        is_state_golden = all_indicators.get(f"{indicator_type}_golden_state_{tf}")
+        is_state_death = all_indicators.get(f"{indicator_type}_death_state_{tf}")
+        if is_instant_golden:
+            return "发生金叉"
+        if is_instant_death:
+            return "发生死叉"
+        if is_state_golden:
+            return "持续金叉"
+        if is_state_death:
+            return "持续死叉"
+        return "无信号"
+
+    cross_signals_text = []
+    for tf in ["15m", "4h", "1d"]:
+        ema_cross = get_cross_status_for_prompt(tf, "ema")
+        kdj_cross = get_cross_status_for_prompt(tf, "kdj")
+        cross_signals_text.append(f"- {tf}: EMA({ema_cross}), KDJ({kdj_cross})")
+    cross_signals_text = "\n".join(cross_signals_text)
+
+    # 4. 准备支撑与压力位数据
     def get_pivot_values(data, timeframe):
         tf_data = data.get(timeframe)
         if tf_data and isinstance(tf_data, dict):
@@ -51,14 +76,14 @@ def build_llm_prompt_text(price_data, fng_index, breakdown, pivot_points_data):
     pivots_4h = get_pivot_values(pivot_points_data, "4h")
     pivots_1d = get_pivot_values(pivot_points_data, "1d")
 
-    # 4. 动态生成日期范围
+    # 5. 动态生成日期范围
     today = datetime.date.today()
     one_week_ago = today - datetime.timedelta(days=7)
     date_range_str = (
         f"{one_week_ago.strftime('%Y年%m月%d日')}至{today.strftime('%Y年%m月%d日')}"
     )
 
-    # 5. 组装最终 Prompt (V6 增强版)
+    # 6. 组装最终 Prompt
     prompt = f"""作为专业的比特币市场策略分析师，请结合以下数据、信号、关键位及最新新闻，分析BTC市场趋势并给出操作建议（买入/卖出/观望）。
 
 ---
@@ -73,6 +98,9 @@ def build_llm_prompt_text(price_data, fng_index, breakdown, pivot_points_data):
 {positive_signals}
 - 看跌信号:
 {negative_signals}
+
+📈 **技术交叉信号**
+{cross_signals_text}
 
 📐 **支撑与压力位**
 请结合当前价格与这些关键位，自主分析市场动能。

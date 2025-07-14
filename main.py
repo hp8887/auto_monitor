@@ -72,7 +72,7 @@ def main():
     logger.info("--- 步骤 4: 调用大语言模型进行决策 ---")
     # 注意：现在传递的是 breakdown 列表 和 pivot_points_data
     prompt_text = build_llm_prompt_text(
-        price_data, fng_data, breakdown, pivot_points_data
+        price_data, fng_data, breakdown, pivot_points_data, all_indicators
     )
     llm_response = ask_llm_by_curl(prompt_text)
 

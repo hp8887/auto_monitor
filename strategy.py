@@ -69,6 +69,13 @@ def calculate_indicators(klines, timeframe="1d"):
             prev_row["EMA_12"] > prev_row["EMA_26"]
             and latest_row["EMA_12"] < latest_row["EMA_26"]
         )
+        # EMA 持续状态
+        latest_indicators["ema_golden_state"] = (
+            latest_row["EMA_12"] > latest_row["EMA_26"]
+        )
+        latest_indicators["ema_death_state"] = (
+            latest_row["EMA_12"] < latest_row["EMA_26"]
+        )
 
         # KDJ 交叉
         latest_indicators["kdj_golden_cross"] = (
@@ -79,6 +86,11 @@ def calculate_indicators(klines, timeframe="1d"):
             prev_row["K_9_3"] > prev_row["D_9_3"]
             and latest_row["K_9_3"] < latest_row["D_9_3"]
         )
+        # KDJ 持续状态
+        latest_indicators["kdj_golden_state"] = (
+            latest_row["K_9_3"] > latest_row["D_9_3"]
+        )
+        latest_indicators["kdj_death_state"] = latest_row["K_9_3"] < latest_row["D_9_3"]
 
     # --- 计算 EMA 排列信号 (仅用于 4h, 1d) ---
     if timeframe in ["4h", "1d"]:
