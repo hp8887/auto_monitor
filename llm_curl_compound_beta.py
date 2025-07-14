@@ -143,7 +143,7 @@ def _call_groq_api(
         return {
             "success": False,
             "decision": f"JSON解析错误: {response_text}",
-            "is_skippable_error": True,  # 改为 True，因为这很可能是由 Cloudflare 等防护引起的，应尝试下一个Key
+            "is_skippable_error": True,  # 再次确认：必须为 True，以允许在遇到Cloudflare等拦截时切换Key
         }
     except Exception as e:
         logger.error(
