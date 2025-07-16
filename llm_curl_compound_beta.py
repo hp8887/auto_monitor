@@ -163,20 +163,31 @@ def ask_llm_by_curl(prompt: str) -> dict:
     """
     last_error = "没有可用的模型或API Key。"
 
-    # 人性化开场白逻辑保持不变
-    final_prompt = prompt
-    if random.random() < 0.25:
-        intro = random.choice(HUMAN_INTRO_POOL)
-        final_prompt = f"{intro}\n\nHere is the data for my main request:\n\n{prompt}"
-        logger.info(f"添加人性化开场白: '{intro}'")
+    # 移除这里的人性化开场白逻辑，将其移动到模型循环内部
+    # final_prompt = prompt
+    # if random.random() < 0.25:
+    #     intro = random.choice(HUMAN_INTRO_POOL)
+    #     final_prompt = f"{intro}\n\nHere is the data for my main request:\n\n{prompt}"
+    #     logger.info(f"添加人性化开场白: '{intro}'")
 
     # 外层循环：按优先级遍历模型
     for model in MODEL_PRIORITY_LIST:
         logger.info(f"--- 正在锁定模型: {model} ---")
 
+        # 【新增】每次尝试新模型时，重新随机化prompt
+        final_prompt = prompt
+        if random.random() < 0.25:
+            intro = random.choice(HUMAN_INTRO_POOL)
+            final_prompt = (
+                f"{intro}\n\nHere is the data for my main request:\n\n{prompt}"
+            )
+            logger.info(f"添加人性化开场白: '{intro}'")
+        else:
+            logger.info("本次不添加开场白，直接使用原始prompt")
+
         # 获取当前所有有效Key的数量，作为最大尝试次数
         # 注意：这里我们不能简单地用一个 for 循环，因为Key池是动态变化的
-        # 我们需要在每次失败后，都从状态管理器获取“下一个”
+        # 我们需要在每次失败后，都从状态管理器获取"下一个"
         num_valid_keys = get_valid_key_count()
 
         if num_valid_keys == 0:
