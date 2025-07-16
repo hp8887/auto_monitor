@@ -32,16 +32,16 @@ def get_decision_emoji(decision):
 
 def format_and_send_message(
     price_data,
-    all_indicators,
+    all_indicators,  # This is now the nested technical_indicators object
     fng_data,
     order_book_data,
     rule_decision_data,
     llm_decision_data=None,
-    pivot_points_data=None,  # 添加新参数
+    news_data=None,  # Add news_data parameter
 ):
     """
     格式化所有数据为飞书卡片，并直接发送。
-    这是一个集成的函数，包含了格式化和发送两个步骤。
+    V2 版本: 使用新的嵌套指标结构，并添加新闻模块。
     """
     # --------------------------------------------------------------------------
     # 1. 准备所有需要展示的数据
@@ -70,44 +70,50 @@ def format_and_send_message(
         return "观望"
 
     def get_cross_status(
-        is_instant_golden, is_instant_death, is_state_golden, is_state_death
+        signals, golden_key, death_key, golden_state_key, death_state_key
     ):
-        """根据交叉瞬间和持续状态，返回最终的交叉信号文本"""
-        if is_instant_golden:
+        """根据信号字典，返回最终的交叉信号文本"""
+        if signals.get(golden_key):
             return "🔼发生金叉"
-        if is_instant_death:
+        if signals.get(death_key):
             return "🔽发生死叉"
-        if is_state_golden:
+        if signals.get(golden_state_key):
             return "📈持续金叉"
-        if is_state_death:
+        if signals.get(death_state_key):
             return "📉持续死叉"
         return "无"
 
     # 准备各周期详细数据
     periods_data = {}
     for tf in ["15m", "4h", "1d"]:
-        rsi = all_indicators.get(f"rsi_{tf}", 0)
+        tf_data = all_indicators.get(tf, {})
+        rsi = tf_data.get("rsi", 0)
+        sma = tf_data.get("sma", 0)
+        signals = tf_data.get("signals", {})
+
         periods_data[tf] = {
             "rsi_text": f"{rsi:.2f}{get_rsi_status(rsi)}",
-            "sma_text": f"${all_indicators.get(f'sma_{tf}', 0):,.2f}",
+            "sma_text": f"${sma:,.2f}",
             "signal_text": get_simple_signal(rsi),
             "ema_cross": get_cross_status(
-                all_indicators.get(f"golden_cross_{tf}"),
-                all_indicators.get(f"death_cross_{tf}"),
-                all_indicators.get(f"ema_golden_state_{tf}"),
-                all_indicators.get(f"ema_death_state_{tf}"),
+                signals,
+                "golden_cross",
+                "death_cross",
+                "ema_golden_state",
+                "ema_death_state",
             ),
             "kdj_cross": get_cross_status(
-                all_indicators.get(f"kdj_golden_cross_{tf}"),
-                all_indicators.get(f"kdj_death_cross_{tf}"),
-                all_indicators.get(f"kdj_golden_state_{tf}"),
-                all_indicators.get(f"kdj_death_state_{tf}"),
+                signals,
+                "kdj_golden_cross",
+                "kdj_death_cross",
+                "kdj_golden_state",
+                "kdj_death_state",
             ),
         }
 
     # 准备归因和解释文本
     attribution_items = [
-        f"{item['name']}: {'+' if item['score'] > 0 else ''}{item['score']}"
+        f"{item['name']}: {'+' if item['score'] > 0 else ''}{item['score']:.1f}"
         for item in score_breakdown
         if item["score"] != 0
     ]
@@ -232,30 +238,50 @@ def format_and_send_message(
     elements.append({"tag": "hr"})
 
     # --- 新增：构建支撑与压力位模块 ---
-    if pivot_points_data:
-        pivot_texts = []
-        for tf in ["15m", "4h", "1d"]:
-            data = pivot_points_data.get(tf)
-            if data and isinstance(data, dict):
-                s1 = data.get("support", {}).get("S1", "N/A")
-                pivot = data.get("pivot", "N/A")
-                r1 = data.get("resistance", {}).get("R1", "N/A")
-                pivot_texts.append(f"**{tf}**: S1 ${s1} | P ${pivot} | R1 ${r1}")
+    pivot_texts = []
+    for tf in ["15m", "4h", "1d"]:
+        tf_data = all_indicators.get(tf, {})
+        s1 = tf_data.get("support", ["N/A"])[0]
+        r1 = tf_data.get("resistance", ["N/A"])[0]
+        # Pivot point is not in the new structure, so we omit it for now or calculate it if needed.
+        # For simplicity, we'll just show S1 and R1.
+        pivot_texts.append(f"**{tf}**: S1 ${s1} | R1 ${r1}")
 
-        if pivot_texts:
-            elements.append(
-                {
-                    "tag": "div",
-                    "text": {
-                        "tag": "lark_md",
-                        "content": "📐 **关键支撑/压力位 (S1/Pivot/R1)**\n"
-                        + "\n".join(pivot_texts),
-                    },
-                }
-            )
-            elements.append({"tag": "hr"})
+    if pivot_texts:
+        elements.append(
+            {
+                "tag": "div",
+                "text": {
+                    "tag": "lark_md",
+                    "content": "**关键支撑/压力位**\n" + "\n".join(pivot_texts),
+                },
+            }
+        )
+        elements.append({"tag": "hr"})
 
-    # --- 构建 LLM 决策模块 ---
+    # --- 新增：新闻模块 ---
+    if news_data:
+        news_items = []
+        for news in news_data[:3]:  # 最多显示3条
+            title = news.get("title", "N/A")
+            sentiment = news.get("sentiment_level", "neutral")
+            news_items.append(f"- {title} (_{sentiment}_)")
+
+        news_content = "\n".join(news_items)
+        elements.append(
+            {
+                "tag": "div",
+                "text": {
+                    "tag": "lark_md",
+                    "content": f"**📰 相关新闻**\n{news_content}",
+                },
+            }
+        )
+        elements.append({"tag": "hr"})
+
+    # --------------------------------------------------------------------------
+    # 3. AI 决策理由解析和展示
+    # --------------------------------------------------------------------------
     if llm_decision_data and llm_decision_data.get("success"):
         llm_decision = llm_decision_data.get("decision", "解析错误")
         llm_reason = llm_decision_data.get("reason", "无详细理由")

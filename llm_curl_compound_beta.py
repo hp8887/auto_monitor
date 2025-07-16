@@ -4,35 +4,24 @@ import os
 import requests
 from logger_setup import logger
 import random
+from llm_state_manager import (
+    get_next_available_credential,
+    report_invalid_key,
+    get_valid_key_count,
+)
 
 # --- 配置 ---
+# 模型优先级列表保持不变
 MODEL_PRIORITY_LIST = ["compound-beta", "compound-beta-mini", "llama-3.1-8b-instant"]
 
-# --- User-Agent 池 ---
-USER_AGENT_POOL = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
-]
+# KEY_ENV_VAR_LIST 和 USER_AGENT_POOL 已被移至 llm_state_manager
 
-# --- 模拟人类开场白 ---
+# --- 模拟人类开场白 (保持不变) ---
 HUMAN_INTRO_POOL = [
     "Hi, can you help me with a quick Bitcoin outlook?",
     "What's your take on the current BTC market situation?",
     "Please provide a professional analysis of the Bitcoin market.",
     "Could you give me a summary of the current Bitcoin trend?",
-]
-
-
-# --- API Key 列表 ---
-# 定义所有可用的API Key对应的环境变量名称
-# 程序将按照这个列表的顺序去尝试每一个Key
-KEY_ENV_VAR_LIST = [
-    "GROQ_API_KEY_1",
-    "GROQ_API_KEY_2",
-    "GROQ_API_KEY_3",
 ]
 
 
@@ -99,15 +88,22 @@ def _call_groq_api(
                 f"API 返回错误 (模型: {model_name}, Key: {key_env_var}, UA: {user_agent}): {error_message}"
             )
 
+            # 增强可跳过错误的判断
             is_skippable = (
                 "rate_limit_exceeded" in error_code
                 or "invalid_api_key" in error_code
+                or "insufficient_quota" in error_code
                 or "Request Entity Too Large" in error_message
+                or "context_length_exceeded" in error_code
             )
+            # 增加一个字段，专门用于识别需要禁用Key的错误
+            is_invalid_key = "invalid_api_key" in error_code
+
             return {
                 "success": False,
                 "decision": error_message,
                 "is_skippable_error": is_skippable,
+                "is_invalid_key": is_invalid_key,  # 返回是否为Key失效错误
             }
 
         content = (
@@ -135,6 +131,7 @@ def _call_groq_api(
             "success": False,
             "decision": "请求超时",
             "is_skippable_error": True,
+            "is_invalid_key": False,
         }
     except json.JSONDecodeError:
         logger.error(
@@ -143,7 +140,8 @@ def _call_groq_api(
         return {
             "success": False,
             "decision": f"JSON解析错误: {response_text}",
-            "is_skippable_error": True,  # 再次确认：必须为 True，以允许在遇到Cloudflare等拦截时切换Key
+            "is_skippable_error": True,  # Cloudflare等拦截HTML页面时会触发
+            "is_invalid_key": False,
         }
     except Exception as e:
         logger.error(
@@ -154,18 +152,18 @@ def _call_groq_api(
             "success": False,
             "decision": f"未知异常: {e}",
             "is_skippable_error": False,
+            "is_invalid_key": False,
         }
 
 
 def ask_llm_by_curl(prompt: str) -> dict:
     """
-    按模型优先级(外层循环)和Key优先级(内层循环)尝试调用，直到成功或全部失败。
-    如果遇到可跳过的错误（如速率限制、Key无效），则自动切换到下一个Key或下一个模型。
-    返回: {"success": bool, "decision": str, "model_used": str}
+    使用新的状态管理器进行API调用。
+    按模型优先级进行尝试，并在每个模型内部使用轮询和频率控制的Key。
     """
     last_error = "没有可用的模型或API Key。"
 
-    # 以 25% 的概率添加人性化开场白
+    # 人性化开场白逻辑保持不变
     final_prompt = prompt
     if random.random() < 0.25:
         intro = random.choice(HUMAN_INTRO_POOL)
@@ -176,41 +174,48 @@ def ask_llm_by_curl(prompt: str) -> dict:
     for model in MODEL_PRIORITY_LIST:
         logger.info(f"--- 正在锁定模型: {model} ---")
 
-        # 内层循环：按顺序遍历所有可用的Key
-        for key_env_var in KEY_ENV_VAR_LIST:
-            api_key = os.getenv(key_env_var)
+        # 获取当前所有有效Key的数量，作为最大尝试次数
+        # 注意：这里我们不能简单地用一个 for 循环，因为Key池是动态变化的
+        # 我们需要在每次失败后，都从状态管理器获取“下一个”
+        num_valid_keys = get_valid_key_count()
 
-            # 如果环境变量未设置或无效，则直接跳过这个Key
-            if not api_key or "gsk_" not in api_key:
-                logger.debug(f"环境变量 '{key_env_var}' 未设置或无效，跳过此Key。")
-                continue
+        if num_valid_keys == 0:
+            logger.warning(f"模型 {model} 没有任何有效的Key可供尝试，跳过。")
+            continue
 
-            # 随机选择一个 User-Agent
-            user_agent = random.choice(USER_AGENT_POOL)
-            logger.info(
-                f"使用 Key (来自 {key_env_var}) 和 UA '{user_agent}' 尝试模型 {model}..."
-            )
+        # 为每个模型进行最多 `num_valid_keys` 次尝试
+        for attempt in range(num_valid_keys):
+            logger.info(f"模型 {model} - 尝试次数 {attempt + 1}/{num_valid_keys}...")
 
-            # 调用API，传入模型、prompt和本次循环的Key
+            # 从状态管理器获取下一个可用凭证
+            key_env_var, api_key, user_agent = get_next_available_credential()
+
+            if not key_env_var:
+                last_error = "所有API Key均已失效。"
+                logger.error("状态管理器未能提供有效Key，终止尝试。")
+                break  # 中断对此模型的所有尝试
+
+            # 调用API
             result = _call_groq_api(
                 final_prompt, model, api_key, key_env_var, user_agent
             )
 
             if result.get("success"):
-                # 只要成功一次，就立即返回最终结果
                 return {
                     "success": True,
                     "decision": result["decision"],
                     "model_used": model,
                 }
 
-            # 记录下本次的错误信息，以备后续展示
             last_error = result.get("decision", "未知错误")
 
-            # 如果是不可跳过的严重错误，则终止所有循环，直接返回失败
+            # 如果是Key失效的特定错误，报告给状态管理器
+            if result.get("is_invalid_key"):
+                report_invalid_key(key_env_var)
+
             if not result.get("is_skippable_error"):
                 logger.error(
-                    f"模型 {model} 使用 Key {key_env_var} 遭遇不可恢复的错误，终止所有尝试。错误: {last_error}"
+                    f"遭遇不可恢复错误，终止所有尝试。模型: {model}, Key: {key_env_var}. 错误: {last_error}"
                 )
                 return {
                     "success": False,
@@ -218,18 +223,13 @@ def ask_llm_by_curl(prompt: str) -> dict:
                     "model_used": model,
                 }
 
-            # 如果是可跳过的错误，内层循环会继续，尝试下一个Key
             logger.warning(
-                f"模型 {model} 使用 Key {key_env_var} 调用失败 (可跳过)，将尝试下一个Key。原因: {last_error}"
+                f"调用失败 (可跳过)，将尝试下一个可用Key。模型: {model}, Key: {key_env_var}. 原因: {last_error}"
             )
 
-        # 当一个模型的所有Key都尝试失败后，会跳出内层循环
-        logger.warning(
-            f"模型 {model} 已尝试所有可用Key但均失败，将降级到下一个优先级的模型。"
-        )
+        logger.warning(f"模型 {model} 已尝试所有可用Key但均失败，将降级到下一个模型。")
 
-    # 当所有模型的所有Key都尝试失败后，会跳出外层循环
-    logger.error(f"所有备选模型及所有可用Key均调用失败。最后一个错误是: {last_error}")
+    logger.error(f"所有模型均尝试失败。最后一个错误是: {last_error}")
     return {
         "success": False,
         "decision": f"所有可用模型和Key均尝试失败。最后错误: {last_error}",
