@@ -31,11 +31,26 @@ USER_AGENTS = [
 
 def _get_key_env_vars():
     """从环境变量中自动发现所有匹配前缀的Key名称。"""
+    # 调试信息：打印所有环境变量
+    logger.info("--- 调试: 环境变量检查开始 ---")
+    groq_vars = [var for var in os.environ if var.startswith(KEY_PREFIX)]
+    logger.info(f"找到的所有GROQ前缀变量: {groq_vars}")
+
+    # 检查每个变量的值是否存在
+    for var in groq_vars:
+        value = os.getenv(var)
+        logger.info(f"变量 {var} 的值: {'有值' if value else '为空'}")
+
     found_keys = [
         var for var in os.environ if var.startswith(KEY_PREFIX) and os.getenv(var)
     ]
+
     if not found_keys:
         logger.warning(f"在环境变量中未找到任何以 '{KEY_PREFIX}' 开头的密钥。")
+    else:
+        logger.info(f"最终找到的有效密钥: {found_keys}")
+
+    logger.info("--- 调试: 环境变量检查结束 ---")
     return sorted(found_keys)  # 排序以保证每次运行顺序一致
 
 

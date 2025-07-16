@@ -4561,3 +4561,65 @@ KeyError: 'choices'
 2025-07-16 14:32:42 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
 2025-07-16 14:32:42 - BtcBroadcast - INFO - ================ 主流程结束 ================
 
+2025-07-16 18:58:23 - BtcBroadcast - INFO - ================ 主流程开始 ================
+2025-07-16 18:58:23 - BtcBroadcast - INFO - --- 步骤 1: 获取基础市场数据 ---
+2025-07-16 18:58:23 - BtcBroadcast - INFO - 正在从 CoinGecko 获取 BTC 价格和24小时变动...
+2025-07-16 18:58:24 - BtcBroadcast - INFO - 获取成功: 价格=$118835, 24h变化=1.53%
+2025-07-16 18:58:24 - BtcBroadcast - INFO - 正在从 alternative.me 获取恐惧贪婪指数...
+2025-07-16 18:58:25 - BtcBroadcast - INFO - 获取成功: 恐惧贪婪指数=70 (贪婪)
+2025-07-16 18:58:25 - BtcBroadcast - INFO - 正在从 KuCoin 获取 BTCUSDT 的订单薄数据...
+2025-07-16 18:58:26 - BtcBroadcast - INFO - 成功从 KuCoin 获取订单薄数据，买卖比: 1.36, 价差: 0.00%
+2025-07-16 18:58:26 - BtcBroadcast - INFO - 正在从 Marketaux API 获取 BTC 的新闻...
+2025-07-16 18:58:27 - BtcBroadcast - INFO - 成功从 Marketaux 获取到 1 条原始新闻。
+2025-07-16 18:58:27 - BtcBroadcast - INFO - 新闻处理和排序完成，找到 1 条有效新闻。
+2025-07-16 18:58:27 - BtcBroadcast - INFO - --- 步骤 2: 计算所有技术指标 ---
+2025-07-16 18:58:27 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 2 条)...
+2025-07-16 18:58:29 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-16 18:58:29 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 2 条)...
+2025-07-16 18:58:30 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-16 18:58:30 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 2 条)...
+2025-07-16 18:58:31 - BtcBroadcast - INFO - 成功获取 3 条K线数据。
+2025-07-16 18:58:31 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 100 条)...
+2025-07-16 18:58:33 - BtcBroadcast - INFO - 成功获取 101 条K线数据。
+2025-07-16 18:58:33 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 100 条)...
+2025-07-16 18:58:34 - BtcBroadcast - INFO - 成功获取 101 条K线数据。
+2025-07-16 18:58:34 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 100 条)...
+2025-07-16 18:58:36 - BtcBroadcast - INFO - 成功获取 101 条K线数据。
+2025-07-16 18:58:36 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 100 条)...
+2025-07-16 18:58:37 - BtcBroadcast - INFO - 成功获取 101 条K线数据。
+2025-07-16 18:58:37 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 100 条)...
+2025-07-16 18:58:38 - BtcBroadcast - INFO - 成功获取 101 条K线数据。
+2025-07-16 18:58:38 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 100 条)...
+2025-07-16 18:58:40 - BtcBroadcast - INFO - 成功获取 101 条K线数据。
+2025-07-16 18:58:40 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 15m K线数据 (最近 14 条)...
+2025-07-16 18:58:41 - BtcBroadcast - INFO - 成功获取 15 条K线数据。
+2025-07-16 18:58:41 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 4h K线数据 (最近 14 条)...
+2025-07-16 18:58:42 - BtcBroadcast - INFO - 成功获取 15 条K线数据。
+2025-07-16 18:58:42 - BtcBroadcast - INFO - 正在从 CryptoCompare 获取 BTCUSDT 的 1d K线数据 (最近 14 条)...
+2025-07-16 18:58:43 - BtcBroadcast - INFO - 成功获取 15 条K线数据。
+2025-07-16 18:58:43 - BtcBroadcast - INFO - --- 步骤 3: 计算规则系统决策和详细归因 ---
+2025-07-16 18:58:43 - BtcBroadcast - INFO - 规则决策结果: 🟡 观望 (得分: 1.5)
+2025-07-16 18:58:43 - BtcBroadcast - INFO - --- 步骤 4: 调用大语言模型进行决策 ---
+2025-07-16 18:58:43 - BtcBroadcast - INFO - --- 正在锁定模型: compound-beta ---
+2025-07-16 18:58:43 - BtcBroadcast - INFO - --- 调试: 环境变量检查开始 ---
+2025-07-16 18:58:51 - BtcBroadcast - INFO - 找到的所有GROQ前缀变量: ['GROQ_API_KEY_1', 'GROQ_API_KEY_2']
+2025-07-16 18:58:56 - BtcBroadcast - INFO - 变量 GROQ_API_KEY_1 的值: 有值
+2025-07-16 18:58:58 - BtcBroadcast - INFO - 变量 GROQ_API_KEY_2 的值: 有值
+2025-07-16 18:59:02 - BtcBroadcast - INFO - 最终找到的有效密钥: ['GROQ_API_KEY_1', 'GROQ_API_KEY_2']
+2025-07-16 18:59:02 - BtcBroadcast - INFO - --- 调试: 环境变量检查结束 ---
+2025-07-16 18:59:02 - BtcBroadcast - INFO - 模型 compound-beta - 尝试次数 1/1...
+2025-07-16 18:59:02 - BtcBroadcast - INFO - --- 调试: 环境变量检查开始 ---
+2025-07-16 18:59:03 - BtcBroadcast - INFO - 找到的所有GROQ前缀变量: ['GROQ_API_KEY_1', 'GROQ_API_KEY_2']
+2025-07-16 18:59:03 - BtcBroadcast - INFO - 变量 GROQ_API_KEY_1 的值: 有值
+2025-07-16 18:59:03 - BtcBroadcast - INFO - 变量 GROQ_API_KEY_2 的值: 有值
+2025-07-16 18:59:03 - BtcBroadcast - INFO - 最终找到的有效密钥: ['GROQ_API_KEY_1', 'GROQ_API_KEY_2']
+2025-07-16 18:59:03 - BtcBroadcast - INFO - --- 调试: 环境变量检查结束 ---
+2025-07-16 18:59:03 - BtcBroadcast - INFO - 找到可用Key: GROQ_API_KEY_1 (距离上次使用 15990.8秒)。
+2025-07-16 18:59:03 - BtcBroadcast - INFO - 准备使用模型 'compound-beta' (通过 GROQ_API_KEY_1) 调用 API...
+2025-07-16 18:59:08 - BtcBroadcast - INFO - 模型 'compound-beta' 使用 Key 'GROQ_API_KEY_1' 调用成功。
+2025-07-16 18:59:08 - BtcBroadcast - INFO - LLM 决策解析成功: 观望
+2025-07-16 18:59:08 - BtcBroadcast - INFO - --- 步骤 5: 决策数据准备完毕 ---
+2025-07-16 18:59:08 - BtcBroadcast - INFO - --- 步骤 6: 格式化并发送播报到飞书 ---
+2025-07-16 18:59:09 - BtcBroadcast - INFO - 成功发送格式化消息到飞书。
+2025-07-16 18:59:09 - BtcBroadcast - INFO - ================ 主流程结束 ================
+
